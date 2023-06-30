@@ -10,7 +10,7 @@ type Props = {
 
 const WeatherCard = ({ data }: Props) => {
   return (
-    <Card>
+    <Card className="border-none shadow-[0px_0px_160px_10px] shadow-blue-900/70">
       <CardHeader className="p-0">
         <div className="flex justify-center">
           <img
