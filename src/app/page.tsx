@@ -50,7 +50,7 @@ const Page = async () => {
   const weatherData: WeatherData = await res.json();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between bg-black p-24">
       <WeatherCard data={weatherData} />
     </main>
   );
