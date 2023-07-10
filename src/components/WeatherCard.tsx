@@ -1,11 +1,10 @@
 import { Droplets, Gauge, Thermometer } from 'lucide-react';
 
-import { WeatherData } from '~/app/page';
 import Icon from '~/components/Icon';
 import { Card, CardContent, CardDescription, CardHeader } from '~/components/ui/card';
 
 type Props = {
-  data: WeatherData;
+  data: any;
 };
 
 const WeatherCard = ({ data }: Props) => {

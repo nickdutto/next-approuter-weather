@@ -1,58 +1,47 @@
-import WeatherCard from '~/components/WeatherCard';
+export type Weather = {
+  data: {
+    timelines: Array<{
+      timestep: string;
+      endTime: string;
+      startTime: string;
+      intervals: Array<{
+        startTime: string;
+        values: {
+          cloudCover: number;
+          dewPoint: number;
+          humidity: number;
+          precipitationProbability: number;
+          pressureSeaLevel: number;
+          temperature: number;
+          temperatureApparent: number;
+          weatherCode: number;
+          windDirection: number;
+          windGust: number;
+          windSpeed: number;
+        };
+      }>;
+    }>;
+  };
+};
 
-export type WeatherData = {
-  coord: {
-    lon: number;
-    lat: number;
-  };
-  weather: Array<{
-    id: number;
-    main: string;
-    description: string;
-    icon: string;
-  }>;
-  base: string;
-  main: {
-    temp: number;
-    feels_like: number;
-    temp_min: number;
-    temp_max: number;
-    pressure: number;
-    humidity: number;
-  };
-  visibility: number;
-  wind: {
-    speed: number;
-    deg: number;
-  };
-  clouds: {
-    all: number;
-  };
-  dt: number;
-  sys: {
-    type: number;
-    id: number;
-    country: string;
-    sunrise: number;
-    sunset: number;
-  };
-  timezone: number;
-  id: number;
-  name: string;
-  cod: number;
+const getWeather = async () => {
+  const res = await fetch(
+    `https://api.tomorrow.io/v4/timelines?location=-35.2801846,149.1310324&fields=temperature,temperatureApparent,humidity,pressureSeaLevel,dewPoint,windSpeed,windGust,windDirection,precipitationProbability,cloudCover,weatherCode&timezone=Australia/Canberra&timesteps=1h&units=metric&apikey=${process.env.TOMORROW_IO_API_KEY}`,
+    {
+      next: {
+        revalidate: 3600,
+      },
+    },
+  );
+
+  return res.json() as unknown as Weather;
 };
 
 const Page = async () => {
-  const res = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=-35.2835&lon=149.1281&units=metric&appid=${process.env.OPEN_WEATHER_MAP_API_KEY}`,
-  );
-
-  const weatherData: WeatherData = await res.json();
+  const weather = await getWeather();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between bg-black p-24">
-      <WeatherCard data={weatherData} />
-    </main>
+    <main className="flex min-h-screen flex-col items-center justify-between bg-black p-24"></main>
   );
 };
 
