@@ -1,3 +1,19 @@
+export type SunriseSunset = {
+  results: {
+    sunrise: string;
+    sunset: string;
+    solar_noon: string;
+    day_length: string;
+    civil_twilight_begin: string;
+    civil_twilight_end: string;
+    nautical_twilight_begin: string;
+    nautical_twilight_end: string;
+    astronomical_twilight_begin: string;
+    astronomical_twilight_end: string;
+  };
+  status: string;
+};
+
 export type Weather = {
   data: {
     timelines: Array<{
@@ -24,6 +40,19 @@ export type Weather = {
   };
 };
 
+const getSunriseSunset = async () => {
+  const res = await fetch(
+    'https://api.sunrise-sunset.org/json?lat=-35.2835&lng=149.1281&formatted=0',
+    {
+      next: {
+        revalidate: 3600,
+      },
+    },
+  );
+
+  return res.json() as unknown as SunriseSunset;
+};
+
 const getWeather = async () => {
   const res = await fetch(
     `https://api.tomorrow.io/v4/timelines?location=-35.2801846,149.1310324&fields=temperature,temperatureApparent,humidity,pressureSeaLevel,dewPoint,windSpeed,windGust,windDirection,precipitationProbability,cloudCover,weatherCode&timezone=Australia/Canberra&timesteps=1h&units=metric&apikey=${process.env.TOMORROW_IO_API_KEY}`,
@@ -38,6 +67,7 @@ const getWeather = async () => {
 };
 
 const Page = async () => {
+  const sunriseSunset = await getSunriseSunset();
   const weather = await getWeather();
 
   return (
