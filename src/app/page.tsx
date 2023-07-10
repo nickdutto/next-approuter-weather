@@ -1,3 +1,5 @@
+import WeatherTable from '~/components/WeatherTable';
+
 export type SunriseSunset = {
   results: {
     sunrise: string;
@@ -71,7 +73,9 @@ const Page = async () => {
   const weather = await getWeather();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between bg-black p-24"></main>
+    <main className="flex min-h-screen flex-col items-center justify-between bg-black p-24">
+      <WeatherTable weather={weather} sunriseSunset={sunriseSunset} />
+    </main>
   );
 };
 
