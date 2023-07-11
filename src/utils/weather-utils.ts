@@ -1,4 +1,6 @@
-import { parseISO, add, getHours, setHours, isAfter, isBefore, isEqual } from 'date-fns';
+import { add, format, getHours, isAfter, isBefore, isEqual, parseISO, setHours } from 'date-fns';
+
+import { type Weather } from '~/app/page';
 
 export const getWeatherIcon = (
   time: string,
@@ -32,4 +34,18 @@ export const getWeatherIcon = (
   } else if (isAfterSunset && isBeforeTomorrowSunrise) {
     return `${code}1.png`;
   }
+};
+
+export const createChartData = (data: Weather, field: string) => {
+  const mappedData = data.data.timelines[0].intervals.map((interval) => {
+    return {
+      x: format(parseISO(interval.startTime), 'dd/MM/yy-HH:mm'),
+      y: interval.values[field as keyof typeof interval.values],
+    };
+  });
+
+  return {
+    id: field,
+    data: mappedData,
+  };
 };
