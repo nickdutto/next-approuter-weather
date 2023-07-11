@@ -1,9 +1,8 @@
-import { parseISO } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -20,25 +19,28 @@ type Props = {
 const WeatherTable = ({ weather, sunriseSunset }: Props) => {
   return (
     <Table className="rounded-md bg-zinc-900">
-      <TableCaption>Weather</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead>Date</TableHead>
-          <TableHead>Time</TableHead>
-          <TableHead>Type</TableHead>
-          <TableHead>Temperature</TableHead>
-          <TableHead>Humidity</TableHead>
-          <TableHead>Pressure</TableHead>
-          <TableHead>Wind Speed</TableHead>
-          <TableHead>Wind Gust</TableHead>
+          <TableHead className="text-center">Date</TableHead>
+          <TableHead className="text-center">Time</TableHead>
+          <TableHead className="text-center">Type</TableHead>
+          <TableHead className="text-center">Temperature (°C)</TableHead>
+          <TableHead className="text-center">Humidity (%)</TableHead>
+          <TableHead className="text-center">Pressure (hPa)</TableHead>
+          <TableHead className="text-center">Wind Speed (km/h)</TableHead>
+          <TableHead className="text-center">Wind Gust (km/h)</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {weather.data.timelines[0].intervals.map((interval) => (
           <TableRow key={interval.startTime} className="p-2">
-            <TableCell>{parseISO(interval.startTime).toLocaleDateString()}</TableCell>
-            <TableCell>{parseISO(interval.startTime).toLocaleTimeString()}</TableCell>
-            <TableCell>
+            <TableCell className="text-center">
+              {format(parseISO(interval.startTime), 'E - dd/MM/yy')}
+            </TableCell>
+            <TableCell className="text-center">
+              {format(parseISO(interval.startTime), 'HH:mm')}
+            </TableCell>
+            <TableCell className="flex justify-center">
               <img
                 src={`./tio/${getWeatherIcon(
                   interval.startTime,
@@ -47,13 +49,16 @@ const WeatherTable = ({ weather, sunriseSunset }: Props) => {
                   interval.values.weatherCode,
                 )}`}
                 alt=""
+                className="w-1/2"
               />
             </TableCell>
-            <TableCell>{interval.values.temperature}</TableCell>
-            <TableCell>{interval.values.humidity}</TableCell>
-            <TableCell>{interval.values.pressureSeaLevel}</TableCell>
-            <TableCell>{interval.values.windSpeed}</TableCell>
-            <TableCell>{interval.values.windGust}</TableCell>
+            <TableCell className="text-center">{interval.values.temperature.toFixed(1)}</TableCell>
+            <TableCell className="text-center">{interval.values.humidity.toFixed(1)}</TableCell>
+            <TableCell className="text-center">
+              {interval.values.pressureSeaLevel.toFixed(1)}
+            </TableCell>
+            <TableCell className="text-center">{interval.values.windSpeed.toFixed(1)}</TableCell>
+            <TableCell className="text-center">{interval.values.windGust.toFixed(1)}</TableCell>
           </TableRow>
         ))}
       </TableBody>
