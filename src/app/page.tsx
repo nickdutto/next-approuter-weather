@@ -1,4 +1,5 @@
 import LineChart from '~/components/LineChart';
+import WeatherCard from '~/components/WeatherCard';
 import WeatherTable from '~/components/WeatherTable';
 import { type SunriseSunset, type Weather } from '~/types/types';
 import { createChartData } from '~/utils/weather-utils';
@@ -34,11 +35,12 @@ const Page = async () => {
   const weather = await getWeather();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between bg-black">
-      <div className="h-[600px] w-full bg-zinc-900">
-        <LineChart data={[createChartData(weather, 'pressureSeaLevel')]} />
-      </div>
-      <WeatherTable weather={weather} sunriseSunset={sunriseSunset} />
+    <main className="flex min-h-screen flex-col items-center bg-black pt-32">
+      <WeatherCard
+        data={weather.data.timelines[0].intervals[0]}
+        sunrise={sunriseSunset.results.sunrise}
+        sunset={sunriseSunset.results.sunset}
+      />
     </main>
   );
 };
