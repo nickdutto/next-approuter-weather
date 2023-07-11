@@ -18,7 +18,7 @@ type Props = {
 
 const WeatherTable = ({ weather, sunriseSunset }: Props) => {
   return (
-    <Table className="rounded-md bg-zinc-900">
+    <Table className="rounded-md bg-zinc-950">
       <TableHeader>
         <TableRow>
           <TableHead className="text-center">Date</TableHead>
@@ -31,7 +31,7 @@ const WeatherTable = ({ weather, sunriseSunset }: Props) => {
           <TableHead className="text-center">Wind Gust (km/h)</TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody>
+      <TableBody className="text-gray-300">
         {weather.data.timelines[0].intervals.map((interval) => (
           <TableRow key={interval.startTime} className="p-2">
             <TableCell className="text-center">
@@ -49,7 +49,7 @@ const WeatherTable = ({ weather, sunriseSunset }: Props) => {
                   interval.values.weatherCode,
                 )}`}
                 alt=""
-                className="w-[32px]"
+                className="w-[32px] brightness-90"
               />
             </TableCell>
             <TableCell className="text-center">{interval.values.temperature.toFixed(1)}</TableCell>
