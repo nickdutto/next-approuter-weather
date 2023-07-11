@@ -8,7 +8,7 @@ import {
 } from 'react-icons/wi';
 
 import Icon from '~/components/Icon';
-import { Card, CardContent, CardDescription, CardHeader } from '~/components/ui/card';
+import { Card, CardContent, CardHeader } from '~/components/ui/card';
 import { WeatherInterval } from '~/types/types';
 import { getWeatherIcon } from '~/utils/weather-utils';
 
@@ -20,9 +20,9 @@ type Props = {
 
 const WeatherCard = ({ data, sunrise, sunset }: Props) => {
   return (
-    <Card className="border-none shadow-[0px_0px_160px_10px] shadow-blue-900/70">
-      <CardHeader className="p-0">
-        <div className="flex justify-center">
+    <Card className="border-none shadow-[0px_0px_200px_20px] shadow-blue-900/70 dark:bg-zinc-950">
+      <CardHeader className="">
+        <div className="flex items-center justify-center">
           <img
             src={`./tio/large/${getWeatherIcon(
               data.startTime,
@@ -30,16 +30,18 @@ const WeatherCard = ({ data, sunrise, sunset }: Props) => {
               sunset,
               data.values.weatherCode,
             )}`}
-            className="h-24 p-2"
+            className="h-16 p-2"
             alt=""
           />
+          <div className="flex flex-col items-center justify-center">
+            <span className="text-4xl font-bold text-gray-300">
+              {data.values.temperature.toFixed(1)}°C
+            </span>
+            <span className="text-sm font-medium text-gray-500">
+              Cloud: {data.values.cloudCover}%
+            </span>
+          </div>
         </div>
-        <CardDescription className="flex flex-col items-center px-6 pb-6">
-          <span className="text-3xl font-bold text-gray-300">
-            {data.values.temperature.toFixed(1)}°C
-          </span>
-          <span className="font-medium text-gray-500">Cloud: {data.values.cloudCover}%</span>
-        </CardDescription>
       </CardHeader>
       <CardContent className="grid grid-cols-3 grid-rows-2 gap-y-4">
         <p className="flex flex-col items-center justify-center gap-1 text-lg font-medium text-gray-400">
