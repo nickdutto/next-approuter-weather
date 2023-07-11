@@ -49,3 +49,14 @@ export const createChartData = (data: Weather, field: string) => {
     data: mappedData,
   };
 };
+
+export const getMinMaxValues = (data: Weather, field: string) => {
+  const values = data.data.timelines[0].intervals.map((interval) => {
+    return interval.values[field as keyof typeof interval.values];
+  });
+
+  return {
+    min: Math.min(...values),
+    max: Math.max(...values),
+  };
+};
