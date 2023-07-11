@@ -1,6 +1,6 @@
 'use client';
 
-import { LineProps } from '@nivo/line';
+import { DatumValue, LineProps } from '@nivo/line';
 
 import dynamic from 'next/dynamic';
 
@@ -58,6 +58,11 @@ const LineChart = ({ data }: Props) => {
         axis: { ticks: { line: { stroke: '#27272a' } } },
         crosshair: { line: { stroke: '#71717a' } },
       }}
+      markers={tickValues.map((tick, i) => ({
+        axis: 'x',
+        value: tick as DatumValue,
+        lineStyle: { stroke: '#27272a' },
+      }))}
       pointLabelYOffset={-12}
       useMesh={true}
       tooltip={ChartTooltip}
