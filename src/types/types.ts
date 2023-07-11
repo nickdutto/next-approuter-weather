@@ -14,28 +14,36 @@ export type SunriseSunset = {
   status: string;
 };
 
-export type Weather = {
-  data: {
-    timelines: Array<{
-      timestep: string;
-      endTime: string;
-      startTime: string;
-      intervals: Array<{
-        startTime: string;
-        values: {
-          cloudCover: number;
-          dewPoint: number;
-          humidity: number;
-          precipitationProbability: number;
-          pressureSeaLevel: number;
-          temperature: number;
-          temperatureApparent: number;
-          weatherCode: number;
-          windDirection: number;
-          windGust: number;
-          windSpeed: number;
-        };
-      }>;
-    }>;
-  };
-};
+export interface Weather {
+  data: WeatherData;
+}
+
+export interface WeatherData {
+  timelines: WeatherTimeline[];
+}
+
+export interface WeatherTimeline {
+  timestep: string;
+  endTime: string;
+  startTime: string;
+  intervals: WeatherInterval[];
+}
+
+export interface WeatherInterval {
+  startTime: string;
+  values: WeatherIntervalValues;
+}
+
+export interface WeatherIntervalValues {
+  cloudCover: number;
+  dewPoint: number;
+  humidity: number;
+  precipitationProbability: number;
+  pressureSeaLevel: number;
+  temperature: number;
+  temperatureApparent: number;
+  weatherCode: number;
+  windDirection: number;
+  windGust: number;
+  windSpeed: number;
+}
