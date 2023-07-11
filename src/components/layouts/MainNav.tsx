@@ -16,7 +16,7 @@ const MainNav = () => {
   const path = usePathname();
 
   return (
-    <div className="relative flex items-center justify-center bg-black p-2">
+    <div className="relative flex items-center justify-center p-2">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
