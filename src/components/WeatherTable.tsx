@@ -49,7 +49,7 @@ const WeatherTable = ({ weather, sunriseSunset }: Props) => {
                   interval.values.weatherCode,
                 )}`}
                 alt=""
-                className="w-1/2"
+                className="w-[32px]"
               />
             </TableCell>
             <TableCell className="text-center">{interval.values.temperature.toFixed(1)}</TableCell>
