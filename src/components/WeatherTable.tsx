@@ -1,6 +1,5 @@
 import { parseISO } from 'date-fns';
 
-import { type SunriseSunset, type Weather } from '~/app/page';
 import {
   Table,
   TableBody,
@@ -10,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from '~/components/ui/table';
+import { type SunriseSunset, type Weather } from '~/types/types';
 import { getWeatherIcon } from '~/utils/weather-utils';
 
 type Props = {

@@ -1,6 +1,6 @@
 import { add, format, getHours, isAfter, isBefore, isEqual, parseISO, setHours } from 'date-fns';
 
-import { type Weather } from '~/app/page';
+import { Weather } from '~/types/types';
 
 export const getWeatherIcon = (
   time: string,
