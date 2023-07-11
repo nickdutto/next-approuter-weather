@@ -7,7 +7,7 @@ const Footer = () => {
         <img
           src="./tio/logo/tomorrowio-logo.svg"
           alt="Tomorrow.io Logo"
-          className="absolute bottom-1 right-2 w-1/5"
+          className="absolute bottom-1 right-2 w-[200px]"
         />
       </a>
     </footer>
