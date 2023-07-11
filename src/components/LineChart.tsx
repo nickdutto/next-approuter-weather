@@ -12,20 +12,22 @@ const ResponsiveLine = dynamic(() => import('@nivo/line').then((m) => m.Responsi
 
 type Props = {
   data: LineProps['data'];
+  min?: number;
+  max?: number;
 };
 
-const LineChart = ({ data }: Props) => {
+const LineChart = ({ data, min, max }: Props) => {
   const tickValues = data[0].data.filter((_, i) => i % 24 === 0).map((d) => d.x);
 
   return (
     <ResponsiveLine
       data={data}
-      margin={{ top: 50, right: 20, bottom: 50, left: 60 }}
+      margin={{ top: 20, right: 20, bottom: 90, left: 60 }}
       xScale={{ type: 'point' }}
       yScale={{
         type: 'linear',
-        min: 'auto',
-        max: 'auto',
+        min: min ? min : 'auto',
+        max: max ? max : 'auto',
         stacked: true,
         reverse: false,
       }}
