@@ -26,7 +26,7 @@ const RiverTable = ({ riverData }: Props) => {
         </TableRow>
       </TableHeader>
       <TableBody className="text-gray-300">
-        {riverData.map((data) => (
+        {riverData.reverse().map((data) => (
           <TableRow key={data.date}>
             <TableCell className="text-center text-xs">
               {formatInTimeZone(data.date, 'Australia/Canberra', 'dd/MM/yy')}
