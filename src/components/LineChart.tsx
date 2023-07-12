@@ -14,9 +14,11 @@ type Props = {
   data: LineProps['data'];
   min?: number;
   max?: number;
+  fieldName: string;
+  fieldUnit: string;
 };
 
-const LineChart = ({ data, min, max }: Props) => {
+const LineChart = ({ data, min, max, fieldName, fieldUnit }: Props) => {
   const tickValues = data[0].data.filter((_, i) => i % 24 === 0).map((d) => d.x);
 
   return (
@@ -47,7 +49,7 @@ const LineChart = ({ data, min, max }: Props) => {
         tickSize: 5,
         tickPadding: 0,
         tickRotation: 0,
-        legend: 'Pressure (hPa)',
+        legend: `${fieldName} (${fieldUnit})`,
         legendOffset: -45,
         legendPosition: 'middle',
       }}
@@ -67,7 +69,7 @@ const LineChart = ({ data, min, max }: Props) => {
       }))}
       pointLabelYOffset={-12}
       useMesh={true}
-      tooltip={ChartTooltip}
+      tooltip={({ point }) => <ChartTooltip point={point} fieldUnit={fieldUnit} />}
     />
   );
 };
