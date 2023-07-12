@@ -1,4 +1,5 @@
-import { add, format, getHours, isAfter, isBefore, isEqual, parseISO, setHours } from 'date-fns';
+import { add, getHours, isAfter, isBefore, isEqual, setHours } from 'date-fns';
+import { formatInTimeZone, utcToZonedTime } from 'date-fns-tz';
 
 import { Weather } from '~/types/types';
 
@@ -8,12 +9,12 @@ export const getWeatherIcon = (
   sunsetStr: string,
   code: number,
 ) => {
-  const today = parseISO(time);
+  const today = utcToZonedTime(time, 'Australia/Canberra');
   const tomorrow = add(today, { days: 1 });
 
-  const sunrise = parseISO(sunriseStr);
+  const sunrise = utcToZonedTime(sunriseStr, 'Australia/Canberra');
   const sunriseHours = getHours(sunrise);
-  const sunset = parseISO(sunsetStr);
+  const sunset = utcToZonedTime(sunsetStr, 'Australia/Canberra');
   const sunsetHours = getHours(sunset);
 
   const sunriseToday = setHours(today, sunriseHours);
@@ -39,7 +40,7 @@ export const getWeatherIcon = (
 export const createChartData = (data: Weather, field: string) => {
   const mappedData = data.data.timelines[0].intervals.map((interval) => {
     return {
-      x: format(parseISO(interval.startTime), 'dd/MM/yy-HH:mm'),
+      x: formatInTimeZone(interval.startTime, 'Australia/Canberra', 'dd/MM/yy-HH:mm'),
       y: interval.values[field as keyof typeof interval.values],
     };
   });

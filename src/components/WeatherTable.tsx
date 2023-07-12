@@ -1,4 +1,4 @@
-import { format, parseISO } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz';
 
 import {
   Table,
@@ -35,10 +35,10 @@ const WeatherTable = ({ weather, sunriseSunset }: Props) => {
         {weather.data.timelines[0].intervals.map((interval) => (
           <TableRow key={interval.startTime} className="p-2">
             <TableCell className="text-center">
-              {format(parseISO(interval.startTime), 'E - dd/MM/yy')}
+              {formatInTimeZone(interval.startTime, 'Australia/Canberra', 'E - dd/MM/yy')}
             </TableCell>
             <TableCell className="text-center">
-              {format(parseISO(interval.startTime), 'HH:mm')}
+              {formatInTimeZone(interval.startTime, 'Australia/Canberra', 'HH:mm')}
             </TableCell>
             <TableCell className="flex justify-center">
               <img
