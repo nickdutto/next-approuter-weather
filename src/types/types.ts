@@ -47,3 +47,17 @@ export interface WeatherIntervalValues {
   windGust: number;
   windSpeed: number;
 }
+
+export type RiverData = {
+  'Station Long Name': string;
+  'Station Number': string;
+  'Station Location Latitude': string;
+  'Station Location Longitude': string;
+  'Parameter Type Name': string;
+  'Timeseries Name': string;
+  'Unit Name': string;
+  DATA_OWNER_NAME: string;
+  Rows: string;
+  columns: string;
+  data: Array<[string, number | undefined]>;
+};
