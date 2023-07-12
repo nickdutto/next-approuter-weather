@@ -5,9 +5,10 @@ import { formatInTimeZone } from 'date-fns-tz';
 
 type Props = {
   point: PointTooltipProps['point'];
+  fieldUnit: string;
 };
 
-const ChartTooltip = ({ point }: Props) => {
+const ChartTooltip = ({ point, fieldUnit }: Props) => {
   const date = parse(point.data.xFormatted as string, 'dd/MM/yy-HH:mm', new Date());
   const formattedDate = formatInTimeZone(date, 'Australia/Canberra', 'EEEE - dd/MM/yy: HH:mm');
 
@@ -16,7 +17,7 @@ const ChartTooltip = ({ point }: Props) => {
       <div className="mb-2 text-xs text-zinc-400">{formattedDate}</div>
       <div className="text-zinc-200">
         {Number(point.data.yFormatted).toFixed(1)}
-        <span className="text-xs text-zinc-400">hPa</span>
+        <span className="text-xs text-zinc-400">{fieldUnit}</span>
       </div>
     </div>
   );
