@@ -18,7 +18,7 @@ const RiverTable = ({ riverData }: Props) => {
   return (
     <Table className="rounded-md bg-zinc-950">
       <TableHeader>
-        <TableRow>
+        <TableRow className="bg-zinc-900/20">
           <TableHead className="text-center">Date</TableHead>
           <TableHead className="text-center">Time</TableHead>
           <TableHead className="text-center">Discharge (cumec)</TableHead>
