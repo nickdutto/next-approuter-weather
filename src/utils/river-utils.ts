@@ -49,11 +49,16 @@ export const mergeRiverData = (discharge: RiverData, level: RiverData) => {
   const levelMap = new Map(level.data);
   const allDates = new Set([...dischargeMap.keys(), ...levelMap.keys()]);
   for (const date of allDates) {
-    mergedArray.push({
-      date,
-      discharge: dischargeMap.get(date),
-      level: levelMap.get(date),
-    });
+    const dischargeValue = dischargeMap.get(date);
+    const levelValue = levelMap.get(date);
+
+    if (dischargeValue || levelValue) {
+      mergedArray.push({
+        date,
+        discharge: dischargeValue,
+        level: levelValue,
+      });
+    }
   }
 
   return mergedArray;
