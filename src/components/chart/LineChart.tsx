@@ -70,7 +70,9 @@ const LineChart = ({ data, min, max, fieldName, fieldUnit, tickSteps = 24 }: Pro
       }))}
       pointLabelYOffset={-12}
       useMesh={true}
-      tooltip={({ point }) => <ChartTooltip point={point} fieldUnit={fieldUnit} />}
+      tooltip={({ point }) => (
+        <ChartTooltip point={point} fieldUnit={fieldUnit} xElemCount={data[0].data.length} />
+      )}
     />
   );
 };
