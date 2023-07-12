@@ -32,15 +32,15 @@ const MainNav = () => {
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/hourly" legacyBehavior passHref>
+            <Link href="/river" legacyBehavior passHref>
               <NavigationMenuLink
                 className={cn(
                   navigationMenuTriggerStyle(),
-                  path === '/hourly' &&
+                  path === '/river' &&
                     'dark:bg-blue-500 dark:hover:bg-blue-500 dark:focus:bg-blue-500',
                 )}
               >
-                Hourly
+                River
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
@@ -54,6 +54,19 @@ const MainNav = () => {
                 )}
               >
                 Charts
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <Link href="/hourly" legacyBehavior passHref>
+              <NavigationMenuLink
+                className={cn(
+                  navigationMenuTriggerStyle(),
+                  path === '/hourly' &&
+                    'dark:bg-blue-500 dark:hover:bg-blue-500 dark:focus:bg-blue-500',
+                )}
+              >
+                Hourly
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
