@@ -1,3 +1,5 @@
+import { Serie } from '@nivo/line';
+
 import { add, getHours, isAfter, isBefore, isEqual, setHours } from 'date-fns';
 import { formatInTimeZone, utcToZonedTime } from 'date-fns-tz';
 
@@ -37,7 +39,7 @@ export const getWeatherIcon = (
   }
 };
 
-export const createChartData = (data: Weather, field: string) => {
+export const createChartData = (data: Weather, field: string): Serie => {
   const mappedData = data.data.timelines[0].intervals.map((interval) => {
     return {
       x: formatInTimeZone(interval.startTime, 'Australia/Canberra', 'dd/MM/yy-HH:mm'),
