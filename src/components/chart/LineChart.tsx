@@ -16,15 +16,16 @@ type Props = {
   max?: number;
   fieldName: string;
   fieldUnit: string;
+  tickSteps?: number;
 };
 
-const LineChart = ({ data, min, max, fieldName, fieldUnit }: Props) => {
-  const tickValues = data[0].data.filter((_, i) => i % 24 === 0).map((d) => d.x);
+const LineChart = ({ data, min, max, fieldName, fieldUnit, tickSteps = 24 }: Props) => {
+  const tickValues = data[0].data.filter((_, i) => i % tickSteps === 0).map((d) => d.x);
 
   return (
     <ResponsiveLine
       data={data}
-      margin={{ top: 20, right: 20, bottom: 90, left: 60 }}
+      margin={{ top: 20, right: 20, bottom: 120, left: 60 }}
       xScale={{ type: 'point' }}
       yScale={{
         type: 'linear',
