@@ -16,7 +16,7 @@ const ChartTooltip = ({ point, fieldUnit }: Props) => {
     <div className="flex flex-col items-center rounded-md bg-zinc-900 p-2">
       <div className="mb-2 text-xs text-zinc-400">{formattedDate}</div>
       <div className="text-zinc-200">
-        {Number(point.data.yFormatted).toFixed(1)}
+        {Number(point.data.yFormatted).toFixed(2)}
         <span className="text-xs text-zinc-400">{fieldUnit}</span>
       </div>
     </div>
