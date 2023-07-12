@@ -1,8 +1,5 @@
-import LineChart from '~/components/LineChart';
 import WeatherCard from '~/components/WeatherCard';
-import WeatherTable from '~/components/WeatherTable';
 import { type SunriseSunset, type Weather } from '~/types/types';
-import { createChartData } from '~/utils/weather-utils';
 
 const getSunriseSunset = async () => {
   const res = await fetch(
