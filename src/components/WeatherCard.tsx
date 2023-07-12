@@ -1,5 +1,6 @@
 'use client';
 
+import { formatInTimeZone } from 'date-fns-tz';
 import {
   WiBarometer,
   WiHumidity,
@@ -40,7 +41,7 @@ const WeatherCard = ({ data, sunrise, sunset }: Props) => {
               {data.values.temperature.toFixed(1)}°C
             </span>
             <span className="text-sm font-medium text-gray-500">
-              Cloud: {data.values.cloudCover}%
+              {formatInTimeZone(data.startTime, 'Australia/Canberra', 'E - HH:mm')}
             </span>
           </div>
         </div>
