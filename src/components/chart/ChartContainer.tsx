@@ -4,7 +4,7 @@ import { type Serie } from '@nivo/line';
 
 import { useEffect, useMemo, useState } from 'react';
 
-import LineChart from '~/components/LineChart';
+import LineChart from '~/components/chart/LineChart';
 import {
   Select,
   SelectContent,
