@@ -1,6 +1,5 @@
-import LineChart from '~/components/LineChart';
+import ChartContainer from '~/components/chart/ChartContainer';
 import { type Weather } from '~/types/types';
-import { createChartData, getMinMaxValues } from '~/utils/weather-utils';
 
 const getWeather = async () => {
   const res = await fetch(
@@ -18,17 +17,9 @@ const getWeather = async () => {
 const ChartsPage = async () => {
   const weather = await getWeather();
 
-  const minMaxFieldValues = getMinMaxValues(weather, 'pressureSeaLevel');
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-black">
-      <div className="h-[500px] w-full bg-zinc-950">
-        <LineChart
-          data={[createChartData(weather, 'pressureSeaLevel')]}
-          min={minMaxFieldValues.min - 10}
-          max={minMaxFieldValues.max + 10}
-        />
-      </div>
+      <ChartContainer weather={weather} />
     </main>
   );
 };
