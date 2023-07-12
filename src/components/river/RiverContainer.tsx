@@ -6,14 +6,16 @@ import { type RiverData } from '~/types/types';
 import { createRiverChartData, getRiverMinMaxValues, mergeRiverData } from '~/utils/river-utils';
 
 type Props = {
-  watercourseDischarge: RiverData[];
-  waterLevel: RiverData[];
+  riverData: {
+    discharge: RiverData[];
+    level: RiverData[];
+  };
 };
 
-const RiverContainer = ({ watercourseDischarge, waterLevel }: Props) => {
-  const mergedRiverData = mergeRiverData(watercourseDischarge[0], waterLevel[0]);
-  const dischargeMinMaxY = getRiverMinMaxValues(watercourseDischarge[0], { defaultMin: 1 });
-  const levelMinMaxY = getRiverMinMaxValues(waterLevel[0], { defaultMin: 1, defaultMax: 2 });
+const RiverContainer = ({ riverData }: Props) => {
+  const mergedRiverData = mergeRiverData(riverData.discharge[0], riverData.level[0]);
+  const dischargeMinMaxY = getRiverMinMaxValues(riverData.discharge[0], { defaultMin: 1 });
+  const levelMinMaxY = getRiverMinMaxValues(riverData.level[0], { defaultMin: 1, defaultMax: 2 });
 
   return (
     <div className="flex w-full flex-col gap-2">
@@ -23,7 +25,7 @@ const RiverContainer = ({ watercourseDischarge, waterLevel }: Props) => {
             Watercourse Discharge (cumec)
           </h3>
           <LineChart
-            data={[createRiverChartData(watercourseDischarge[0], 'Watercourse Discharge')]}
+            data={[createRiverChartData(riverData.discharge[0], 'Watercourse Discharge')]}
             fieldName="Watercourse Discharge"
             fieldUnit="cumec"
             min={dischargeMinMaxY.min}
@@ -34,7 +36,7 @@ const RiverContainer = ({ watercourseDischarge, waterLevel }: Props) => {
         <div className="h-[400px] bg-zinc-950">
           <h3 className="pt-2 text-center font-semibold text-blue-400">River Level (m)</h3>
           <LineChart
-            data={[createRiverChartData(waterLevel[0], 'Water Level')]}
+            data={[createRiverChartData(riverData.level[0], 'Water Level')]}
             fieldName="Watercourse Level"
             fieldUnit="m"
             min={1}

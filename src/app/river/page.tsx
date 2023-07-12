@@ -1,39 +1,68 @@
+import { set, sub } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz';
+
 import RiverContainer from '~/components/river/RiverContainer';
 import { type RiverData } from '~/types/types';
 
-const getWatercourseDischarge = async () => {
-  const res = await fetch(
-    'http://www.bom.gov.au/waterdata/services?service=kisters&type=queryServices&request=getTimeseriesValues&datasource=0&format=json&ts_id=1795010&from=2023-06-11T00%3A00%3A00.000%2B10%3A00&to=2023-07-12T00%3A00%3A00.000%2B10%3A00&returnfields=Timestamp,Value&language=en&timezone=individual&csvdiv=,&md_returnfields=station_longname,station_no,station_latitude,station_longitude,parametertype_name,ts_name,ts_unitname,custom_attributes&custattr_returnfields=DATA_OWNER_NAME&metadata=true&downloadfilename=json.w00002.20230712123746.410738%20HTTP%2F1.1',
-    {
-      next: {
-        revalidate: 3600,
-      },
+const getRiverData = async () => {
+  const date = set(new Date(), { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 });
+
+  const toDate = formatInTimeZone(
+    date,
+    'Australia/Canberra',
+    "yyyy-MM-dd'T'HH:mm:ss.SSSxxx",
+  ).replace(/\+/g, '%2B');
+  const fromDate = formatInTimeZone(
+    sub(date, { months: 1 }),
+    'Australia/Canberra',
+    "yyyy-MM-dd'T'HH:mm:ss.SSSxxx",
+  ).replace(/\+/g, '%2B');
+
+  const params = new URLSearchParams({
+    service: 'kisters',
+    type: 'queryServices',
+    request: 'getTimeseriesValues',
+    datasource: '0',
+    format: 'json',
+    from: fromDate,
+    to: toDate,
+    returnfields: 'Timestamp,Value',
+    md_returnfields:
+      'station_longname,station_no,station_latitude,station_longitude,parametertype_name',
+    custattr_returnfields: 'DATA_OWNER_NAME',
+    metadata: 'true',
+  });
+
+  const urlDischarge = `http://www.bom.gov.au/waterdata/services?${params.toString()}&ts_id=1795010`;
+  const urlLevel = `http://www.bom.gov.au/waterdata/services?${params.toString()}&ts_id=1821010`;
+
+  const resDischarge = await fetch(urlDischarge, {
+    next: {
+      revalidate: 3600,
     },
-  );
+  });
 
-  return res.json() as unknown as RiverData[];
-};
-
-const getWaterLevel = async () => {
-  const res = await fetch(
-    'http://www.bom.gov.au/waterdata/services?service=kisters&type=queryServices&request=getTimeseriesValues&datasource=0&format=json&ts_id=1821010&from=2023-06-11T00%3A00%3A00.000%2B10%3A00&to=2023-07-12T00%3A00%3A00.000%2B10%3A00&returnfields=Timestamp,Value&language=en&timezone=individual&csvdiv=,&md_returnfields=station_longname,station_no,station_latitude,station_longitude,parametertype_name,ts_name,ts_unitname,custom_attributes&custattr_returnfields=DATA_OWNER_NAME&metadata=true&downloadfilename=json.w00002.20230712123746.410738%20HTTP%2F1.1',
-    {
-      next: {
-        revalidate: 3600,
-      },
+  const resLevel = await fetch(urlLevel, {
+    next: {
+      revalidate: 3600,
     },
-  );
+  });
 
-  return res.json() as unknown as RiverData[];
+  const dataDischarge = (await resDischarge.json()) as unknown as RiverData[];
+  const dataLevel = (await resLevel.json()) as unknown as RiverData[];
+
+  return {
+    discharge: dataDischarge,
+    level: dataLevel,
+  };
 };
 
 const RiverPage = async () => {
-  const watercourseDischarge = await getWatercourseDischarge();
-  const waterLevel = await getWaterLevel();
+  const riverData = await getRiverData();
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-black">
-      <RiverContainer watercourseDischarge={watercourseDischarge} waterLevel={waterLevel} />
+      <RiverContainer riverData={riverData} />
     </main>
   );
 };
