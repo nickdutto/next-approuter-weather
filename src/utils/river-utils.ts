@@ -1,6 +1,7 @@
 import { type Serie } from '@nivo/line';
 
-import { formatInTimeZone } from 'date-fns-tz';
+import { sub } from 'date-fns';
+import { formatInTimeZone, toDate } from 'date-fns-tz';
 
 import { type RiverData } from '~/types/types';
 
@@ -10,8 +11,25 @@ export type MergedRiverData = {
   level?: number;
 }[];
 
-export const createRiverChartData = (riverData: RiverData, name: string): Serie => {
-  const mappedData = riverData.data.map((data) => {
+const compareDateOnly = (date1: string, date2: string) => {
+  return (
+    formatInTimeZone(date1, 'Australia/Canberra', 'dd/MM/yy') ===
+    formatInTimeZone(date2, 'Australia/Canberra', 'dd/MM/yy')
+  );
+};
+
+export const createRiverChartData = (riverData: RiverData, name: string, range: number): Serie => {
+  const latestDate = riverData.data[riverData.data.length - 1][0];
+  const endDate = formatInTimeZone(
+    sub(toDate(latestDate, { timeZone: 'Australia/Canberra' }), { days: range }),
+    'Australia/Canberra',
+    "yyyy-MM-dd'T'HH:mm:ss.SSSXXX",
+  );
+
+  const toIndex = riverData.data.findIndex((interval) => compareDateOnly(endDate, interval[0]));
+  const slicedData = toIndex !== -1 ? riverData.data.slice(toIndex) : riverData.data;
+
+  const mappedData = slicedData.map((data) => {
     return {
       x: formatInTimeZone(data[0], 'Australia/Canberra', 'dd/MM/yy-HH:mm'),
       y: data[1],
