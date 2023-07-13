@@ -23,6 +23,7 @@ type Props = {
 
 const ChartContainer = ({ weather }: Props) => {
   const [sliderValue, setSliderValue] = useState([10]);
+  const [timeRange, setTimeRange] = useState('120');
   const [selectValue, setSelectValue] = useState('pressureSeaLevel');
   const [chartData, setChartData] = useState<Serie[] | null>(null);
   const [minMaxY, setMinMaxY] = useState({ min: 0, max: 0 });
@@ -50,8 +51,8 @@ const ChartContainer = ({ weather }: Props) => {
   }, [selectValue, weather]);
 
   useEffect(() => {
-    setChartData([createChartData(weather, selectValue)]);
-  }, [selectValue, weather]);
+    setChartData([createChartData(weather, selectValue, parseInt(timeRange))]);
+  }, [selectValue, timeRange, weather]);
 
   return (
     <div className="relative w-full">
@@ -68,6 +69,18 @@ const ChartContainer = ({ weather }: Props) => {
             step={5}
           />
         </div>
+        <Select defaultValue={timeRange} onValueChange={setTimeRange}>
+          <SelectTrigger className="w-[140px]">
+            <SelectValue placeholder="Time Range" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="120">5 Days</SelectItem>
+            <SelectItem value="96">4 Days</SelectItem>
+            <SelectItem value="72">3 Days</SelectItem>
+            <SelectItem value="48">2 Days</SelectItem>
+            <SelectItem value="24">1 Days</SelectItem>
+          </SelectContent>
+        </Select>
         <Select defaultValue={selectValue} onValueChange={setSelectValue}>
           <SelectTrigger className="w-[140px]">
             <SelectValue placeholder="Weather Field" />

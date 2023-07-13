@@ -39,8 +39,9 @@ export const getWeatherIcon = (
   }
 };
 
-export const createChartData = (data: Weather, field: string): Serie => {
-  const mappedData = data.data.timelines[0].intervals.map((interval) => {
+export const createChartData = (data: Weather, field: string, range: number): Serie => {
+  const slicedData = data.data.timelines[0].intervals.slice(0, range);
+  const mappedData = slicedData.map((interval) => {
     return {
       x: formatInTimeZone(interval.startTime, 'Australia/Canberra', 'dd/MM/yy-HH:mm'),
       y: interval.values[field as keyof typeof interval.values],
