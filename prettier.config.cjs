@@ -7,6 +7,7 @@ const config = {
   printWidth: 100,
   semi: true,
   singleQuote: true,
+  endOfLine: 'auto',
 };
 
 module.exports = config;
