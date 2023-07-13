@@ -2,27 +2,39 @@ import WeatherTable from '~/components/WeatherTable';
 import { type SunriseSunset, type Weather } from '~/types/types';
 
 const getSunriseSunset = async () => {
-  const res = await fetch(
-    'https://api.sunrise-sunset.org/json?lat=-35.2835&lng=149.1281&formatted=0',
-    {
-      next: {
-        revalidate: 3600,
-      },
+  const params = new URLSearchParams({
+    lat: '-35.2801846',
+    lng: '149.1310324',
+    formatted: '0',
+  });
+
+  const url = `https://api.sunrise-sunset.org/json?${params.toString()}`;
+  const res = await fetch(url, {
+    next: {
+      revalidate: 3600,
     },
-  );
+  });
 
   return res.json() as unknown as SunriseSunset;
 };
 
 const getWeather = async () => {
-  const res = await fetch(
-    `https://api.tomorrow.io/v4/timelines?location=-35.2801846,149.1310324&fields=temperature,temperatureApparent,humidity,pressureSeaLevel,dewPoint,windSpeed,windGust,windDirection,precipitationProbability,cloudCover,weatherCode&timezone=Australia/Canberra&timesteps=1h&units=metric&apikey=${process.env.TOMORROW_IO_API_KEY}`,
-    {
-      next: {
-        revalidate: 3600,
-      },
+  const params = new URLSearchParams({
+    location: '-35.2801846,149.1310324',
+    fields:
+      'temperature,temperatureApparent,humidity,pressureSeaLevel,dewPoint,windSpeed,windGust,windDirection,precipitationProbability,cloudCover,weatherCode',
+    timezone: 'Australia/Canberra',
+    timesteps: '1h',
+    units: 'metric',
+    apikey: `${process.env.TOMORROW_IO_API_KEY}`,
+  });
+
+  const url = `https://api.tomorrow.io/v4/timelines?${params.toString()}`;
+  const res = await fetch(url, {
+    next: {
+      revalidate: 3600,
     },
-  );
+  });
 
   return res.json() as unknown as Weather;
 };
