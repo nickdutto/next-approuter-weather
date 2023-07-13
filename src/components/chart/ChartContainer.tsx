@@ -46,6 +46,23 @@ const ChartContainer = ({ weather }: Props) => {
     }
   }, [selectValue]);
 
+  const tickSteps = useMemo(() => {
+    switch (timeRange) {
+      case '120':
+        return 24;
+      case '96':
+        return 18;
+      case '72':
+        return 12;
+      case '48':
+        return 8;
+      case '24':
+        return 4;
+      default:
+        return 24;
+    }
+  }, [timeRange]);
+
   useEffect(() => {
     setMinMaxY(getMinMaxValues(weather, selectValue));
   }, [selectValue, weather]);
@@ -70,7 +87,7 @@ const ChartContainer = ({ weather }: Props) => {
           />
         </div>
         <Select defaultValue={timeRange} onValueChange={setTimeRange}>
-          <SelectTrigger className="w-[140px]">
+          <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Time Range" />
           </SelectTrigger>
           <SelectContent>
@@ -82,7 +99,7 @@ const ChartContainer = ({ weather }: Props) => {
           </SelectContent>
         </Select>
         <Select defaultValue={selectValue} onValueChange={setSelectValue}>
-          <SelectTrigger className="w-[140px]">
+          <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Weather Field" />
           </SelectTrigger>
           <SelectContent>
@@ -103,6 +120,7 @@ const ChartContainer = ({ weather }: Props) => {
             max={minMaxY.max + sliderValue[0]}
             fieldName={selectValue}
             fieldUnit={fieldUnit}
+            tickSteps={tickSteps}
           />
         )}
       </div>
