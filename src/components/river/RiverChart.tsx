@@ -1,6 +1,6 @@
 import { type Serie } from '@nivo/line';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import LineChart from '~/components/chart/LineChart';
 import {
@@ -30,6 +30,23 @@ const RiverChart = ({ title, chartId, fieldName, fieldUnit, riverData, minMaxY }
   const [timeRange, setTimeRange] = useState('30');
 
   const yScaleMinMax = getRiverMinMaxValues(riverData, minMaxY);
+
+  const tickSteps = useMemo(() => {
+    switch (timeRange) {
+      case '30':
+        return 24;
+      case '20':
+        return 18;
+      case '14':
+        return 14;
+      case '7':
+        return 8;
+      case '5':
+        return 6;
+      default:
+        return 24;
+    }
+  }, [timeRange]);
 
   useEffect(() => {
     setChartData(createRiverChartData(riverData, chartId, parseInt(timeRange)));
@@ -62,7 +79,7 @@ const RiverChart = ({ title, chartId, fieldName, fieldUnit, riverData, minMaxY }
             fieldUnit={fieldUnit}
             min={yScaleMinMax.min}
             max={yScaleMinMax.max}
-            tickSteps={24}
+            tickSteps={tickSteps}
           />
         )}
       </div>
