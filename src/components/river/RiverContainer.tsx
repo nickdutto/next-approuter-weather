@@ -24,6 +24,7 @@ const RiverContainer = ({ riverData }: Props) => {
           fieldName="Watercourse Discharge"
           fieldUnit="cumec"
           riverData={riverData.discharge[0]}
+          minMaxY={{ defaultMin: 1, defaultMax: 40 }}
         />
         <RiverChart
           title="River Level (m)"
@@ -31,6 +32,7 @@ const RiverContainer = ({ riverData }: Props) => {
           fieldName="Water Level"
           fieldUnit="m"
           riverData={riverData.level[0]}
+          minMaxY={{ defaultMin: 1, defaultMax: 2 }}
         />
       </div>
       <RiverTable riverData={mergedRiverData} />

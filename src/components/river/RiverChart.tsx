@@ -19,13 +19,17 @@ interface Props {
   fieldName: string;
   fieldUnit: string;
   riverData: RiverData;
+  minMaxY: {
+    defaultMin: number;
+    defaultMax: number;
+  };
 }
 
-const RiverChart = ({ title, chartId, fieldName, fieldUnit, riverData }: Props) => {
+const RiverChart = ({ title, chartId, fieldName, fieldUnit, riverData, minMaxY }: Props) => {
   const [chartData, setChartData] = useState<Serie | null>(null);
   const [timeRange, setTimeRange] = useState('30');
 
-  const yScaleMinMax = getRiverMinMaxValues(riverData, { defaultMin: 1 });
+  const yScaleMinMax = getRiverMinMaxValues(riverData, minMaxY);
 
   useEffect(() => {
     setChartData(createRiverChartData(riverData, chartId, parseInt(timeRange)));
