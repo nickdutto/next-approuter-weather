@@ -1,4 +1,4 @@
-export type SunriseSunset = {
+export interface SunriseSunset {
   results: {
     sunrise: string;
     sunset: string;
@@ -12,7 +12,7 @@ export type SunriseSunset = {
     astronomical_twilight_end: string;
   };
   status: string;
-};
+}
 
 export interface Weather {
   data: WeatherData;
@@ -48,7 +48,7 @@ export interface WeatherIntervalValues {
   windSpeed: number;
 }
 
-export type RiverData = {
+export interface RiverData {
   'Station Long Name': string;
   'Station Number': string;
   'Station Location Latitude': string;
@@ -59,5 +59,5 @@ export type RiverData = {
   DATA_OWNER_NAME: string;
   Rows: string;
   columns: string;
-  data: Array<[string, number | undefined]>;
-};
+  data: [string, number | undefined][];
+}

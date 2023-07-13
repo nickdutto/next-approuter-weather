@@ -11,10 +11,10 @@ import {
 import { type SunriseSunset, type Weather } from '~/types/types';
 import { getWeatherIcon } from '~/utils/weather-utils';
 
-type Props = {
+interface Props {
   weather: Weather;
   sunriseSunset: SunriseSunset;
-};
+}
 
 const WeatherTable = ({ weather, sunriseSunset }: Props) => {
   return (

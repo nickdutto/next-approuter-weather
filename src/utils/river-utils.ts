@@ -1,4 +1,4 @@
-import { Serie } from '@nivo/line';
+import { type Serie } from '@nivo/line';
 
 import { formatInTimeZone } from 'date-fns-tz';
 
@@ -31,7 +31,7 @@ export const getRiverMinMaxValues = (
   const mappedData = riverData.data
     .filter((data) => typeof data[1] === 'number')
     .map((data) => {
-      return data[1] as number;
+      return data[1]!;
     });
 
   const min = Math.min(...mappedData);
@@ -52,7 +52,7 @@ export const mergeRiverData = (discharge: RiverData, level: RiverData) => {
     const dischargeValue = dischargeMap.get(date);
     const levelValue = levelMap.get(date);
 
-    if (dischargeValue || levelValue) {
+    if (dischargeValue ?? levelValue) {
       mergedArray.push({
         date,
         discharge: dischargeValue,

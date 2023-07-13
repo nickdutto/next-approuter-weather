@@ -1,6 +1,6 @@
 'use client';
 
-import { DatumValue, LineProps } from '@nivo/line';
+import { type LineProps } from '@nivo/line';
 
 import dynamic from 'next/dynamic';
 
@@ -10,14 +10,14 @@ const ResponsiveLine = dynamic(() => import('@nivo/line').then((m) => m.Responsi
   ssr: false,
 });
 
-type Props = {
+interface Props {
   data: LineProps['data'];
   min?: number;
   max?: number;
   fieldName: string;
   fieldUnit: string;
   tickSteps?: number;
-};
+}
 
 const LineChart = ({ data, min, max, fieldName, fieldUnit, tickSteps = 24 }: Props) => {
   const tickValues = data[0].data.filter((_, i) => i % tickSteps === 0).map((d) => d.x);
@@ -63,9 +63,9 @@ const LineChart = ({ data, min, max, fieldName, fieldUnit, tickSteps = 24 }: Pro
         axis: { ticks: { line: { stroke: '#27272a' } } },
         crosshair: { line: { stroke: '#71717a' } },
       }}
-      markers={tickValues.map((tick, i) => ({
+      markers={tickValues.map((tick) => ({
         axis: 'x',
-        value: tick as DatumValue,
+        value: tick!,
         lineStyle: { stroke: '#27272a' },
       }))}
       pointLabelYOffset={-12}

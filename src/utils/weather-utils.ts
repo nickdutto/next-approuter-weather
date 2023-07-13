@@ -1,9 +1,9 @@
-import { Serie } from '@nivo/line';
+import { type Serie } from '@nivo/line';
 
 import { add, getHours, isAfter, isBefore, isEqual, setHours } from 'date-fns';
 import { formatInTimeZone, utcToZonedTime } from 'date-fns-tz';
 
-import { Weather } from '~/types/types';
+import { type Weather } from '~/types/types';
 
 export const getWeatherIcon = (
   time: string,

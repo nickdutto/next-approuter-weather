@@ -1,14 +1,14 @@
-import { PointTooltipProps } from '@nivo/line';
+import { type PointTooltipProps } from '@nivo/line';
 import clsx from 'clsx';
 
 import { parse } from 'date-fns';
 import { formatInTimeZone } from 'date-fns-tz';
 
-type Props = {
+interface Props {
   point: PointTooltipProps['point'];
   fieldUnit: string;
   xElemCount: number;
-};
+}
 
 const ChartTooltip = ({ point, fieldUnit, xElemCount }: Props) => {
   const isFirstHalf = point.index < xElemCount / 2;

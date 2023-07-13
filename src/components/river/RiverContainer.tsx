@@ -5,12 +5,12 @@ import RiverTable from '~/components/river/RiverTable';
 import { type RiverData } from '~/types/types';
 import { createRiverChartData, getRiverMinMaxValues, mergeRiverData } from '~/utils/river-utils';
 
-type Props = {
+interface Props {
   riverData: {
     discharge: RiverData[];
     level: RiverData[];
   };
-};
+}
 
 const RiverContainer = ({ riverData }: Props) => {
   const mergedRiverData = mergeRiverData(riverData.discharge[0], riverData.level[0]);

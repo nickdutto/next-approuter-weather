@@ -1,11 +1,11 @@
 'use client';
 
 import { type Serie } from '@nivo/line';
-import { Slider } from '~/components/ui/slider';
 
 import { useEffect, useMemo, useState } from 'react';
 
 import LineChart from '~/components/chart/LineChart';
+import { Label } from '~/components/ui/label';
 import {
   Select,
   SelectContent,
@@ -13,13 +13,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select';
+import { Slider } from '~/components/ui/slider';
 import { type Weather } from '~/types/types';
 import { createChartData, getMinMaxValues } from '~/utils/weather-utils';
-import { Label } from '~/components/ui/label';
 
-type Props = {
+interface Props {
   weather: Weather;
-};
+}
 
 const ChartContainer = ({ weather }: Props) => {
   const [sliderValue, setSliderValue] = useState([10]);
@@ -115,7 +115,7 @@ const ChartContainer = ({ weather }: Props) => {
       <div className="h-[500px] bg-zinc-950">
         {chartData && (
           <LineChart
-            data={chartData as Serie[]}
+            data={chartData}
             min={minMaxY.min - sliderValue[0]}
             max={minMaxY.max + sliderValue[0]}
             fieldName={selectValue}

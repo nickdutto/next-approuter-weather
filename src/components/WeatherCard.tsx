@@ -12,14 +12,14 @@ import {
 
 import Icon from '~/components/Icon';
 import { Card, CardContent, CardHeader } from '~/components/ui/card';
-import { WeatherInterval } from '~/types/types';
+import { type WeatherInterval } from '~/types/types';
 import { getWeatherIcon } from '~/utils/weather-utils';
 
-type Props = {
+interface Props {
   data: WeatherInterval;
   sunrise: string;
   sunset: string;
-};
+}
 
 const WeatherCard = ({ data, sunrise, sunset }: Props) => {
   return (

@@ -10,9 +10,9 @@ import {
 } from '~/components/ui/table';
 import { type MergedRiverData } from '~/utils/river-utils';
 
-type Props = {
+interface Props {
   riverData: MergedRiverData;
-};
+}
 
 const RiverTable = ({ riverData }: Props) => {
   return (
