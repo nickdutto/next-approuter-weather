@@ -112,7 +112,7 @@ const ChartContainer = ({ weather }: Props) => {
           </SelectContent>
         </Select>
       </div>
-      <div className="h-[500px] bg-zinc-950">
+      <div className="grid h-[500px] auto-cols-fr bg-zinc-950">
         {chartData && (
           <LineChart
             data={chartData}

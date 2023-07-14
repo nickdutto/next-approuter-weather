@@ -71,7 +71,7 @@ const RiverChart = ({ title, chartId, fieldName, fieldUnit, riverData, minMaxY }
           </Select>
         </div>
       </div>
-      <div className="h-[400px]">
+      <div className="grid h-[400px] auto-cols-fr">
         {chartData && (
           <LineChart
             data={[chartData]}

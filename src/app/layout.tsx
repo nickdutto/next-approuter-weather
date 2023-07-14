@@ -5,7 +5,8 @@ import { Analytics } from '@vercel/analytics/react';
 import { Inter } from 'next/font/google';
 
 import Footer from '~/components/layouts/Footer';
-import MainNav from '~/components/layouts/MainNav';
+import Navbar from '~/components/layouts/Navbar';
+import Sidebar from '~/components/layouts/Sidebar';
 import { ThemeProvider } from '~/components/ThemeProvider';
 import { cn } from '~/lib/utils';
 
@@ -30,9 +31,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={cn(inter.className, 'bg-black')}>
         <ThemeProvider attribute="class" defaultTheme="dark">
-          <MainNav />
-          {children}
-          <Footer />
+          <div>
+            <div className="block md:flex">
+              <Sidebar className="hidden w-[250px] border-r-2 dark:border-zinc-900 md:block" />
+              <div className="flex-1">
+                <Navbar className="flex w-full justify-center md:hidden" />
+                {children}
+              </div>
+            </div>
+            <Footer className="" />
+          </div>
           <Analytics />
         </ThemeProvider>
       </body>

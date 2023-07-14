@@ -1,8 +1,14 @@
 'use client';
 
-const Footer = () => {
+import { cn } from '~/lib/utils';
+
+interface Props {
+  className?: string;
+}
+
+const Footer = ({ className }: Props) => {
   return (
-    <footer className="relative w-full bg-black p-4">
+    <footer className={cn('relative w-full bg-black p-4', className)}>
       <a href="https://www.tomorrow.io/weather-api" target="_blank">
         <img
           src="./tio/logo/tomorrowio-logo.svg"

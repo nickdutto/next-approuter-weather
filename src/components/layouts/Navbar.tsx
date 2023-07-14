@@ -12,11 +12,15 @@ import {
 } from '~/components/ui/navigation-menu';
 import { cn } from '~/lib/utils';
 
-const MainNav = () => {
+interface Props {
+  className?: string;
+}
+
+const Navbar = ({ className }: Props) => {
   const path = usePathname();
 
   return (
-    <div className="relative flex items-center justify-center p-2">
+    <div className={cn('relative flex items-center justify-center p-2', className)}>
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
@@ -76,4 +80,4 @@ const MainNav = () => {
   );
 };
 
-export default MainNav;
+export default Navbar;
