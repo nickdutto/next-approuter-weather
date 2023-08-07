@@ -15,7 +15,7 @@ const Sidebar = ({ className }: Props) => {
   const path = usePathname();
 
   return (
-    <div className={cn('pb-12', className)}>
+    <div className={cn('bg-dark-900 pb-12', className)}>
       <div className="space-y-4 py-4">
         <div className="fixed w-[250px] px-3 py-2">
           <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">Weather</h2>

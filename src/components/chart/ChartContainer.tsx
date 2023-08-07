@@ -1,7 +1,5 @@
 'use client';
 
-import { type Serie } from '@nivo/line';
-
 import { useEffect, useMemo, useState } from 'react';
 
 import LineChart from '~/components/chart/LineChart';
@@ -15,7 +13,7 @@ import {
 } from '~/components/ui/select';
 import { Slider } from '~/components/ui/slider';
 import { type Weather } from '~/types/types';
-import { createChartData, getMinMaxValues } from '~/utils/weather-utils';
+import { createChartData, getMinMaxValues, type SerieWithColor } from '~/utils/weather-utils';
 
 interface Props {
   weather: Weather;
@@ -25,7 +23,7 @@ const ChartContainer = ({ weather }: Props) => {
   const [sliderValue, setSliderValue] = useState([10]);
   const [timeRange, setTimeRange] = useState('120');
   const [selectValue, setSelectValue] = useState('pressureSeaLevel');
-  const [chartData, setChartData] = useState<Serie[] | null>(null);
+  const [chartData, setChartData] = useState<SerieWithColor[] | null>(null);
   const [minMaxY, setMinMaxY] = useState({ min: 0, max: 0 });
 
   const fieldUnit = useMemo(() => {
@@ -43,6 +41,21 @@ const ChartContainer = ({ weather }: Props) => {
         return 'km/h';
       default:
         return '';
+    }
+  }, [selectValue]);
+
+  const colorSteps = useMemo(() => {
+    switch (selectValue) {
+      case 'pressureSeaLevel':
+        return [
+          { low: 0, high: 1015, color: '#f97316' },
+          { low: 1015, high: 1020, color: '#4daa31' },
+          { low: 1020, high: 1031, color: '#3b82f6' },
+          { low: 1030, high: 1040, color: '#8b5cf6' },
+          { low: 1040, high: 1101, color: '#d946ef' },
+        ];
+      default:
+        return [{ low: 0, high: 2000, color: '#3b82f6' }];
     }
   }, [selectValue]);
 
@@ -68,8 +81,8 @@ const ChartContainer = ({ weather }: Props) => {
   }, [selectValue, weather]);
 
   useEffect(() => {
-    setChartData([createChartData(weather, selectValue, parseInt(timeRange))]);
-  }, [selectValue, timeRange, weather]);
+    setChartData(createChartData(weather, selectValue, parseInt(timeRange), colorSteps));
+  }, [selectValue, timeRange, colorSteps, weather]);
 
   return (
     <div className="relative w-full">

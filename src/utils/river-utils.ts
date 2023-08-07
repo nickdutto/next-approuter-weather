@@ -1,9 +1,8 @@
-import { type Serie } from '@nivo/line';
-
 import { sub } from 'date-fns';
 import { formatInTimeZone, toDate } from 'date-fns-tz';
 
 import { type RiverData } from '~/types/types';
+import { type ColorStep, type SerieWithColor } from '~/utils/weather-utils';
 
 export type MergedRiverData = {
   date: string;
@@ -18,7 +17,12 @@ const compareDateOnly = (date1: string, date2: string) => {
   );
 };
 
-export const createRiverChartData = (riverData: RiverData, name: string, range: number): Serie => {
+export const createRiverChartData = (
+  riverData: RiverData,
+  name: string,
+  range: number,
+  colorSteps: ColorStep[],
+): SerieWithColor[] => {
   const latestDate = riverData.data[riverData.data.length - 1][0];
   const endDate = formatInTimeZone(
     sub(toDate(latestDate, { timeZone: 'Australia/Canberra' }), { days: range }),
@@ -29,17 +33,30 @@ export const createRiverChartData = (riverData: RiverData, name: string, range: 
   const toIndex = riverData.data.findIndex((interval) => compareDateOnly(endDate, interval[0]));
   const slicedData = toIndex !== -1 ? riverData.data.slice(toIndex) : riverData.data;
 
-  const mappedData = slicedData.map((data) => {
-    return {
-      x: formatInTimeZone(data[0], 'Australia/Canberra', 'dd/MM/yy-HH:mm'),
-      y: data[1],
-    };
+  const mappedValues = colorSteps.map((step) => {
+    const mappedData = slicedData.map((data) => {
+      const value = data[1];
+      if (value && Math.round(value) >= step.low && Math.round(value) <= step.high) {
+        return {
+          x: new Date(data[0]),
+          y: data[1],
+        };
+      } else {
+        return {
+          x: new Date(data[0]),
+          y: null,
+        };
+      }
+    });
+
+    if (mappedData.length === 0) {
+      return null;
+    } else {
+      return { id: `${step.low}-${step.high}`, color: step.color, data: mappedData };
+    }
   });
 
-  return {
-    id: name,
-    data: mappedData,
-  };
+  return mappedValues.filter((value) => value !== null) as SerieWithColor[];
 };
 
 export const getRiverMinMaxValues = (
