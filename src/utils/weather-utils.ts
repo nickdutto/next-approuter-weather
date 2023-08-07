@@ -1,9 +1,19 @@
 import { type Serie } from '@nivo/line';
 
 import { add, getHours, isAfter, isBefore, isEqual, setHours } from 'date-fns';
-import { formatInTimeZone, utcToZonedTime } from 'date-fns-tz';
+import { utcToZonedTime } from 'date-fns-tz';
 
 import { type Weather } from '~/types/types';
+
+export interface SerieWithColor extends Serie {
+  color: string;
+}
+
+export interface ColorStep {
+  low: number;
+  high: number;
+  color: string;
+}
 
 export const getWeatherIcon = (
   time: string,
@@ -39,19 +49,38 @@ export const getWeatherIcon = (
   }
 };
 
-export const createChartData = (data: Weather, field: string, range: number): Serie => {
+export const createChartData = (
+  data: Weather,
+  field: string,
+  range: number,
+  colorSteps: ColorStep[],
+): SerieWithColor[] => {
   const slicedData = data.data.timelines[0].intervals.slice(0, range);
-  const mappedData = slicedData.map((interval) => {
-    return {
-      x: formatInTimeZone(interval.startTime, 'Australia/Canberra', 'dd/MM/yy-HH:mm'),
-      y: interval.values[field as keyof typeof interval.values],
-    };
+
+  const mappedValues = colorSteps.map((step) => {
+    const mappedData = slicedData.map((interval) => {
+      const value = interval.values[field as keyof typeof interval.values];
+      if (Math.round(value) >= step.low && Math.round(value) <= step.high) {
+        return {
+          x: new Date(interval.startTime),
+          y: interval.values[field as keyof typeof interval.values],
+        };
+      } else {
+        return {
+          x: new Date(interval.startTime),
+          y: null,
+        };
+      }
+    });
+
+    if (mappedData.length === 0) {
+      return null;
+    } else {
+      return { id: `${step.low}-${step.high}`, color: step.color, data: mappedData };
+    }
   });
 
-  return {
-    id: field,
-    data: mappedData,
-  };
+  return mappedValues.filter((value) => value !== null) as SerieWithColor[];
 };
 
 export const getMinMaxValues = (data: Weather, field: string) => {

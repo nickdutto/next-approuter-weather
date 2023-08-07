@@ -19,20 +19,19 @@ interface Props {
   tickSteps?: number;
 }
 
-const LineChart = ({ data, min, max, fieldName, fieldUnit, tickSteps = 24 }: Props) => {
+const LowHighLineChart = ({ data, min, max, fieldName, fieldUnit, tickSteps = 24 }: Props) => {
   const tickValues = data[0].data.filter((_, i) => i % tickSteps === 0).map((d) => d.x);
 
   return (
     <ResponsiveLine
       data={data}
       margin={{ top: 20, right: 20, bottom: 120, left: 60 }}
-      xScale={{ type: 'point' }}
+      xScale={{ format: '%Y-%m-%dT%H:%M:%S.%L%Z', type: 'time', precision: 'minute' }}
+      xFormat="time:%d/%m/%Y-%H:%M"
       yScale={{
         type: 'linear',
         min: min ? min : 'auto',
         max: max ? max : 'auto',
-        stacked: true,
-        reverse: false,
       }}
       yFormat=" >-.2f"
       curve="natural"
@@ -56,7 +55,7 @@ const LineChart = ({ data, min, max, fieldName, fieldUnit, tickSteps = 24 }: Pro
       }}
       enablePoints={false}
       enableGridX={false}
-      colors={{ scheme: 'category10' }}
+      colors={{ datum: 'color' }}
       theme={{
         textColor: '#a1a1aa',
         grid: { line: { stroke: '#27272a' } },
@@ -77,4 +76,4 @@ const LineChart = ({ data, min, max, fieldName, fieldUnit, tickSteps = 24 }: Pro
   );
 };
 
-export default LineChart;
+export default LowHighLineChart;

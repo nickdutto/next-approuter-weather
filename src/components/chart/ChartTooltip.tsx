@@ -1,7 +1,6 @@
 import { type PointTooltipProps } from '@nivo/line';
-import clsx from 'clsx';
 
-import { parse } from 'date-fns';
+import clsx from 'clsx';
 import { formatInTimeZone } from 'date-fns-tz';
 
 interface Props {
@@ -12,9 +11,8 @@ interface Props {
 
 const ChartTooltip = ({ point, fieldUnit, xElemCount }: Props) => {
   const isFirstHalf = point.index < xElemCount / 2;
-  const date = parse(point.data.xFormatted as string, 'dd/MM/yy-HH:mm', new Date());
-  const formattedDay = formatInTimeZone(date, 'Australia/Canberra', 'EEEE');
-  const formattedDate = formatInTimeZone(date, 'Australia/Canberra', 'dd/MM/yy: HH:mm');
+  const formattedDay = formatInTimeZone(point.data.x, 'Australia/Canberra', 'EEEE');
+  const formattedDate = formatInTimeZone(point.data.x, 'Australia/Canberra', 'dd/MM/yy: HH:mm');
 
   const className = clsx([
     'absolute flex w-[150px] flex-col items-center gap-1 rounded-md bg-zinc-900 py-2',
