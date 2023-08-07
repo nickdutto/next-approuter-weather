@@ -61,7 +61,7 @@ const RiverPage = async () => {
   const riverData = await getRiverData();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between bg-black">
+    <main className="flex flex-col items-center justify-between bg-dark-950 lg:h-[calc(100vh-50px)]">
       <RiverContainer riverData={riverData} />
     </main>
   );

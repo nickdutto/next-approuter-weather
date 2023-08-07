@@ -27,15 +27,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <body className={cn(inter.className, 'bg-black')}>
         <ThemeProvider attribute="class" defaultTheme="dark">
-          <div>
-            <div className="block md:flex">
-              <Sidebar className="hidden w-[250px] border-r-2 dark:border-zinc-900 md:block" />
-              <div className="flex-1">
-                <Navbar className="flex w-full justify-center md:hidden" />
-                {children}
-              </div>
+          <div className="flex flex-col md:grid md:h-screen md:grid-cols-[250px_1fr] md:grid-rows-[1fr_50px]">
+            <Sidebar className="hidden w-[250px] border-r-2 dark:border-zinc-900 md:col-span-1 md:row-span-2 md:block" />
+            <div className="flex-1 md:col-start-2 md:row-span-1">
+              <Navbar className="flex w-full justify-center md:hidden" />
+              {children}
             </div>
-            <Footer className="" />
+            <Footer className="border-t-2 dark:border-zinc-900 md:col-start-2 md:row-span-2" />
           </div>
           <Analytics />
         </ThemeProvider>
