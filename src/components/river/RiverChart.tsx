@@ -1,5 +1,3 @@
-import { type Serie } from '@nivo/line';
-
 import { useEffect, useMemo, useState } from 'react';
 
 import LineChart from '~/components/chart/LineChart';
@@ -12,6 +10,7 @@ import {
 } from '~/components/ui/select';
 import { type RiverData } from '~/types/types';
 import { createRiverChartData, getRiverMinMaxValues } from '~/utils/river-utils';
+import { type SerieWithColor } from '~/utils/weather-utils';
 
 interface Props {
   title: string;
@@ -26,7 +25,7 @@ interface Props {
 }
 
 const RiverChart = ({ title, chartId, fieldName, fieldUnit, riverData, minMaxY }: Props) => {
-  const [chartData, setChartData] = useState<Serie | null>(null);
+  const [chartData, setChartData] = useState<SerieWithColor[] | null>(null);
   const [timeRange, setTimeRange] = useState('30');
 
   const yScaleMinMax = getRiverMinMaxValues(riverData, minMaxY);
@@ -49,7 +48,11 @@ const RiverChart = ({ title, chartId, fieldName, fieldUnit, riverData, minMaxY }
   }, [timeRange]);
 
   useEffect(() => {
-    setChartData(createRiverChartData(riverData, chartId, parseInt(timeRange)));
+    setChartData(
+      createRiverChartData(riverData, chartId, parseInt(timeRange), [
+        { low: 0, high: 2000, color: '#3b82f6' },
+      ]),
+    );
   }, [timeRange, riverData, chartId]);
 
   return (
@@ -74,7 +77,7 @@ const RiverChart = ({ title, chartId, fieldName, fieldUnit, riverData, minMaxY }
       <div className="grid h-[400px] auto-cols-fr">
         {chartData && (
           <LineChart
-            data={[chartData]}
+            data={chartData}
             fieldName={fieldName}
             fieldUnit={fieldUnit}
             min={yScaleMinMax.min}
