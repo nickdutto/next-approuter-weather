@@ -5,7 +5,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended-type-checked',
     'plugin:@typescript-eslint/stylistic-type-checked',
-    // 'plugin:prettier/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -14,7 +13,7 @@ module.exports = {
   overrides: [
     {
       extends: ['plugin:@typescript-eslint/disable-type-checked'],
-      files: ['./**/*.{js,cjs}'],
+      files: ['./**/*.{js,cjs}', '!./next-env.d.ts'],
     },
   ],
   root: true,
@@ -26,5 +25,8 @@ module.exports = {
     ],
     'import/consistent-type-specifier-style': ['error', 'prefer-inline'],
     'end-of-line': 'off',
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/consistent-type-definitions': 'off',
   },
 };
