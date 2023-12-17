@@ -1,5 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  corePlugins: {
+    preflight: false,
+  },
   darkMode: ['class'],
   content: [
     './pages/**/*.{ts,tsx}',
@@ -47,5 +50,6 @@ module.exports = {
       },
     },
   },
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   plugins: [require('tailwindcss-animate'), require('tailwindcss-radix')()],
 };

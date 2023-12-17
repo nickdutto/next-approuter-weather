@@ -1,17 +1,18 @@
-import './globals.css';
+import '~/styles/preflight.css';
+import '~/styles/globals.css';
+import '@mantine/core/styles.css';
 
+import { ColorSchemeScript } from '@mantine/core';
 import { Analytics } from '@vercel/analytics/react';
 
+import { GeistMono } from 'geist/font/mono';
+import { GeistSans } from 'geist/font/sans';
 import { type Metadata } from 'next';
-import { Inter } from 'next/font/google';
 
 import Footer from '~/components/layouts/Footer';
 import Navbar from '~/components/layouts/Navbar';
 import Sidebar from '~/components/layouts/Sidebar';
-import { ThemeProvider } from '~/components/ThemeProvider';
-import { cn } from '~/lib/utils';
-
-const inter = Inter({ subsets: ['latin'] });
+import Providers from '~/components/providers/Providers';
 
 export const metadata: Metadata = {
   title: 'Next Weather',
@@ -24,9 +25,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={cn(inter.className, 'bg-black')}>
-        <ThemeProvider attribute="class" defaultTheme="dark">
+    <html
+      lang="en"
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <ColorSchemeScript forceColorScheme="dark" />
+      </head>
+      <body className="">
+        <Providers sansFont={GeistSans.style.fontFamily} monoFont={GeistMono.style.fontFamily}>
           <div className="flex flex-col md:grid md:h-screen md:grid-cols-[250px_1fr] md:grid-rows-[1fr_50px]">
             <Sidebar className="hidden w-[250px] border-r-2 dark:border-zinc-900 md:col-span-1 md:row-span-2 md:block" />
             <div className="flex-1 md:col-start-2 md:row-span-1">
@@ -36,7 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer className="border-t-2 dark:border-zinc-900 md:col-start-2 md:row-span-2" />
           </div>
           <Analytics />
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

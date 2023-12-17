@@ -57,7 +57,7 @@ const LowHighLineChart = ({ data, min, max, fieldName, fieldUnit, tickSteps = 24
       enableGridX={false}
       colors={{ datum: 'color' }}
       theme={{
-        textColor: '#a1a1aa',
+        text: { color: '#a1a1aa' },
         grid: { line: { stroke: '#27272a' } },
         axis: { ticks: { line: { stroke: '#27272a' } } },
         crosshair: { line: { stroke: '#71717a' } },

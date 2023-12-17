@@ -44,7 +44,7 @@ const Page = async () => {
   const weather = await getWeather();
 
   return (
-    <main className="flex min-h-screen flex-col items-center bg-black pt-32">
+    <main className="flex min-h-screen flex-col items-center pt-32">
       <WeatherCard
         data={weather.data.timelines[0].intervals[0]}
         sunrise={sunriseSunset.results.sunrise}
