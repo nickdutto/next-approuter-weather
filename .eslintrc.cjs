@@ -23,7 +23,6 @@ module.exports = {
       'error',
       { prefer: 'type-imports', fixStyle: 'inline-type-imports' },
     ],
-    'import/consistent-type-specifier-style': ['error', 'prefer-inline'],
     'end-of-line': 'off',
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
