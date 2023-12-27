@@ -9,7 +9,7 @@ import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import { type Metadata } from 'next';
 
-import NewNavbar from '~/components/layouts/NewNavbar';
+import Navbar from '~/components/layouts/Navbar';
 import Sidebar from '~/components/layouts/Sidebar';
 import Providers from '~/components/providers/Providers';
 
@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers sansFont={GeistSans.style.fontFamily} monoFont={GeistMono.style.fontFamily}>
           <Sidebar className="md:col-span-1 md:row-span-2" />
           <div className="flex-1 md:col-start-2 md:row-span-1">
-            <NewNavbar />
+            <Navbar />
             {children}
           </div>
           <Analytics />
