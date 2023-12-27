@@ -49,15 +49,15 @@ export interface WeatherIntervalValues {
 }
 
 export interface RiverData {
-  'Station Long Name': string;
-  'Station Number': string;
-  'Station Location Latitude': string;
-  'Station Location Longitude': string;
-  'Parameter Type Name': string;
-  'Timeseries Name': string;
-  'Unit Name': string;
+  station_longname: string;
+  station_no: string;
+  station_latitude: string;
+  station_longitude: string;
+  parametertype_name: string;
+  ts_name: string;
+  ts_unitname: string;
   DATA_OWNER_NAME: string;
-  Rows: string;
+  rows: string;
   columns: string;
   data: [string, number | undefined][];
 }
