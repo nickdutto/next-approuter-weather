@@ -1,6 +1,8 @@
 import '~/styles/preflight.css';
 import '~/styles/globals.css';
+
 import '@mantine/core/styles.css';
+import 'mantine-datatable/styles.layer.css';
 
 import { ColorSchemeScript } from '@mantine/core';
 import { Analytics } from '@vercel/analytics/react';

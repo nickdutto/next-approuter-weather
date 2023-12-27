@@ -77,6 +77,9 @@ dependencies:
   geist:
     specifier: ^1.2.0
     version: 1.2.0(next@14.0.4)
+  mantine-datatable:
+    specifier: ^7.3.3
+    version: 7.3.3(@mantine/core@7.3.2)(@mantine/hooks@7.3.2)(clsx@2.0.0)(react@18.2.0)
   next:
     specifier: 14.0.4
     version: 14.0.4(react-dom@18.2.0)(react@18.2.0)
@@ -3278,6 +3281,20 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yallist: 4.0.0
+
+  /mantine-datatable@7.3.3(@mantine/core@7.3.2)(@mantine/hooks@7.3.2)(clsx@2.0.0)(react@18.2.0):
+    resolution: {integrity: sha512-Pfu3SMFIeS0IcjtA3cZ1q3ukSIMIyKJscEervs0sIdzOlWZ3dJ2a80GEntVMj0IacsGJcLgCF488T1AZLHKohA==}
+    peerDependencies:
+      '@mantine/core': '>=7'
+      '@mantine/hooks': '>=7'
+      clsx: '>=2'
+      react: '>=18.2'
+    dependencies:
+      '@mantine/core': 7.3.2(@mantine/hooks@7.3.2)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
+      '@mantine/hooks': 7.3.2(react@18.2.0)
+      clsx: 2.0.0
+      react: 18.2.0
+    dev: false
 
   /merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
