@@ -1,8 +1,6 @@
 import '~/styles/preflight.css';
 import '~/styles/globals.css';
-
 import '@mantine/core/styles.css';
-import 'mantine-datatable/styles.layer.css';
 
 import { ColorSchemeScript } from '@mantine/core';
 import { Analytics } from '@vercel/analytics/react';
@@ -11,8 +9,7 @@ import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import { type Metadata } from 'next';
 
-import Footer from '~/components/layouts/Footer';
-import Navbar from '~/components/layouts/Navbar';
+import NewNavbar from '~/components/layouts/NewNavbar';
 import Sidebar from '~/components/layouts/Sidebar';
 import Providers from '~/components/providers/Providers';
 
@@ -35,15 +32,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <ColorSchemeScript forceColorScheme="dark" />
       </head>
-      <body className="">
+      <body className="flex flex-col bg-[var(--mantine-color-night-10)] p-4 md:grid md:h-[100svh] md:grid-cols-[250px_1fr] md:grid-rows-[1fr_50px] md:gap-4">
         <Providers sansFont={GeistSans.style.fontFamily} monoFont={GeistMono.style.fontFamily}>
-          <div className="flex flex-col md:grid md:h-screen md:grid-cols-[250px_1fr] md:grid-rows-[1fr_50px]">
-            <Sidebar className="hidden w-[250px] border-r-2 dark:border-zinc-900 md:col-span-1 md:row-span-2 md:block" />
-            <div className="flex-1 md:col-start-2 md:row-span-1">
-              <Navbar className="flex w-full justify-center md:hidden" />
-              {children}
-            </div>
-            <Footer className="border-t-2 dark:border-zinc-900 md:col-start-2 md:row-span-2" />
+          <Sidebar className="md:col-span-1 md:row-span-2" />
+          <div className="flex-1 md:col-start-2 md:row-span-1">
+            <NewNavbar />
+            {children}
           </div>
           <Analytics />
         </Providers>
