@@ -1,4 +1,9 @@
-import WeatherCard from '~/components/WeatherCard';
+import { Paper } from '@mantine/core';
+
+import CurrentWeatherCard from '~/components/weather/CurrentWeatherCard';
+import CurrentWeatherDetailCard from '~/components/weather/CurrentWeatherDetailCard';
+import CurrentWeatherWindCard from '~/components/weather/CurrentWeatherWindCard';
+import WeatherIntervalTableCard from '~/components/weather/WeatherIntervalTableCard';
 import { type SunriseSunset, type Weather } from '~/types/types';
 
 const getSunriseSunset = async () => {
@@ -44,12 +49,27 @@ const Page = async () => {
   const weather = await getWeather();
 
   return (
-    <main className="flex min-h-screen flex-col items-center pt-32">
-      <WeatherCard
-        data={weather.data.timelines[0].intervals[0]}
-        sunrise={sunriseSunset.results.sunrise}
-        sunset={sunriseSunset.results.sunset}
-      />
+    <main className="flex flex-col gap-2 pt-4">
+      <div className="flex gap-2">
+        <div className="w-[320px]">
+          <CurrentWeatherCard
+            data={weather.data.timelines[0].intervals[0]}
+            sunrise={sunriseSunset.results.sunrise}
+            sunset={sunriseSunset.results.sunset}
+          />
+        </div>
+        <Paper radius="lg" classNames={{ root: 'flex w-full flex-col gap-2 bg-transparent' }}>
+          <CurrentWeatherDetailCard data={weather.data.timelines[0].intervals[0]} />
+          <CurrentWeatherWindCard data={weather.data.timelines[0].intervals[0]} />
+        </Paper>
+      </div>
+      <Paper radius="lg" classNames={{ root: 'flex w-full h-[600px] gap-2 p-4 bg-m-night-7' }}>
+        <WeatherIntervalTableCard
+          data={weather.data.timelines[0].intervals}
+          sunrise={sunriseSunset.results.sunrise}
+          sunset={sunriseSunset.results.sunset}
+        />
+      </Paper>
     </main>
   );
 };
