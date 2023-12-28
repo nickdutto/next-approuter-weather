@@ -12,7 +12,7 @@ const Navbar = () => {
   return (
     <nav className="flex items-center justify-between rounded-m-lg bg-m-night-7 px-4 py-2">
       <div className="flex items-center gap-2">
-        <Title order={1} size="h3" c="blue.7">
+        <Title order={1} c="blue.7" className="text-m-md sm:text-m-xl">
           NextWeather
         </Title>
         <Menu
@@ -39,10 +39,11 @@ const Navbar = () => {
                     opened ? '-rotate-180' : ''
                   }`}
                 >
-                  <LuChevronDown size={16} className="text-m-gray-6" />
+                  <LuChevronDown className="h-3 w-3 text-m-gray-6 sm:h-4 sm:w-4" />
                 </span>
               }
               classNames={{
+                root: 'text-m-xs sm:text-m-sm',
                 inner: '!gap-1',
                 section: '!ml-0 h-full',
               }}
@@ -65,7 +66,7 @@ const Navbar = () => {
         placeholder="Search"
         variant="filled"
         radius="lg"
-        classNames={{ input: '!bg-m-night-4' }}
+        classNames={{ root: 'hidden sm:block', input: '!bg-m-night-4' }}
       />
     </nav>
   );
