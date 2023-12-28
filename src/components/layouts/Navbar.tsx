@@ -63,11 +63,14 @@ const Navbar = () => {
               Hall&apos;s Crossing
             </Menu.Item>
             <Menu.Label>Cotter River</Menu.Label>
+            <Menu.Item component={Link} href="/river/cotter-river-bendora-dam">
+              D/S Bendora Dam
+            </Menu.Item>
             <Menu.Item component={Link} href="/river/vanitys-crossing">
               Vanity&apos;s Crossing
             </Menu.Item>
-            <Menu.Item component={Link} href="/river/cotter-river-bendora-dam">
-              D/S Bendora Dam
+            <Menu.Item component={Link} href="/river/cotter-kiosk">
+              Cotter Kiosk
             </Menu.Item>
           </Menu.Dropdown>
         </Menu>
