@@ -73,6 +73,9 @@ const Navbar = () => {
               Sturt Island
             </Menu.Item>
             <Menu.Label>Cotter River</Menu.Label>
+            <Menu.Item component={Link} href="/river/cotter-river/gingera">
+              Gingera
+            </Menu.Item>
             <Menu.Item component={Link} href="/river/cotter-river/corin-dam">
               Corin Dam
             </Menu.Item>
