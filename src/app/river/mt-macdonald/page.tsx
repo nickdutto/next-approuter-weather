@@ -52,9 +52,25 @@ const getRiverData = async () => {
   const dischargeData = await getDischargeData(dischargeParams);
   const levelData = await getLevelData(levelParams);
 
+  const filteredDischargeData = dischargeData[0].data.filter((data) => data[1] !== null);
+  const filteredLevelData = levelData[0].data.filter((data) => data[1] !== null);
+
+  const lastDischarge = filteredDischargeData.at(-1);
+  const lastLevel = filteredLevelData.at(-1);
+
   return {
-    discharge: dischargeData,
-    level: levelData,
+    discharge: [{ ...dischargeData[0], data: filteredDischargeData }],
+    level: [{ ...levelData[0], data: filteredLevelData }],
+    last: {
+      discharge: {
+        timestamp: lastDischarge?.[0],
+        value: Number(lastDischarge?.[1]) ?? 0,
+      },
+      level: {
+        timestamp: lastLevel?.[0],
+        value: Number(lastLevel?.[1]) ?? 0,
+      },
+    },
     fromDate: fromDate,
     toDate: toDate,
     timeZone: timeZone,
@@ -64,33 +80,21 @@ const getRiverData = async () => {
 const Page = async () => {
   const riverData = await getRiverData();
 
-  const filteredDischargeData = riverData.discharge[0].data.filter((data) => data[1] !== null);
-  const filteredLevelData = riverData.level[0].data.filter((data) => data[1] !== null);
+  const dischargeQuality = riverQualityCn(riverData.last.discharge.value, {
+    low: 10,
+    medium: 15,
+    high: 20,
+    veryHigh: 30,
+    extreme: 40,
+  });
 
-  const lastDischarge = filteredDischargeData[filteredDischargeData.length - 1];
-  const lastLevel = filteredLevelData[filteredLevelData.length - 1];
-
-  const dischargeQuality = (discharge: number) => {
-    return clsx([
-      'h-[16px] w-[16px] rounded-full',
-      discharge <= 10 && 'bg-blue-500',
-      discharge > 10 && discharge <= 15 && 'bg-green-500',
-      discharge > 15 && discharge <= 20 && 'bg-yellow-500',
-      discharge > 20 && discharge <= 30 && 'bg-orange-500',
-      discharge > 30 && 'bg-red-500',
-    ]);
-  };
-
-  const levelQuality = (level: number) => {
-    return clsx([
-      'h-[16px] w-[16px] rounded-full',
-      level <= 1.4 && 'bg-blue-500',
-      level > 1.4 && level <= 1.5 && 'bg-green-500',
-      level > 1.5 && level <= 1.6 && 'bg-yellow-500',
-      level > 1.6 && level <= 1.7 && 'bg-orange-500',
-      level > 1.7 && 'bg-red-500',
-    ]);
-  };
+  const levelQuality = riverQualityCn(riverData.last.level.value, {
+    low: 1.4,
+    medium: 1.5,
+    high: 1.6,
+    veryHigh: 1.7,
+    extreme: 1.8,
+  });
 
   return (
     <main className="flex flex-col gap-4">
@@ -100,18 +104,47 @@ const Page = async () => {
             <h2 className="text-2xl font-bold">{riverData.discharge[0].station_longname}</h2>
             <p>
               Latest Discharge:{' '}
-              {formatInTimeZone(lastDischarge[0], riverData.timeZone, 'dd/MM/yy - HH:mm')}
+              {riverData.last.discharge.timestamp &&
+                formatInTimeZone(
+                  riverData.last.discharge.timestamp,
+                  riverData.timeZone,
+                  'dd/MM/yy - HH:mm',
+                )}
             </p>
             <p>
-              Latest Level: {formatInTimeZone(lastLevel[0], riverData.timeZone, 'dd/MM/yy - HH:mm')}
+              Latest Level:{' '}
+              {riverData.last.level.timestamp &&
+                formatInTimeZone(
+                  riverData.last.level.timestamp,
+                  riverData.timeZone,
+                  'dd/MM/yy - HH:mm',
+                )}
             </p>
             <div className="flex items-center gap-2">
               <p>Discharge Quality:</p>
-              <div className={dischargeQuality(Number(lastDischarge[1]))} />
+              <div className="relative flex h-4 w-4">
+                <div
+                  className={cn(dischargeQuality, 'relative inline-flex h-4 w-4 rounded-full')}
+                />
+                <div
+                  className={cn(
+                    dischargeQuality,
+                    'absolute inline-flex h-full w-full animate-ping rounded-full opacity-75',
+                  )}
+                />
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <p>Level Quality:</p>
-              <div className={levelQuality(Number(lastLevel[1]))} />
+              <div className="relative flex h-4 w-4">
+                <div className={cn(levelQuality, 'relative inline-flex h-4 w-4 rounded-full')} />
+                <div
+                  className={cn(
+                    levelQuality,
+                    'absolute inline-flex h-full w-full animate-ping rounded-full opacity-75',
+                  )}
+                />
+              </div>
             </div>
           </div>
           <div>
@@ -139,7 +172,7 @@ const Page = async () => {
       </div>
       <div className="flex gap-2">
         <NewRiverTable riverData={riverData.level} />
-        <NewRiverTable riverData={[{ ...riverData.discharge[0], data: filteredDischargeData }]} />
+        <NewRiverTable riverData={riverData.discharge} />
       </div>
     </main>
   );
