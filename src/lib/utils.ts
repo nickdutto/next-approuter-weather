@@ -1,5 +1,5 @@
 import { type ClassValue, clsx } from 'clsx';
-import { set, sub } from 'date-fns';
+import { sub } from 'date-fns';
 import { formatInTimeZone } from 'date-fns-tz';
 import { twMerge } from 'tailwind-merge';
 
@@ -12,7 +12,7 @@ export const formatTzISO = (date: Date, timeZone: string) => {
 };
 
 export const getToFromDates = (timeZone: string, subOptions: Parameters<typeof sub>[1]) => {
-  const date = set(new Date(), { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 });
+  const date = new Date();
   const toDate = formatTzISO(date, timeZone);
   const fromDate = formatTzISO(sub(date, subOptions), timeZone);
 

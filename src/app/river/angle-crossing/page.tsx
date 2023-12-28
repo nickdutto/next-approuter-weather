@@ -1,8 +1,14 @@
 import RiverInfoCard from '~/components/river/RiverInfoCard';
 import RiverTablesContainer from '~/components/river/RiverTablesContainer';
+import { getRiverData } from '~/server/river';
 
 const Page = async () => {
-  const riverData = await getRiverData();
+  const riverData = await getRiverData({
+    dischargeId: '1091010',
+    levelId: '1117010',
+    timeZone: 'Australia/Canberra',
+    subDateRange: { days: 7 },
+  });
 
   return (
     <main className="flex flex-col gap-4">
