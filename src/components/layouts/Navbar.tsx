@@ -72,6 +72,10 @@ const Navbar = () => {
             <Menu.Item component={Link} href="/river/cotter-kiosk">
               Cotter Kiosk
             </Menu.Item>
+            <Menu.Label>Condor Creek</Menu.Label>
+            <Menu.Item component={Link} href="/river/condor-creek/threeways">
+              Threeways
+            </Menu.Item>
           </Menu.Dropdown>
         </Menu>
       </div>
