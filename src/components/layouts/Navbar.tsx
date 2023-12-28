@@ -56,6 +56,9 @@ const Navbar = () => {
             <Menu.Item component={Link} href="/river/murrumbidgee-river/angle-crossing">
               Angle Crossing
             </Menu.Item>
+            <Menu.Item component={Link} href="/river/murrumbidgee-river/lobbs-hole-creek">
+              Lobbs Hole Creek
+            </Menu.Item>
             <Menu.Item component={Link} href="/river/murrumbidgee-river/mt-macdonald">
               Mt. MacDonald
             </Menu.Item>
