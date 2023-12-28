@@ -66,6 +66,9 @@ const Navbar = () => {
             <Menu.Item component={Link} href="/river/vanitys-crossing">
               Vanity&apos;s Crossing
             </Menu.Item>
+            <Menu.Item component={Link} href="/river/cotter-river-bendora-dam">
+              D/S Bendora Dam
+            </Menu.Item>
           </Menu.Dropdown>
         </Menu>
       </div>
