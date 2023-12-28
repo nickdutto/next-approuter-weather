@@ -66,6 +66,9 @@ const Navbar = () => {
             <Menu.Item component={Link} href="/river/molonglo-river/coppins-crossing">
               Coppins Crossing
             </Menu.Item>
+            <Menu.Item component={Link} href="/river/molonglo-river/sturt-island">
+              Sturt Island
+            </Menu.Item>
             <Menu.Label>Cotter River</Menu.Label>
             <Menu.Item component={Link} href="/river/cotter-river/bendora-dam">
               Bendora Dam
