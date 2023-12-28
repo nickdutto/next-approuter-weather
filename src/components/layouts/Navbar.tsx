@@ -62,6 +62,10 @@ const Navbar = () => {
             <Menu.Item component={Link} href="/river/halls-crossing">
               Hall&apos;s Crossing
             </Menu.Item>
+            <Menu.Label>Cotter River</Menu.Label>
+            <Menu.Item component={Link} href="/river/vanitys-crossing">
+              Vanity&apos;s Crossing
+            </Menu.Item>
           </Menu.Dropdown>
         </Menu>
       </div>
