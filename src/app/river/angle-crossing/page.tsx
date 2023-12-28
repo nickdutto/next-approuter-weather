@@ -1,79 +1,5 @@
 import RiverInfoCard from '~/components/river/RiverInfoCard';
-import RiverTable from '~/components/river/RiverTable';
-import { baseWaterDataParams } from '~/lib/river';
-import { getToFromDates } from '~/lib/utils';
-import { type RiverData } from '~/types/types';
-
-const getDischargeData = async (urlSearchParams: URLSearchParams) => {
-  const res = await fetch(
-    `http://www.bom.gov.au/waterdata/services?${urlSearchParams.toString()}`,
-    {
-      next: {
-        revalidate: 3600,
-      },
-    },
-  );
-
-  return (await res.json()) as RiverData[];
-};
-
-const getLevelData = async (urlSearchParams: URLSearchParams) => {
-  const res = await fetch(
-    `http://www.bom.gov.au/waterdata/services?${urlSearchParams.toString()}`,
-    {
-      next: {
-        revalidate: 3600,
-      },
-    },
-  );
-
-  return (await res.json()) as RiverData[];
-};
-
-const getRiverData = async () => {
-  const timeZone = 'Australia/Canberra';
-  const { fromDate, toDate } = getToFromDates(timeZone, { days: 7 });
-
-  const dischargeParams = new URLSearchParams({
-    ...baseWaterDataParams,
-    from: fromDate,
-    to: toDate,
-    ts_id: '1091010',
-  });
-  const levelParams = new URLSearchParams({
-    ...baseWaterDataParams,
-    from: fromDate,
-    to: toDate,
-    ts_id: '1117010',
-  });
-
-  const dischargeData = await getDischargeData(dischargeParams);
-  const levelData = await getLevelData(levelParams);
-
-  const filteredDischargeData = dischargeData[0].data.filter((data) => data[1] !== null);
-  const filteredLevelData = levelData[0].data.filter((data) => data[1] !== null);
-
-  const latestDischarge = filteredDischargeData.at(-1);
-  const latestLevel = filteredLevelData.at(-1);
-
-  return {
-    discharge: [{ ...dischargeData[0], data: filteredDischargeData }],
-    level: [{ ...levelData[0], data: filteredLevelData }],
-    latest: {
-      discharge: {
-        timestamp: latestDischarge?.[0],
-        value: Number(latestDischarge?.[1]) ?? 0,
-      },
-      level: {
-        timestamp: latestLevel?.[0],
-        value: Number(latestLevel?.[1]) ?? 0,
-      },
-    },
-    fromDate: fromDate,
-    toDate: toDate,
-    timeZone: timeZone,
-  };
-};
+import RiverTablesContainer from '~/components/river/RiverTablesContainer';
 
 const Page = async () => {
   const riverData = await getRiverData();
@@ -107,10 +33,7 @@ const Page = async () => {
         }}
         latest={riverData.latest}
       />
-      <div className="flex gap-2">
-        <RiverTable riverData={riverData.level} />
-        <RiverTable riverData={riverData.discharge} />
-      </div>
+      <RiverTablesContainer riverData={riverData} />
     </main>
   );
 };
