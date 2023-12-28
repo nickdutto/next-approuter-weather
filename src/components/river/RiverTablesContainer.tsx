@@ -5,6 +5,7 @@ import { useMediaQuery } from '@mantine/hooks';
 
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
+import { WiFlood, WiSandstorm } from 'react-icons/wi';
 
 import RiverTable from '~/components/river/RiverTable';
 import { type RiverData } from '~/types/types';
@@ -32,7 +33,7 @@ const RiverTablesContainer = ({ riverData }: Props) => {
 
   const tabTabCn = (value: string, tabCount: '2' | '3', position: 'left' | 'middle' | 'right') => {
     return clsx([
-      'text-m-xs sm:text-m-sm',
+      'gap-1 text-m-xs',
       tabCount === '2' && 'w-1/2',
       tabCount === '3' && 'w-1/3',
       position === 'left' && 'rounded-r-none',
@@ -46,12 +47,28 @@ const RiverTablesContainer = ({ riverData }: Props) => {
   return (
     <>
       {isMobile === true && (
-        <Tabs variant="pills" value={tab} onChange={setTab}>
+        <Tabs value={tab} onChange={setTab} variant="pills" radius="lg">
           <TabsList className="gap-0">
-            <TabsTab value="level" fw={600} className={tabTabCn('level', '2', 'left')}>
+            <TabsTab
+              value="level"
+              fw={600}
+              leftSection={<WiFlood size={20} />}
+              classNames={{
+                tab: tabTabCn('level', '2', 'left'),
+                tabSection: 'mr-0',
+              }}
+            >
               Water Course Level
             </TabsTab>
-            <TabsTab value="discharge" fw={600} className={tabTabCn('discharge', '2', 'right')}>
+            <TabsTab
+              value="discharge"
+              fw={600}
+              leftSection={<WiSandstorm size={20} />}
+              classNames={{
+                tab: tabTabCn('discharge', '2', 'right'),
+                tabSection: 'mr-0',
+              }}
+            >
               Water Course Discharge
             </TabsTab>
           </TabsList>
@@ -64,15 +81,31 @@ const RiverTablesContainer = ({ riverData }: Props) => {
         </Tabs>
       )}
       {isMobile === false && (
-        <Tabs variant="pills" value={tab} onChange={setTab}>
+        <Tabs value={tab} onChange={setTab} variant="pills" radius="lg">
           <TabsList className="gap-0">
-            <TabsTab value="level" fw={600} className={tabTabCn('level', '3', 'left')}>
+            <TabsTab
+              value="level"
+              fw={600}
+              leftSection={<WiFlood size={20} />}
+              classNames={{
+                tab: tabTabCn('level', '3', 'left'),
+                tabSection: 'mr-0',
+              }}
+            >
               Water Course Level
             </TabsTab>
             <TabsTab value="both" fw={600} className={tabTabCn('both', '3', 'middle')}>
               Both
             </TabsTab>
-            <TabsTab value="discharge" fw={600} className={tabTabCn('discharge', '3', 'right')}>
+            <TabsTab
+              value="discharge"
+              fw={600}
+              leftSection={<WiSandstorm size={20} />}
+              classNames={{
+                tab: tabTabCn('discharge', '3', 'right'),
+                tabSection: 'mr-0',
+              }}
+            >
               Water Course Discharge
             </TabsTab>
           </TabsList>

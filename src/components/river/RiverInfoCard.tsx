@@ -1,4 +1,5 @@
 import { formatInTimeZone } from 'date-fns-tz';
+import { WiFlood, WiSandstorm } from 'react-icons/wi';
 
 import { riverQualityCn, type RiverQualitySteps } from '~/lib/river';
 import { cn } from '~/lib/utils';
@@ -7,6 +8,7 @@ type Props = {
   station: {
     id: string;
     name: string;
+    riverName: string;
     owner: string;
     latitude: string;
     longitude: string;
@@ -34,45 +36,54 @@ const RiverInfoCard = ({ station, dischargeQualitySteps, levelQualitySteps, late
 
   return (
     <div className="pt-4">
-      <div className="flex items-center justify-between rounded-m-lg bg-m-night-7 p-4">
-        <div>
-          <h2 className="text-2xl font-bold">{station.name}</h2>
-          <p>
-            Latest Discharge:{' '}
-            {latest.discharge.timestamp &&
-              formatInTimeZone(latest.discharge.timestamp, station.timeZone, 'dd/MM/yy - HH:mm')}
-          </p>
-          <p>
-            Latest Level:{' '}
-            {latest.level.timestamp &&
-              formatInTimeZone(latest.level.timestamp, station.timeZone, 'dd/MM/yy - HH:mm')}
-          </p>
-          <div className="flex items-center gap-2">
-            <p>Discharge Quality:</p>
-            <div className="relative flex h-4 w-4">
-              <div className={cn(dischargeQuality, 'relative inline-flex h-4 w-4 rounded-full')} />
-              <div
-                className={cn(
-                  dischargeQuality,
-                  'absolute inline-flex h-full w-full animate-ping rounded-full opacity-75',
-                )}
-              />
+      <div className="flex justify-between rounded-m-lg bg-m-night-7 p-4">
+        <div className="flex w-full flex-col gap-1">
+          <h2 className="flex flex-col text-center">
+            <span className="text-base font-bold sm:text-start sm:text-2xl">
+              {station.riverName}
+            </span>
+            <span className="text-base font-semibold sm:text-start sm:text-xl">{station.name}</span>
+          </h2>
+          <div className="flex flex-row justify-center gap-2 sm:flex-col sm:justify-start">
+            <div className="flex flex-col items-center gap-2 sm:flex-row">
+              <p className="inline-flex items-center gap-1">
+                <WiFlood size={24} />{' '}
+                <span>
+                  Quality<span className="hidden sm:inline">:</span>
+                </span>
+              </p>
+              <div className="relative flex h-4 w-4">
+                <div className={cn(levelQuality, 'relative inline-flex h-4 w-4 rounded-full')} />
+                <div
+                  className={cn(
+                    levelQuality,
+                    'absolute inline-flex h-full w-full animate-ping rounded-full opacity-75',
+                  )}
+                />
+              </div>
             </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <p>Level Quality:</p>
-            <div className="relative flex h-4 w-4">
-              <div className={cn(levelQuality, 'relative inline-flex h-4 w-4 rounded-full')} />
-              <div
-                className={cn(
-                  levelQuality,
-                  'absolute inline-flex h-full w-full animate-ping rounded-full opacity-75',
-                )}
-              />
+            <div className="flex flex-col items-center gap-2 sm:flex-row">
+              <p className="inline-flex items-center gap-1">
+                <WiSandstorm size={24} />{' '}
+                <span>
+                  Quality<span className="hidden sm:inline">:</span>
+                </span>
+              </p>
+              <div className="relative flex h-4 w-4">
+                <div
+                  className={cn(dischargeQuality, 'relative inline-flex h-4 w-4 rounded-full')}
+                />
+                <div
+                  className={cn(
+                    dischargeQuality,
+                    'absolute inline-flex h-full w-full animate-ping rounded-full opacity-75',
+                  )}
+                />
+              </div>
             </div>
           </div>
         </div>
-        <div>
+        <div className="hidden sm:block">
           <p>
             <span className="font-semibold">Station:</span> {station.id}
           </p>

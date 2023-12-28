@@ -15,7 +15,7 @@ const Table = <T extends object>({ title, data, columns }: Props<T>) => {
 
   return (
     <div className="rounded-m-lg bg-m-night-7 p-2">
-      <div className="h-[calc(100svh-400px)] overflow-y-auto scrollbar scrollbar-track-m-night-7 scrollbar-thumb-m-night-0">
+      <div className="h-[calc(100svh-304px)] overflow-y-auto scrollbar scrollbar-track-m-night-7 scrollbar-thumb-m-night-0 sm:h-[calc(100svh-380px)]">
         {title && (
           <div>
             <h3 className="text-center text-lg font-bold">{title}</h3>

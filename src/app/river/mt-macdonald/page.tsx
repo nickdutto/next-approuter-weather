@@ -15,7 +15,8 @@ const Page = async () => {
       <RiverInfoCard
         station={{
           id: riverData.discharge[0].station_no,
-          name: riverData.discharge[0].station_longname,
+          name: 'Mt. MacDonald',
+          riverName: 'Murrumbidgee River',
           owner: riverData.discharge[0].DATA_OWNER_NAME,
           latitude: riverData.discharge[0].station_latitude,
           longitude: riverData.discharge[0].station_longitude,
