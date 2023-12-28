@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-type RiverQualitySteps = {
+export type RiverQualitySteps = {
   low: number;
   medium: number;
   high: number;
