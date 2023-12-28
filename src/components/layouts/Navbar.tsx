@@ -53,6 +53,9 @@ const Navbar = () => {
           </Menu.Target>
           <Menu.Dropdown>
             <Menu.Label>Murrumbidgee River</Menu.Label>
+            <Menu.Item component={Link} href="/river/murrumbidgee-river/yaouk-no2">
+              Yaouk No.2
+            </Menu.Item>
             <Menu.Item component={Link} href="/river/murrumbidgee-river/mittagang-crossing">
               Mittagang Crossing
             </Menu.Item>
