@@ -1,9 +1,8 @@
-import clsx from 'clsx';
 import { formatInTimeZone } from 'date-fns-tz';
 
-import NewRiverTable from '~/components/river/NewRiverTable';
-import { baseWaterDataParams } from '~/lib/river';
-import { getToFromDates } from '~/lib/utils';
+import RiverTable from '~/components/river/RiverTable';
+import { baseWaterDataParams, riverQualityCn } from '~/lib/river';
+import { cn, getToFromDates } from '~/lib/utils';
 import { type RiverData } from '~/types/types';
 
 const getDischargeData = async (urlSearchParams: URLSearchParams) => {
@@ -171,8 +170,8 @@ const Page = async () => {
         </div>
       </div>
       <div className="flex gap-2">
-        <NewRiverTable riverData={riverData.level} />
-        <NewRiverTable riverData={riverData.discharge} />
+        <RiverTable riverData={riverData.level} />
+        <RiverTable riverData={riverData.discharge} />
       </div>
     </main>
   );

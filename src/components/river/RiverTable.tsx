@@ -1,45 +1,74 @@
+'use client';
+
+import { createColumnHelper } from '@tanstack/react-table';
+
+import clsx from 'clsx';
 import { formatInTimeZone } from 'date-fns-tz';
+import { useMemo } from 'react';
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/ui/table';
-import { type MergedRiverData } from '~/utils/river-utils';
+import Table from '~/components/table/Table';
+import { type RiverData } from '~/types/types';
 
-interface Props {
-  riverData: MergedRiverData;
-}
+type RiverTableData = {
+  timestamp: string;
+  value: string | number;
+  change: string;
+};
+
+type Props = {
+  riverData: RiverData[];
+};
 
 const RiverTable = ({ riverData }: Props) => {
+  const data = useMemo((): RiverTableData[] => {
+    return riverData[0].data
+      .slice()
+      .reverse()
+      .filter((data) => data[1] !== null)
+      .map((data, index, self) => {
+        let change = '0.000';
+        if (index > 0) {
+          const diff = Number(data[1]) - Number(self[index - 1][1]);
+          if (diff > 0) {
+            change = `+ ${diff.toFixed(3)}`;
+          } else if (diff < 0) {
+            change = `- ${Math.abs(diff).toFixed(3)}`;
+          }
+        }
+
+        return {
+          timestamp: formatInTimeZone(data[0], '+10', 'dd/MM/yy - HH:mm'),
+          value: data[1] ?? '',
+          change: change,
+        };
+      });
+  }, [riverData]);
+
+  const columns = useMemo(() => {
+    const helper = createColumnHelper<RiverTableData>();
+    return [
+      helper.accessor('timestamp', {
+        cell: (row) => row.getValue(),
+      }),
+      helper.accessor('value', {
+        cell: (row) => row.getValue(),
+      }),
+      helper.accessor('change', {
+        cell: (row) => {
+          const className = clsx([
+            row.getValue().startsWith('+') && 'text-m-green-6',
+            row.getValue().startsWith('-') && 'text-m-red-6',
+            row.getValue().startsWith('0') && 'text-m-blue-6',
+          ]);
+
+          return <span className={className}>{row.getValue()}</span>;
+        },
+      }),
+    ];
+  }, []);
+
   return (
-    <Table className="rounded-md bg-zinc-950">
-      <TableHeader>
-        <TableRow className="bg-zinc-900/20">
-          <TableHead className="text-center">Date</TableHead>
-          <TableHead className="text-center">Time</TableHead>
-          <TableHead className="text-center">Discharge (cumec)</TableHead>
-          <TableHead className="text-center">Level (m)</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody className="text-gray-300">
-        {riverData.reverse().map((data) => (
-          <TableRow key={data.date}>
-            <TableCell className="text-center text-xs">
-              {formatInTimeZone(data.date, 'Australia/Canberra', 'dd/MM/yy')}
-            </TableCell>
-            <TableCell className="text-center text-xs">
-              {formatInTimeZone(data.date, 'Australia/Canberra', 'HH:mm')}
-            </TableCell>
-            <TableCell className="text-center text-xs">{data.discharge}</TableCell>
-            <TableCell className="text-center text-xs">{data.level}</TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <Table<RiverTableData> title={riverData[0].parametertype_name} data={data} columns={columns} />
   );
 };
 
