@@ -10,7 +10,6 @@ import { GeistSans } from 'geist/font/sans';
 import { type Metadata } from 'next';
 
 import Navbar from '~/components/layouts/Navbar';
-import Sidebar from '~/components/layouts/Sidebar';
 import Providers from '~/components/providers/Providers';
 
 export const metadata: Metadata = {
@@ -32,13 +31,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <ColorSchemeScript forceColorScheme="dark" />
       </head>
-      <body className="flex flex-col bg-[var(--mantine-color-night-10)] p-4 md:grid md:h-[100svh] md:grid-cols-[250px_1fr] md:grid-rows-[1fr_50px] md:gap-4">
+      <body className="flex min-h-[100svh] flex-col bg-[var(--mantine-color-night-10)] p-4">
         <Providers sansFont={GeistSans.style.fontFamily} monoFont={GeistMono.style.fontFamily}>
-          <Sidebar className="md:col-span-1 md:row-span-2" />
-          <div className="flex-1 md:col-start-2 md:row-span-1">
-            <Navbar />
-            {children}
-          </div>
+          <Navbar />
+          {children}
           <Analytics />
         </Providers>
       </body>
