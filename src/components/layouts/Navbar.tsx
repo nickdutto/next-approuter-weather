@@ -53,14 +53,18 @@ const Navbar = () => {
           </Menu.Target>
           <Menu.Dropdown>
             <Menu.Label>Murrumbidgee River</Menu.Label>
-            <Menu.Item component={Link} href="/river/murrumbidgee-river/mt-macdonald">
-              Mt. MacDonald
-            </Menu.Item>
             <Menu.Item component={Link} href="/river/murrumbidgee-river/angle-crossing">
               Angle Crossing
             </Menu.Item>
+            <Menu.Item component={Link} href="/river/murrumbidgee-river/mt-macdonald">
+              Mt. MacDonald
+            </Menu.Item>
             <Menu.Item component={Link} href="/river/murrumbidgee-river/halls-crossing">
               Hall&apos;s Crossing
+            </Menu.Item>
+            <Menu.Label>Molonglo River</Menu.Label>
+            <Menu.Item component={Link} href="/river/molonglo-river/coppins-crossing">
+              Coppins Crossing
             </Menu.Item>
             <Menu.Label>Cotter River</Menu.Label>
             <Menu.Item component={Link} href="/river/cotter-river/bendora-dam">
