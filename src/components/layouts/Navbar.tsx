@@ -53,23 +53,23 @@ const Navbar = () => {
           </Menu.Target>
           <Menu.Dropdown>
             <Menu.Label>Murrumbidgee River</Menu.Label>
-            <Menu.Item component={Link} href="/river/mt-macdonald">
+            <Menu.Item component={Link} href="/river/murrumbidgee-river/mt-macdonald">
               Mt. MacDonald
             </Menu.Item>
-            <Menu.Item component={Link} href="/river/angle-crossing">
+            <Menu.Item component={Link} href="/river/murrumbidgee-river/angle-crossing">
               Angle Crossing
             </Menu.Item>
-            <Menu.Item component={Link} href="/river/halls-crossing">
+            <Menu.Item component={Link} href="/river/murrumbidgee-river/halls-crossing">
               Hall&apos;s Crossing
             </Menu.Item>
             <Menu.Label>Cotter River</Menu.Label>
-            <Menu.Item component={Link} href="/river/cotter-river-bendora-dam">
-              D/S Bendora Dam
+            <Menu.Item component={Link} href="/river/cotter-river/bendora-dam">
+              Bendora Dam
             </Menu.Item>
-            <Menu.Item component={Link} href="/river/vanitys-crossing">
+            <Menu.Item component={Link} href="/river/cotter-river/vanitys-crossing">
               Vanity&apos;s Crossing
             </Menu.Item>
-            <Menu.Item component={Link} href="/river/cotter-kiosk">
+            <Menu.Item component={Link} href="/river/cotter-river/cotter-kiosk">
               Cotter Kiosk
             </Menu.Item>
             <Menu.Label>Condor Creek</Menu.Label>
