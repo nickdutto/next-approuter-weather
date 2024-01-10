@@ -12,8 +12,8 @@ const ResponsiveLine = dynamic(() => import('@nivo/line').then((m) => m.Responsi
 
 interface Props {
   data: LineProps['data'];
-  min?: number;
-  max?: number;
+  min: number | 'auto' | undefined;
+  max: number | 'auto' | undefined;
   fieldName: string;
   fieldUnit: string;
   tickSteps?: number;
@@ -30,21 +30,22 @@ const LowHighLineChart = ({ data, min, max, fieldName, fieldUnit, tickSteps = 24
       xFormat="time:%d/%m/%Y-%H:%M"
       yScale={{
         type: 'linear',
-        min: min ? min : 'auto',
-        max: max ? max : 'auto',
+        min: min,
+        max: max,
       }}
       yFormat=" >-.2f"
       curve="natural"
       axisTop={null}
       axisRight={null}
-      axisBottom={{
-        tickValues: tickValues,
-        tickSize: 5,
-        tickPadding: 0,
-        tickRotation: 90,
-        legendOffset: 36,
-        legendPosition: 'middle',
-      }}
+      axisBottom={null}
+      // axisBottom={{
+      //   tickValues: [tickValues[0], tickValues.at(-1)],
+      //   tickSize: 5,
+      //   tickPadding: 0,
+      //   tickRotation: 90,
+      //   legendOffset: 36,
+      //   legendPosition: 'middle',
+      // }}
       axisLeft={{
         tickSize: 5,
         tickPadding: 0,
@@ -57,16 +58,13 @@ const LowHighLineChart = ({ data, min, max, fieldName, fieldUnit, tickSteps = 24
       enableGridX={false}
       colors={{ datum: 'color' }}
       theme={{
-        text: { color: '#a1a1aa' },
-        grid: { line: { stroke: '#27272a' } },
-        axis: { ticks: { line: { stroke: '#27272a' } } },
-        crosshair: { line: { stroke: '#71717a' } },
+        grid: { line: { stroke: '#26262B ' } },
+        axis: {
+          ticks: { line: { stroke: '#26262B ' }, text: { fill: '#909296' } },
+          legend: { text: { fill: '#909296' } },
+        },
+        crosshair: { line: { stroke: '#62626f' } },
       }}
-      markers={tickValues.map((tick) => ({
-        axis: 'x',
-        value: tick!,
-        lineStyle: { stroke: '#27272a' },
-      }))}
       pointLabelYOffset={-12}
       useMesh={true}
       tooltip={({ point }) => (

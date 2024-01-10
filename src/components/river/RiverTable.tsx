@@ -51,13 +51,13 @@ const RiverTable = ({ riverData }: Props) => {
         cell: (row) => row.getValue(),
       }),
       helper.accessor('value', {
-        cell: (row) => row.getValue(),
+        cell: (row) => Number(row.getValue()).toFixed(3),
       }),
       helper.accessor('change', {
         cell: (row) => {
           const className = clsx([
-            row.getValue().startsWith('+') && 'text-m-green-6',
-            row.getValue().startsWith('-') && 'text-m-red-6',
+            row.getValue().startsWith('+') && 'text-m-red-6',
+            row.getValue().startsWith('-') && 'text-m-green-6',
             row.getValue().startsWith('0') && 'text-m-blue-6',
           ]);
 
