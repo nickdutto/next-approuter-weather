@@ -1,12 +1,13 @@
 import RiverInfoCard from '~/components/river/RiverInfoCard';
 import RiverTablesContainer from '~/components/river/RiverTablesContainer';
+import { murrumbidgee_tantangara_reservoir } from '~/data/waterdata-stations';
 import { getRiverData } from '~/server/river';
 
 const Page = async () => {
   const riverData = await getRiverData({
-    dischargeId: '325639010',
-    levelId: '325665010',
-    timeZone: 'Australia/Canberra',
+    dischargeId: murrumbidgee_tantangara_reservoir.dischargeId,
+    levelId: murrumbidgee_tantangara_reservoir.levelId,
+    timeZone: murrumbidgee_tantangara_reservoir.timezone,
     subDateRange: { days: 7 },
   });
 
@@ -15,8 +16,8 @@ const Page = async () => {
       <RiverInfoCard
         station={{
           id: riverData.discharge[0].station_no,
-          name: 'U/S Tantangara Reservoir',
-          riverName: 'Murrumbidgee River',
+          name: murrumbidgee_tantangara_reservoir.name,
+          riverName: murrumbidgee_tantangara_reservoir.waterwayName,
           owner: riverData.discharge[0].DATA_OWNER_NAME,
           latitude: riverData.discharge[0].station_latitude,
           longitude: riverData.discharge[0].station_longitude,

@@ -1,12 +1,13 @@
 import RiverInfoCard from '~/components/river/RiverInfoCard';
 import RiverTablesContainer from '~/components/river/RiverTablesContainer';
+import { cotter_gingera } from '~/data/waterdata-stations';
 import { getRiverData } from '~/server/river';
 
 const Page = async () => {
   const riverData = await getRiverData({
-    dischargeId: '1570010',
-    levelId: '1596010',
-    timeZone: 'Australia/Canberra',
+    dischargeId: cotter_gingera.dischargeId,
+    levelId: cotter_gingera.levelId,
+    timeZone: cotter_gingera.timezone,
     subDateRange: { days: 7 },
   });
 
@@ -15,8 +16,8 @@ const Page = async () => {
       <RiverInfoCard
         station={{
           id: riverData.discharge[0].station_no,
-          name: 'Gingera',
-          riverName: 'Cotter River',
+          name: cotter_gingera.name,
+          riverName: cotter_gingera.waterwayName,
           owner: riverData.discharge[0].DATA_OWNER_NAME,
           latitude: riverData.discharge[0].station_latitude,
           longitude: riverData.discharge[0].station_longitude,

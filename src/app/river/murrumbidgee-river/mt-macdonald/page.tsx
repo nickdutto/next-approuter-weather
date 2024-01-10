@@ -1,14 +1,15 @@
 import LineChart from '~/components/chart/LineChart';
 import RiverInfoCard from '~/components/river/RiverInfoCard';
 import RiverTablesContainer from '~/components/river/RiverTablesContainer';
+import { murrumbidgee_mt_macdonald } from '~/data/waterdata-stations';
 import { getRiverData } from '~/server/river';
 import { createRiverChartData, getRiverMinMaxValues } from '~/utils/river-utils';
 
 const Page = async () => {
   const riverData = await getRiverData({
-    dischargeId: '1795010',
-    levelId: '1821010',
-    timeZone: 'Australia/Canberra',
+    dischargeId: murrumbidgee_mt_macdonald.dischargeId,
+    levelId: murrumbidgee_mt_macdonald.levelId,
+    timeZone: murrumbidgee_mt_macdonald.timezone,
     subDateRange: { days: 7 },
   });
 
@@ -35,8 +36,8 @@ const Page = async () => {
       <RiverInfoCard
         station={{
           id: riverData.discharge[0].station_no,
-          name: 'Mt. MacDonald',
-          riverName: 'Murrumbidgee River',
+          name: murrumbidgee_mt_macdonald.name,
+          riverName: murrumbidgee_mt_macdonald.waterwayName,
           owner: riverData.discharge[0].DATA_OWNER_NAME,
           latitude: riverData.discharge[0].station_latitude,
           longitude: riverData.discharge[0].station_longitude,

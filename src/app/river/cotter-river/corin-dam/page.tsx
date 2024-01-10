@@ -1,12 +1,13 @@
 import RiverInfoCard from '~/components/river/RiverInfoCard';
 import RiverTablesContainer from '~/components/river/RiverTablesContainer';
+import { cotter_corin_dam } from '~/data/waterdata-stations';
 import { getRiverData } from '~/server/river';
 
 const Page = async () => {
   const riverData = await getRiverData({
-    dischargeId: '2051010',
-    levelId: '2077010',
-    timeZone: 'Australia/Canberra',
+    dischargeId: cotter_corin_dam.dischargeId,
+    levelId: cotter_corin_dam.levelId,
+    timeZone: cotter_corin_dam.timezone,
     subDateRange: { days: 7 },
   });
 
@@ -15,8 +16,8 @@ const Page = async () => {
       <RiverInfoCard
         station={{
           id: riverData.discharge[0].station_no,
-          name: 'D/S Corin Dam',
-          riverName: 'Cotter River',
+          name: cotter_corin_dam.name,
+          riverName: cotter_corin_dam.waterwayName,
           owner: riverData.discharge[0].DATA_OWNER_NAME,
           latitude: riverData.discharge[0].station_latitude,
           longitude: riverData.discharge[0].station_longitude,

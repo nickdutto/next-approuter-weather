@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { forwardRef } from 'react';
 import { LuChevronRight } from 'react-icons/lu';
 
+import { molonglo_stations } from '~/data/waterdata-stations';
+
 const MolongloRiverMenu = forwardRef<HTMLButtonElement, { close: () => void }>(({ close }, ref) => {
   return (
     <Menu
@@ -44,22 +46,17 @@ const MolongloRiverMenu = forwardRef<HTMLButtonElement, { close: () => void }>((
       <Menu.Dropdown>
         <Menu.Label>Molonglo River</Menu.Label>
         <Menu.Divider className="border-t-m-dark-4" />
-        <Menu.Item
-          component={Link}
-          onClick={close}
-          href="/river/molonglo-river/coppins-crossing"
-          className="text-m-xs sm:text-m-sm"
-        >
-          Coppins Crossing
-        </Menu.Item>
-        <Menu.Item
-          component={Link}
-          onClick={close}
-          href="/river/molonglo-river/sturt-island"
-          className="text-m-xs sm:text-m-sm"
-        >
-          Sturt Island
-        </Menu.Item>
+        {molonglo_stations.map((station) => (
+          <Menu.Item
+            key={station.id}
+            component={Link}
+            href={station.href}
+            onClick={close}
+            className="text-m-xs sm:text-m-sm"
+          >
+            {station.name}
+          </Menu.Item>
+        ))}
       </Menu.Dropdown>
     </Menu>
   );

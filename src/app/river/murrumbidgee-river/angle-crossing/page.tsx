@@ -1,12 +1,13 @@
 import RiverInfoCard from '~/components/river/RiverInfoCard';
 import RiverTablesContainer from '~/components/river/RiverTablesContainer';
+import { murrumbidgee_angle_crossing } from '~/data/waterdata-stations';
 import { getRiverData } from '~/server/river';
 
 const Page = async () => {
   const riverData = await getRiverData({
-    dischargeId: '1091010',
-    levelId: '1117010',
-    timeZone: 'Australia/Canberra',
+    dischargeId: murrumbidgee_angle_crossing.dischargeId,
+    levelId: murrumbidgee_angle_crossing.levelId,
+    timeZone: murrumbidgee_angle_crossing.timezone,
     subDateRange: { days: 7 },
   });
 
@@ -15,8 +16,8 @@ const Page = async () => {
       <RiverInfoCard
         station={{
           id: riverData.discharge[0].station_no,
-          name: 'Angle Crossing',
-          riverName: 'Murrumbidgee River',
+          name: murrumbidgee_angle_crossing.name,
+          riverName: murrumbidgee_angle_crossing.waterwayName,
           owner: riverData.discharge[0].DATA_OWNER_NAME,
           latitude: riverData.discharge[0].station_latitude,
           longitude: riverData.discharge[0].station_longitude,
