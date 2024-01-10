@@ -1,3 +1,5 @@
+import { type SVGProps } from 'react';
+
 export interface SunriseSunset {
   results: {
     sunrise: string;
@@ -61,3 +63,7 @@ export interface RiverData {
   columns: string;
   data: [string, number | undefined][];
 }
+
+export type IconSvgProps = SVGProps<SVGSVGElement> & {
+  size?: number;
+};
