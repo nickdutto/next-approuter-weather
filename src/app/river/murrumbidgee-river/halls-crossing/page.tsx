@@ -1,12 +1,13 @@
 import RiverInfoCard from '~/components/river/RiverInfoCard';
 import RiverTablesContainer from '~/components/river/RiverTablesContainer';
+import { murrumbidgee_halls_crossing } from '~/data/waterdata-stations';
 import { getRiverData } from '~/server/river';
 
 const Page = async () => {
   const riverData = await getRiverData({
-    dischargeId: '2388010',
-    levelId: '2414010',
-    timeZone: 'Australia/Canberra',
+    dischargeId: murrumbidgee_halls_crossing.dischargeId,
+    levelId: murrumbidgee_halls_crossing.levelId,
+    timeZone: murrumbidgee_halls_crossing.timezone,
     subDateRange: { days: 7 },
   });
 
@@ -15,8 +16,8 @@ const Page = async () => {
       <RiverInfoCard
         station={{
           id: riverData.discharge[0].station_no,
-          name: "Hall's Crossing",
-          riverName: 'Murrumbidgee River',
+          name: murrumbidgee_halls_crossing.name,
+          riverName: murrumbidgee_halls_crossing.waterwayName,
           owner: riverData.discharge[0].DATA_OWNER_NAME,
           latitude: riverData.discharge[0].station_latitude,
           longitude: riverData.discharge[0].station_longitude,

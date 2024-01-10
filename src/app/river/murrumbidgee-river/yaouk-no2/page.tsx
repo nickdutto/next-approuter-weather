@@ -1,12 +1,13 @@
 import RiverInfoCard from '~/components/river/RiverInfoCard';
 import RiverTablesContainer from '~/components/river/RiverTablesContainer';
+import { murrumbidgee_yaouk_no2 } from '~/data/waterdata-stations';
 import { getRiverData } from '~/server/river';
 
 const Page = async () => {
   const riverData = await getRiverData({
-    dischargeId: '148601010',
-    levelId: '148623010',
-    timeZone: 'Australia/Canberra',
+    dischargeId: murrumbidgee_yaouk_no2.dischargeId,
+    levelId: murrumbidgee_yaouk_no2.levelId,
+    timeZone: murrumbidgee_yaouk_no2.timezone,
     subDateRange: { days: 7 },
   });
 
@@ -15,8 +16,8 @@ const Page = async () => {
       <RiverInfoCard
         station={{
           id: riverData.discharge[0].station_no,
-          name: 'Yaouk No.2',
-          riverName: 'Murrumbidgee River',
+          name: murrumbidgee_yaouk_no2.name,
+          riverName: murrumbidgee_yaouk_no2.waterwayName,
           owner: riverData.discharge[0].DATA_OWNER_NAME,
           latitude: riverData.discharge[0].station_latitude,
           longitude: riverData.discharge[0].station_longitude,

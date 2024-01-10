@@ -1,12 +1,13 @@
 import RiverInfoCard from '~/components/river/RiverInfoCard';
 import RiverTablesContainer from '~/components/river/RiverTablesContainer';
+import { murrumbidgee_lobbs_hole_creek } from '~/data/waterdata-stations';
 import { getRiverData } from '~/server/river';
 
 const Page = async () => {
   const riverData = await getRiverData({
-    dischargeId: '4039010',
-    levelId: '4065010',
-    timeZone: 'Australia/Canberra',
+    dischargeId: murrumbidgee_lobbs_hole_creek.dischargeId,
+    levelId: murrumbidgee_lobbs_hole_creek.levelId,
+    timeZone: murrumbidgee_lobbs_hole_creek.timezone,
     subDateRange: { days: 7 },
   });
 
@@ -15,8 +16,8 @@ const Page = async () => {
       <RiverInfoCard
         station={{
           id: riverData.discharge[0].station_no,
-          name: 'Lobbs Hole Creek',
-          riverName: 'Murrumbidgee River',
+          name: murrumbidgee_lobbs_hole_creek.name,
+          riverName: murrumbidgee_lobbs_hole_creek.waterwayName,
           owner: riverData.discharge[0].DATA_OWNER_NAME,
           latitude: riverData.discharge[0].station_latitude,
           longitude: riverData.discharge[0].station_longitude,

@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { forwardRef } from 'react';
 import { LuChevronRight } from 'react-icons/lu';
 
+import { condor_creek_stations } from '~/data/waterdata-stations';
+
 const CondorCreekMenu = forwardRef<HTMLButtonElement, { close: () => void }>(({ close }, ref) => {
   return (
     <Menu
@@ -44,14 +46,17 @@ const CondorCreekMenu = forwardRef<HTMLButtonElement, { close: () => void }>(({ 
       <Menu.Dropdown>
         <Menu.Label>Condor Creek</Menu.Label>
         <Menu.Divider className="border-t-m-dark-4" />
-        <Menu.Item
-          component={Link}
-          onClick={close}
-          href="/river/condor-creek/threeways"
-          className="text-m-xs sm:text-m-sm"
-        >
-          Threeways
-        </Menu.Item>
+        {condor_creek_stations.map((station) => (
+          <Menu.Item
+            key={station.id}
+            component={Link}
+            href={station.href}
+            onClick={close}
+            className="text-m-xs sm:text-m-sm"
+          >
+            {station.name}
+          </Menu.Item>
+        ))}
       </Menu.Dropdown>
     </Menu>
   );
