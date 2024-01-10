@@ -1,12 +1,13 @@
 import RiverInfoCard from '~/components/river/RiverInfoCard';
 import RiverTablesContainer from '~/components/river/RiverTablesContainer';
+import { cotter_bendora_dam } from '~/data/waterdata-stations';
 import { getRiverData } from '~/server/river';
 
 const Page = async () => {
   const riverData = await getRiverData({
-    dischargeId: '1923010',
-    levelId: '1949010',
-    timeZone: 'Australia/Canberra',
+    dischargeId: cotter_bendora_dam.dischargeId,
+    levelId: cotter_bendora_dam.levelId,
+    timeZone: cotter_bendora_dam.timezone,
     subDateRange: { days: 7 },
   });
 
@@ -15,8 +16,8 @@ const Page = async () => {
       <RiverInfoCard
         station={{
           id: riverData.discharge[0].station_no,
-          name: 'D/S Bendora Dam',
-          riverName: 'Cotter River',
+          name: cotter_bendora_dam.name,
+          riverName: cotter_bendora_dam.waterwayName,
           owner: riverData.discharge[0].DATA_OWNER_NAME,
           latitude: riverData.discharge[0].station_latitude,
           longitude: riverData.discharge[0].station_longitude,

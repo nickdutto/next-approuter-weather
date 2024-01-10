@@ -20,8 +20,8 @@ export const getBOMWaterData = async (urlSearchParams: URLSearchParams) => {
 };
 
 type GetRiverDataParams = {
-  dischargeId: string;
-  levelId: string;
+  dischargeId: number;
+  levelId: number;
   timeZone: string;
   subDateRange: Parameters<typeof sub>[1];
 };
@@ -38,13 +38,13 @@ export const getRiverData = async ({
     ...baseWaterDataParams,
     from: fromDate,
     to: toDate,
-    ts_id: dischargeId,
+    ts_id: dischargeId.toString(),
   });
   const levelParams = new URLSearchParams({
     ...baseWaterDataParams,
     from: fromDate,
     to: toDate,
-    ts_id: levelId,
+    ts_id: levelId.toString(),
   });
 
   const dischargeData = await getBOMWaterData(dischargeParams);

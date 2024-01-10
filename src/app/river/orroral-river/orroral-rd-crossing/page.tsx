@@ -1,12 +1,13 @@
 import RiverInfoCard from '~/components/river/RiverInfoCard';
 import RiverTablesContainer from '~/components/river/RiverTablesContainer';
+import { orroral_orroral_rd_crossing } from '~/data/waterdata-stations';
 import { getRiverData } from '~/server/river';
 
 const Page = async () => {
   const riverData = await getRiverData({
-    dischargeId: '1755010',
-    levelId: '1777010',
-    timeZone: 'Australia/Canberra',
+    dischargeId: orroral_orroral_rd_crossing.dischargeId,
+    levelId: orroral_orroral_rd_crossing.levelId,
+    timeZone: orroral_orroral_rd_crossing.timezone,
     subDateRange: { days: 7 },
   });
 
@@ -15,8 +16,8 @@ const Page = async () => {
       <RiverInfoCard
         station={{
           id: riverData.discharge[0].station_no,
-          name: 'Orroral Rd Crossing',
-          riverName: 'Orroral River',
+          name: orroral_orroral_rd_crossing.name,
+          riverName: orroral_orroral_rd_crossing.waterwayName,
           owner: riverData.discharge[0].DATA_OWNER_NAME,
           latitude: riverData.discharge[0].station_latitude,
           longitude: riverData.discharge[0].station_longitude,

@@ -1,12 +1,13 @@
 import RiverInfoCard from '~/components/river/RiverInfoCard';
 import RiverTablesContainer from '~/components/river/RiverTablesContainer';
+import { molonglo_coppins_crossing } from '~/data/waterdata-stations';
 import { getRiverData } from '~/server/river';
 
 const Page = async () => {
   const riverData = await getRiverData({
-    dischargeId: '3995010',
-    levelId: '4020010',
-    timeZone: 'Australia/Canberra',
+    dischargeId: molonglo_coppins_crossing.dischargeId,
+    levelId: molonglo_coppins_crossing.levelId,
+    timeZone: molonglo_coppins_crossing.timezone,
     subDateRange: { days: 7 },
   });
 
@@ -15,8 +16,8 @@ const Page = async () => {
       <RiverInfoCard
         station={{
           id: riverData.discharge[0].station_no,
-          name: 'Coppins Crossing',
-          riverName: 'Molonglo River',
+          name: molonglo_coppins_crossing.name,
+          riverName: molonglo_coppins_crossing.waterwayName,
           owner: riverData.discharge[0].DATA_OWNER_NAME,
           latitude: riverData.discharge[0].station_latitude,
           longitude: riverData.discharge[0].station_longitude,

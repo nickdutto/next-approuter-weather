@@ -1,12 +1,13 @@
 import RiverInfoCard from '~/components/river/RiverInfoCard';
 import RiverTablesContainer from '~/components/river/RiverTablesContainer';
+import { condor_creek_threeways } from '~/data/waterdata-stations';
 import { getRiverData } from '~/server/river';
 
 const Page = async () => {
   const riverData = await getRiverData({
-    dischargeId: '1660010',
-    levelId: '1686010',
-    timeZone: 'Australia/Canberra',
+    dischargeId: condor_creek_threeways.dischargeId,
+    levelId: condor_creek_threeways.levelId,
+    timeZone: condor_creek_threeways.timezone,
     subDateRange: { days: 7 },
   });
 
@@ -15,8 +16,8 @@ const Page = async () => {
       <RiverInfoCard
         station={{
           id: riverData.discharge[0].station_no,
-          name: 'Threeways',
-          riverName: 'Condor Creek',
+          name: condor_creek_threeways.name,
+          riverName: condor_creek_threeways.waterwayName,
           owner: riverData.discharge[0].DATA_OWNER_NAME,
           latitude: riverData.discharge[0].station_latitude,
           longitude: riverData.discharge[0].station_longitude,

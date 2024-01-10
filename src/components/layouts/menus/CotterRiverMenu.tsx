@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { forwardRef } from 'react';
 import { LuChevronRight } from 'react-icons/lu';
 
+import { cotter_stations } from '~/data/waterdata-stations';
+
 const CotterRiverMenu = forwardRef<HTMLButtonElement, { close: () => void }>(({ close }, ref) => {
   return (
     <Menu
@@ -44,46 +46,17 @@ const CotterRiverMenu = forwardRef<HTMLButtonElement, { close: () => void }>(({ 
       <Menu.Dropdown>
         <Menu.Label>Cotter River</Menu.Label>
         <Menu.Divider className="border-t-m-dark-4" />
-        <Menu.Item
-          component={Link}
-          onClick={close}
-          href="/river/cotter-river/gingera"
-          className="text-m-xs sm:text-m-sm"
-        >
-          Gingera
-        </Menu.Item>
-        <Menu.Item
-          component={Link}
-          onClick={close}
-          href="/river/cotter-river/corin-dam"
-          className="text-m-xs sm:text-m-sm"
-        >
-          Corin Dam
-        </Menu.Item>
-        <Menu.Item
-          component={Link}
-          onClick={close}
-          href="/river/cotter-river/bendora-dam"
-          className="text-m-xs sm:text-m-sm"
-        >
-          Bendora Dam
-        </Menu.Item>
-        <Menu.Item
-          component={Link}
-          onClick={close}
-          href="/river/cotter-river/vanitys-crossing"
-          className="text-m-xs sm:text-m-sm"
-        >
-          Vanity&apos;s Crossing
-        </Menu.Item>
-        <Menu.Item
-          component={Link}
-          onClick={close}
-          href="/river/cotter-river/cotter-kiosk"
-          className="text-m-xs sm:text-m-sm"
-        >
-          Cotter Kiosk
-        </Menu.Item>
+        {cotter_stations.map((station) => (
+          <Menu.Item
+            key={station.id}
+            component={Link}
+            href={station.href}
+            onClick={close}
+            className="text-m-xs sm:text-m-sm"
+          >
+            {station.name}
+          </Menu.Item>
+        ))}
       </Menu.Dropdown>
     </Menu>
   );

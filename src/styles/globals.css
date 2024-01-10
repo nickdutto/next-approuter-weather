@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.maplibregl-popup {
+  @apply bg-transparent !important;
+}
+.maplibregl-popup-content {
+  @apply rounded-m-lg bg-m-night-5 !important;
+}
+
+.maplibregl-popup-anchor-top > .maplibregl-popup-tip {
+  @apply border-b-m-night-5 !important;
+}

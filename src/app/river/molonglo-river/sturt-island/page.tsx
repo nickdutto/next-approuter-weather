@@ -1,12 +1,13 @@
 import RiverInfoCard from '~/components/river/RiverInfoCard';
 import RiverTablesContainer from '~/components/river/RiverTablesContainer';
+import { molonglo_sturt_island } from '~/data/waterdata-stations';
 import { getRiverData } from '~/server/river';
 
 const Page = async () => {
   const riverData = await getRiverData({
-    dischargeId: '1840010',
-    levelId: '1866010',
-    timeZone: 'Australia/Canberra',
+    dischargeId: molonglo_sturt_island.dischargeId,
+    levelId: molonglo_sturt_island.levelId,
+    timeZone: molonglo_sturt_island.timezone,
     subDateRange: { days: 7 },
   });
 
@@ -15,8 +16,8 @@ const Page = async () => {
       <RiverInfoCard
         station={{
           id: riverData.discharge[0].station_no,
-          name: 'Sturt Island',
-          riverName: 'Molonglo River',
+          name: molonglo_sturt_island.name,
+          riverName: molonglo_sturt_island.waterwayName,
           owner: riverData.discharge[0].DATA_OWNER_NAME,
           latitude: riverData.discharge[0].station_latitude,
           longitude: riverData.discharge[0].station_longitude,

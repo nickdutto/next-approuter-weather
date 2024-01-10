@@ -1,12 +1,13 @@
 import RiverInfoCard from '~/components/river/RiverInfoCard';
 import RiverTablesContainer from '~/components/river/RiverTablesContainer';
+import { cotter_vanitys_crossing } from '~/data/waterdata-stations';
 import { getRiverData } from '~/server/river';
 
 const Page = async () => {
   const riverData = await getRiverData({
-    dischargeId: '1508010',
-    levelId: '1534010',
-    timeZone: 'Australia/Canberra',
+    dischargeId: cotter_vanitys_crossing.dischargeId,
+    levelId: cotter_vanitys_crossing.levelId,
+    timeZone: cotter_vanitys_crossing.timezone,
     subDateRange: { days: 7 },
   });
 
@@ -15,8 +16,8 @@ const Page = async () => {
       <RiverInfoCard
         station={{
           id: riverData.discharge[0].station_no,
-          name: "Vanity's Crossing",
-          riverName: 'Cotter River',
+          name: cotter_vanitys_crossing.name,
+          riverName: cotter_vanitys_crossing.waterwayName,
           owner: riverData.discharge[0].DATA_OWNER_NAME,
           latitude: riverData.discharge[0].station_latitude,
           longitude: riverData.discharge[0].station_longitude,

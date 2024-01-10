@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { forwardRef } from 'react';
 import { LuChevronRight } from 'react-icons/lu';
 
+import { murrumbidgee_stations } from '~/data/waterdata-stations';
+
 const MurrumbidgeeRiverMenu = forwardRef<HTMLButtonElement, { close: () => void }>(
   ({ close }, ref) => {
     return (
@@ -45,78 +47,17 @@ const MurrumbidgeeRiverMenu = forwardRef<HTMLButtonElement, { close: () => void 
         <Menu.Dropdown>
           <Menu.Label>Murrumbidgee River</Menu.Label>
           <Menu.Divider className="border-t-m-dark-4" />
-          <Menu.Item
-            component={Link}
-            onClick={close}
-            href="/river/murrumbidgee-river/tantangara-reservoir"
-            className="text-m-xs sm:text-m-sm"
-          >
-            Tantangara Reservoir
-          </Menu.Item>
-          <Menu.Item
-            component={Link}
-            onClick={close}
-            href="/river/murrumbidgee-river/yaouk-no2"
-            className="text-m-xs sm:text-m-sm"
-          >
-            Yaouk No.2
-          </Menu.Item>
-          <Menu.Item
-            component={Link}
-            onClick={close}
-            href="/river/murrumbidgee-river/mittagang-crossing"
-            className="text-m-xs sm:text-m-sm"
-          >
-            Mittagang Crossing
-          </Menu.Item>
-          <Menu.Item
-            component={Link}
-            onClick={close}
-            href="/river/murrumbidgee-river/billilingra"
-            className="text-m-xs sm:text-m-sm"
-          >
-            Billilingra
-          </Menu.Item>
-          <Menu.Item
-            component={Link}
-            onClick={close}
-            href="/river/murrumbidgee-river/michelago-creek"
-            className="text-m-xs sm:text-m-sm"
-          >
-            Michelago Creek
-          </Menu.Item>
-          <Menu.Item
-            component={Link}
-            onClick={close}
-            href="/river/murrumbidgee-river/angle-crossing"
-            className="text-m-xs sm:text-m-sm"
-          >
-            Angle Crossing
-          </Menu.Item>
-          <Menu.Item
-            component={Link}
-            onClick={close}
-            href="/river/murrumbidgee-river/lobbs-hole-creek"
-            className="text-m-xs sm:text-m-sm"
-          >
-            Lobbs Hole Creek
-          </Menu.Item>
-          <Menu.Item
-            component={Link}
-            onClick={close}
-            href="/river/murrumbidgee-river/mt-macdonald"
-            className="text-m-xs sm:text-m-sm"
-          >
-            Mt. MacDonald
-          </Menu.Item>
-          <Menu.Item
-            component={Link}
-            onClick={close}
-            href="/river/murrumbidgee-river/halls-crossing"
-            className="text-m-xs sm:text-m-sm"
-          >
-            Hall&apos;s Crossing
-          </Menu.Item>
+          {murrumbidgee_stations.map((station) => (
+            <Menu.Item
+              key={station.id}
+              component={Link}
+              href={station.href}
+              onClick={close}
+              className="text-m-xs sm:text-m-sm"
+            >
+              {station.name}
+            </Menu.Item>
+          ))}
         </Menu.Dropdown>
       </Menu>
     );
