@@ -1,6 +1,8 @@
+import LineChart from '~/components/chart/LineChart';
 import RiverInfoCard from '~/components/river/RiverInfoCard';
 import RiverTablesContainer from '~/components/river/RiverTablesContainer';
 import { getRiverData } from '~/server/river';
+import { createRiverChartData, getRiverMinMaxValues } from '~/utils/river-utils';
 
 const Page = async () => {
   const riverData = await getRiverData({
@@ -8,6 +10,24 @@ const Page = async () => {
     levelId: '1821010',
     timeZone: 'Australia/Canberra',
     subDateRange: { days: 7 },
+  });
+
+  const dischargeChartData = createRiverChartData(
+    riverData.discharge[0],
+    'WatercourseDischarge',
+    7,
+    [{ low: 0, high: 2000, color: '#3b82f6' }],
+  );
+  const dischargeYScaleMinMax = getRiverMinMaxValues(riverData.discharge[0], {
+    defaultMin: 1,
+    defaultMax: 40,
+  });
+  const levelChartData = createRiverChartData(riverData.level[0], 'WatercourseDischarge', 7, [
+    { low: 0, high: 2000, color: '#3b82f6' },
+  ]);
+  const levelYScaleMinMax = getRiverMinMaxValues(riverData.level[0], {
+    defaultMin: 1,
+    defaultMax: 2,
   });
 
   return (
@@ -40,6 +60,32 @@ const Page = async () => {
         }}
         latest={riverData.latest}
       />
+      <div className="flex w-full gap-2">
+        <div className="h-[400px] w-full rounded-m-lg bg-m-night-7">
+          {levelChartData && (
+            <LineChart
+              data={levelChartData}
+              fieldName="Watercourse Discharge"
+              fieldUnit="cumec"
+              min={0}
+              max={levelYScaleMinMax.max + 1}
+              tickSteps={8}
+            />
+          )}
+        </div>
+        <div className="h-[400px] w-full rounded-m-lg bg-m-night-7">
+          {dischargeChartData && (
+            <LineChart
+              data={dischargeChartData}
+              fieldName="Watercourse Discharge"
+              fieldUnit="cumec"
+              min={0}
+              max={dischargeYScaleMinMax.max + 10}
+              tickSteps={8}
+            />
+          )}
+        </div>
+      </div>
       <RiverTablesContainer riverData={riverData} />
     </main>
   );
