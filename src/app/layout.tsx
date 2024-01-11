@@ -4,6 +4,7 @@ import '@mantine/core/styles.css';
 
 import { ColorSchemeScript } from '@mantine/core';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Navbar />
           {children}
           <Analytics />
+          <SpeedInsights />
         </Providers>
       </body>
     </html>
