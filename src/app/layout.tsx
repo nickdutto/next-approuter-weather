@@ -32,10 +32,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <ColorSchemeScript forceColorScheme="dark" />
       </head>
-      <body className="flex min-h-[100svh] flex-col bg-[var(--mantine-color-night-10)] p-4">
+      <body className="flex min-h-[100svh] flex-col bg-m-night-10 p-4">
         <Providers sansFont={GeistSans.style.fontFamily} monoFont={GeistMono.style.fontFamily}>
           <Navbar />
-          {children}
+          <div className="pt-[52px]">{children}</div>
           <Analytics />
           <SpeedInsights />
         </Providers>

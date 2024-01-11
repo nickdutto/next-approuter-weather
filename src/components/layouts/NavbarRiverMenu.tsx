@@ -40,7 +40,7 @@ const NavbarRiverMenu = () => {
         <Button
           fw={600}
           variant="subtle"
-          color="gray.5"
+          c="gray.5"
           rightSection={
             <span
               className={`flex h-full items-center justify-center transition-transform duration-200 ${
@@ -51,7 +51,7 @@ const NavbarRiverMenu = () => {
             </span>
           }
           classNames={{
-            root: 'text-m-xs sm:text-m-sm',
+            root: 'text-m-xs sm:text-m-sm  hover:!bg-m-night-7 data-[expanded=true]:!bg-m-night-7',
             inner: '!gap-1',
             section: '!ml-0 h-full',
           }}

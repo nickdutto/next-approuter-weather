@@ -48,7 +48,7 @@ const WaterStationContainer = ({
   const levelYScaleMinMax = getWaterMinMaxValues(levelData, 'level', levelChartYScale);
 
   return (
-    <main className="flex flex-col gap-4 py-4">
+    <main className="flex flex-col gap-4 overflow-x-scroll py-4">
       <WaterStationInfoCard
         station={station}
         dischargeQualitySteps={dischargeQualitySteps}

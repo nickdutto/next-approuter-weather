@@ -49,7 +49,7 @@ const Page = async () => {
   const weather = await getWeather();
 
   return (
-    <main className="flex flex-col gap-2 pt-4">
+    <main className="flex flex-col gap-2 overflow-x-scroll pt-4">
       <div className="flex gap-2">
         <div className="w-[320px]">
           <CurrentWeatherCard

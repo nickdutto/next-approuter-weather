@@ -26,7 +26,7 @@ const ChartsPage = async () => {
   const weather = await getWeather();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between bg-black">
+    <main className="flex min-h-screen flex-col items-center justify-between overflow-x-scroll bg-black">
       <ChartContainer weather={weather} />
     </main>
   );

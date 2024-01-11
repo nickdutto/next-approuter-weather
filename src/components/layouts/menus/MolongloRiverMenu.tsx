@@ -33,8 +33,9 @@ const MolongloRiverMenu = forwardRef<HTMLButtonElement, { close: () => void }>((
           variant="subtle"
           color="gray.5"
           rightSection={<LuChevronRight className="h-3 w-3 text-m-gray-6 sm:h-4 sm:w-4" />}
+          className="transform-none"
           classNames={{
-            root: 'text-m-xs sm:text-m-sm w-full ',
+            root: 'text-m-xs sm:text-m-sm w-full hover:!bg-m-night-0 data-[expanded=true]:!bg-m-night-0 active:!transform-none active:!transform-none',
             inner: '!gap-1 justify-between',
             label: 'text-m-xs sm:text-m-sm',
             section: '!ml-0 h-full',
