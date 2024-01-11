@@ -18,7 +18,7 @@ export const murrumbidgee_tantangara_reservoir: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: 'Tantangara Reservoir - U/S',
   waterwayName: 'Murrumbidgee River',
-  href: '/river/murrumbidgee-river/tantangara-reservoir',
+  href: '/water/murrumbidgee-river/tantangara-reservoir',
   longitude: 148.57027778,
   latitude: -35.77055556,
 };
@@ -30,7 +30,7 @@ export const murrumbidgee_yaouk_no2: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: 'Yaouk No.2',
   waterwayName: 'Murrumbidgee River',
-  href: '/river/murrumbidgee-river/yaouk-no2',
+  href: '/water/murrumbidgee-river/yaouk-no2',
   longitude: 148.79321619,
   latitude: -35.88474689,
 };
@@ -42,7 +42,7 @@ export const murrumbidgee_mittagang_crossing: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: 'Mittagang Crossing',
   waterwayName: 'Murrumbidgee River',
-  href: '/river/murrumbidgee-river/mittagang-crossing',
+  href: '/water/murrumbidgee-river/mittagang-crossing',
   longitude: 149.0947,
   latitude: -36.1644,
 };
@@ -54,7 +54,7 @@ export const murrumbidgee_billilingra: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: 'Billilingra',
   waterwayName: 'Murrumbidgee River',
-  href: '/river/murrumbidgee-river/billilingra',
+  href: '/water/murrumbidgee-river/billilingra',
   longitude: 149.1276,
   latitude: -35.9826,
 };
@@ -66,7 +66,7 @@ export const murrumbidgee_michelago_creek: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: 'Michelago Creek - U/S',
   waterwayName: 'Murrumbidgee River',
-  href: '/river/murrumbidgee-river/michelago-creek',
+  href: '/water/murrumbidgee-river/michelago-creek',
   longitude: 149.137988,
   latitude: -35.702337,
 };
@@ -78,7 +78,7 @@ export const murrumbidgee_angle_crossing: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: 'Angle Crossing',
   waterwayName: 'Murrumbidgee River',
-  href: '/river/murrumbidgee-river/angle-crossing',
+  href: '/water/murrumbidgee-river/angle-crossing',
   longitude: 149.114147,
   latitude: -35.585654,
 };
@@ -90,7 +90,7 @@ export const murrumbidgee_lobbs_hole_creek: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: 'Lobbs Hole Creek',
   waterwayName: 'Murrumbidgee River',
-  href: '/river/murrumbidgee-river/lobbs-hole-creek',
+  href: '/water/murrumbidgee-river/lobbs-hole-creek',
   longitude: 149.10119444,
   latitude: -35.53813889,
 };
@@ -102,7 +102,7 @@ export const murrumbidgee_mt_macdonald: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: 'Mt. MacDonald',
   waterwayName: 'Murrumbidgee River',
-  href: '/river/murrumbidgee-river/mt-macdonald',
+  href: '/water/murrumbidgee-river/mt-macdonald',
   longitude: 148.95527639,
   latitude: -35.29166431,
 };
@@ -114,7 +114,7 @@ export const murrumbidgee_halls_crossing: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: "Hall's Crossing",
   waterwayName: 'Murrumbidgee River',
-  href: '/river/murrumbidgee-river/halls-crossing',
+  href: '/water/murrumbidgee-river/halls-crossing',
   longitude: 148.94475,
   latitude: -35.13136111,
 };
@@ -139,7 +139,7 @@ export const molonglo_coppins_crossing: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: 'Coppins Crossing',
   waterwayName: 'Molonglo River',
-  href: '/river/molonglo-river/coppins-crossing',
+  href: '/water/molonglo-river/coppins-crossing',
   longitude: 149.00860983,
   latitude: -35.27360722,
 };
@@ -151,7 +151,7 @@ export const molonglo_sturt_island: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: 'Sturt Island',
   waterwayName: 'Molonglo River',
-  href: '/river/molonglo-river/sturt-island',
+  href: '/water/molonglo-river/sturt-island',
   longitude: 148.961247,
   latitude: -35.24433,
 };
@@ -166,7 +166,7 @@ export const cotter_gingera: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: 'Gingera',
   waterwayName: 'Cotter River',
-  href: '/river/cotter-river/gingera',
+  href: '/water/cotter-river/gingera',
   longitude: 148.82191667,
   latitude: -35.58805556,
 };
@@ -178,7 +178,7 @@ export const cotter_corin_dam: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: 'Corin Dam - D/S',
   waterwayName: 'Cotter River',
-  href: '/river/cotter-river/corin-dam',
+  href: '/water/cotter-river/corin-dam',
   longitude: 148.83594444,
   latitude: -35.53172222,
 };
@@ -190,7 +190,7 @@ export const cotter_bendora_dam: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: 'Bendora Dam - D/S',
   waterwayName: 'Cotter River',
-  href: '/river/cotter-river/bendora-dam',
+  href: '/water/cotter-river/bendora-dam',
   longitude: 148.82938889,
   latitude: -35.44527778,
 };
@@ -202,7 +202,7 @@ export const cotter_vanitys_crossing: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: "Vanity's Crossing",
   waterwayName: 'Cotter River',
-  href: '/river/cotter-river/vanitys-crossing',
+  href: '/water/cotter-river/vanitys-crossing',
   longitude: 148.89,
   latitude: -35.35,
 };
@@ -214,7 +214,7 @@ export const cotter_cotter_kiosk: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: 'Cotter Kiosk',
   waterwayName: 'Cotter River',
-  href: '/river/cotter-river/cotter-kiosk',
+  href: '/water/cotter-river/cotter-kiosk',
   longitude: 148.94175,
   latitude: -35.32402778,
 };
@@ -235,7 +235,7 @@ export const condor_creek_threeways: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: 'Threeways',
   waterwayName: 'Condor Creek',
-  href: '/river/condor-creek/threeways',
+  href: '/water/condor-creek/threeways',
   longitude: 148.88834802,
   latitude: -35.33019071,
 };
@@ -250,7 +250,7 @@ export const gudgenby_tennent: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: 'Tennent',
   waterwayName: 'Gudgenby River',
-  href: '/river/gudgenby-river/tennent',
+  href: '/water/gudgenby-river/tennent',
   longitude: 149.06811389,
   latitude: -35.57187222,
 };
@@ -265,7 +265,7 @@ export const orroral_orroral_rd_crossing: WaterDataStation = {
   timezone: 'Australia/Canberra',
   name: 'Orroral Rd Crossing',
   waterwayName: 'Orroral River',
-  href: '/river/orroral-river/orroral-rd-crossing',
+  href: '/water/orroral-river/orroral-rd-crossing',
   longitude: 148.98936111,
   latitude: -35.66505556,
 };

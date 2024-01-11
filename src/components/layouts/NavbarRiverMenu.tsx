@@ -56,7 +56,7 @@ const NavbarRiverMenu = () => {
             section: '!ml-0 h-full',
           }}
         >
-          River
+          WaterData
         </Button>
       </Menu.Target>
       <Menu.Dropdown>
