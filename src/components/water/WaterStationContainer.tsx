@@ -1,6 +1,6 @@
 import LineChart from '~/components/chart/LineChart';
-import RiverInfoCard, { type StationInfo } from '~/components/river/RiverInfoCard';
-import RiverTablesContainer from '~/components/river/RiverTablesContainer';
+import WaterDataTablesContainer from '~/components/water/WaterDataTablesContainer';
+import WaterStationInfoCard, { type StationInfo } from '~/components/water/WaterStationInfoCard';
 import { type WaterData } from '~/lib/validators/WaterDataValidator';
 import { createWaterChartData, getWaterMinMaxValues, type WaterQualitySteps } from '~/lib/water';
 import { type LatestWaterData } from '~/server/water';
@@ -49,7 +49,7 @@ const WaterStationContainer = ({
 
   return (
     <main className="flex flex-col gap-4 py-4">
-      <RiverInfoCard
+      <WaterStationInfoCard
         station={station}
         dischargeQualitySteps={dischargeQualitySteps}
         levelQualitySteps={levelQualitySteps}
@@ -81,7 +81,7 @@ const WaterStationContainer = ({
           )}
         </div>
       </div>
-      <RiverTablesContainer dischargeData={dischargeData} levelData={levelData} />
+      <WaterDataTablesContainer dischargeData={dischargeData} levelData={levelData} />
     </main>
   );
 };

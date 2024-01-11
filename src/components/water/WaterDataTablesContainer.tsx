@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { WiFlood, WiSandstorm } from 'react-icons/wi';
 
-import RiverTable from '~/components/river/RiverTable';
+import WaterDataTable from '~/components/water/WaterDataTable';
 import { type WaterData } from '~/lib/validators/WaterDataValidator';
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
   levelData: WaterData;
 };
 
-const RiverTablesContainer = ({ dischargeData, levelData }: Props) => {
+const WaterDataTablesContainer = ({ dischargeData, levelData }: Props) => {
   const [tab, setTab] = useState<string | null>(null);
 
   const isMobile = useMediaQuery('(max-width: 768px)');
@@ -71,10 +71,10 @@ const RiverTablesContainer = ({ dischargeData, levelData }: Props) => {
             </TabsTab>
           </TabsList>
           <TabsPanel value="level" className="pt-2">
-            <RiverTable waterData={levelData} />
+            <WaterDataTable waterData={levelData} />
           </TabsPanel>
           <TabsPanel value="discharge" className="pt-2">
-            <RiverTable waterData={dischargeData} />
+            <WaterDataTable waterData={dischargeData} />
           </TabsPanel>
         </Tabs>
       )}
@@ -108,14 +108,14 @@ const RiverTablesContainer = ({ dischargeData, levelData }: Props) => {
             </TabsTab>
           </TabsList>
           <TabsPanel value="level" className="pt-2">
-            <RiverTable waterData={levelData} />
+            <WaterDataTable waterData={levelData} />
           </TabsPanel>
           <TabsPanel value="both" className="flex gap-2 pt-2">
-            <RiverTable waterData={levelData} />
-            <RiverTable waterData={dischargeData} />
+            <WaterDataTable waterData={levelData} />
+            <WaterDataTable waterData={dischargeData} />
           </TabsPanel>
           <TabsPanel value="discharge" className="pt-2">
-            <RiverTable waterData={dischargeData} />
+            <WaterDataTable waterData={dischargeData} />
           </TabsPanel>
         </Tabs>
       )}
@@ -123,4 +123,4 @@ const RiverTablesContainer = ({ dischargeData, levelData }: Props) => {
   );
 };
 
-export default RiverTablesContainer;
+export default WaterDataTablesContainer;

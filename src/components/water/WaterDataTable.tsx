@@ -19,7 +19,7 @@ type Props = {
   waterData: WaterData;
 };
 
-const RiverTable = ({ waterData }: Props) => {
+const WaterDataTable = ({ waterData }: Props) => {
   const data = useMemo((): RiverTableData[] => {
     return waterData.data
       .slice()
@@ -72,4 +72,4 @@ const RiverTable = ({ waterData }: Props) => {
   );
 };
 
-export default RiverTable;
+export default WaterDataTable;

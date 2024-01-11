@@ -24,7 +24,12 @@ type Props = {
   latest: LatestWaterData;
 };
 
-const RiverInfoCard = ({ station, dischargeQualitySteps, levelQualitySteps, latest }: Props) => {
+const WaterStationInfoCard = ({
+  station,
+  dischargeQualitySteps,
+  levelQualitySteps,
+  latest,
+}: Props) => {
   const dischargeQuality = waterQualityCn(latest.discharge.value, dischargeQualitySteps);
   const levelQuality = waterQualityCn(latest.level.value, levelQualitySteps);
 
@@ -101,4 +106,4 @@ const RiverInfoCard = ({ station, dischargeQualitySteps, levelQualitySteps, late
   );
 };
 
-export default RiverInfoCard;
+export default WaterStationInfoCard;
