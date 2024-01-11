@@ -272,9 +272,5 @@ module.exports = {
     },
   },
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  plugins: [
-    require('tailwindcss-animate'),
-    require('tailwindcss-radix'),
-    require('tailwind-scrollbar'),
-  ],
+  plugins: [require('tailwind-scrollbar')],
 };
