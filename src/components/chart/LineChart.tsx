@@ -16,16 +16,13 @@ interface Props {
   max: number | 'auto' | undefined;
   fieldName: string;
   fieldUnit: string;
-  tickSteps?: number;
 }
 
-const LineChart = ({ data, min, max, fieldName, fieldUnit, tickSteps = 24 }: Props) => {
-  const tickValues = data[0].data.filter((_, i) => i % tickSteps === 0).map((d) => d.x);
-
+const LineChart = ({ data, min, max, fieldName, fieldUnit }: Props) => {
   return (
     <ResponsiveLine
       data={data}
-      margin={{ top: 20, right: 20, bottom: 120, left: 60 }}
+      margin={{ top: 20, right: 20, bottom: 60, left: 60 }}
       xScale={{ format: '%Y-%m-%dT%H:%M:%S.%L%Z', type: 'time', precision: 'minute' }}
       xFormat="time:%d/%m/%Y-%H:%M"
       yScale={{
@@ -38,14 +35,6 @@ const LineChart = ({ data, min, max, fieldName, fieldUnit, tickSteps = 24 }: Pro
       axisTop={null}
       axisRight={null}
       axisBottom={null}
-      // axisBottom={{
-      //   tickValues: [tickValues[0], tickValues.at(-1)],
-      //   tickSize: 5,
-      //   tickPadding: 0,
-      //   tickRotation: 90,
-      //   legendOffset: 36,
-      //   legendPosition: 'middle',
-      // }}
       axisLeft={{
         tickSize: 5,
         tickPadding: 0,

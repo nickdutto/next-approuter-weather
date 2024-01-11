@@ -19,15 +19,14 @@ const WaterDataTablesContainer = ({ dischargeData, levelData }: Props) => {
   const [tab, setTab] = useState<string | null>(null);
 
   const isMobile = useMediaQuery('(max-width: 768px)');
-  const isDesktop = useMediaQuery('(min-width: 768px)');
 
   useEffect(() => {
     if (isMobile) {
       setTab('level');
-    } else if (isDesktop) {
+    } else if (!isMobile) {
       setTab('both');
     }
-  }, [isMobile, isDesktop]);
+  }, [isMobile]);
 
   const tabTabCn = (value: string, tabCount: '2' | '3', position: 'left' | 'middle' | 'right') => {
     return clsx([

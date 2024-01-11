@@ -52,23 +52,6 @@ const ChartContainer = ({ weather }: Props) => {
     }
   }, [weatherValue]);
 
-  const tickSteps = useMemo(() => {
-    switch (timeRange) {
-      case '120':
-        return 24;
-      case '96':
-        return 18;
-      case '72':
-        return 12;
-      case '48':
-        return 8;
-      case '24':
-        return 4;
-      default:
-        return 24;
-    }
-  }, [timeRange]);
-
   useEffect(() => {
     if (!weatherValue) return;
 
@@ -142,7 +125,6 @@ const ChartContainer = ({ weather }: Props) => {
             max={minMaxY.max + sliderValue}
             fieldName={weatherValue ?? ''}
             fieldUnit={fieldUnit}
-            tickSteps={tickSteps}
           />
         )}
       </div>

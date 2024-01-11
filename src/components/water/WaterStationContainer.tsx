@@ -1,4 +1,4 @@
-import LineChart from '~/components/chart/LineChart';
+import WaterDataChartsContainer from '~/components/water/WaterDataChartsContainer';
 import WaterDataTablesContainer from '~/components/water/WaterDataTablesContainer';
 import WaterStationInfoCard, { type StationInfo } from '~/components/water/WaterStationInfoCard';
 import { type WaterData } from '~/lib/validators/WaterDataValidator';
@@ -55,32 +55,12 @@ const WaterStationContainer = ({
         levelQualitySteps={levelQualitySteps}
         latest={latest}
       />
-      <div className="flex w-full gap-2">
-        <div className="h-[400px] w-full rounded-m-lg bg-m-night-7">
-          {levelChartData && (
-            <LineChart
-              data={levelChartData}
-              fieldName="Watercourse Discharge"
-              fieldUnit="cumec"
-              min={0}
-              max={levelYScaleMinMax.max}
-              tickSteps={8}
-            />
-          )}
-        </div>
-        <div className="h-[400px] w-full rounded-m-lg bg-m-night-7">
-          {dischargeChartData && (
-            <LineChart
-              data={dischargeChartData}
-              fieldName="Watercourse Discharge"
-              fieldUnit="cumec"
-              min={0}
-              max={dischargeYScaleMinMax.max}
-              tickSteps={8}
-            />
-          )}
-        </div>
-      </div>
+      <WaterDataChartsContainer
+        dischargeChartData={dischargeChartData}
+        levelChartData={levelChartData}
+        dischargeChartYScale={dischargeYScaleMinMax}
+        levelChartYScale={levelYScaleMinMax}
+      />
       <WaterDataTablesContainer dischargeData={dischargeData} levelData={levelData} />
     </main>
   );
