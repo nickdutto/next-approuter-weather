@@ -1,48 +1,45 @@
-import RiverInfoCard from '~/components/river/RiverInfoCard';
-import RiverTablesContainer from '~/components/river/RiverTablesContainer';
+import WaterStationContainer from '~/components/water/WaterStationContainer';
 import { murrumbidgee_yaouk_no2 } from '~/data/waterdata-stations';
-import { getRiverData } from '~/server/river';
+import { getWaterData } from '~/server/water';
 
 const Page = async () => {
-  const riverData = await getRiverData({
+  const waterData = await getWaterData({
+    id: murrumbidgee_yaouk_no2.id,
+    name: murrumbidgee_yaouk_no2.name,
+    waterwayName: murrumbidgee_yaouk_no2.waterwayName,
     dischargeId: murrumbidgee_yaouk_no2.dischargeId,
     levelId: murrumbidgee_yaouk_no2.levelId,
-    timeZone: murrumbidgee_yaouk_no2.timezone,
+    timezone: murrumbidgee_yaouk_no2.timezone,
     subDateRange: { days: 7 },
   });
 
+  const dischargeQualitySteps = {
+    low: 0,
+    medium: 0,
+    high: 0,
+    veryHigh: 0,
+    extreme: 0,
+  };
+
+  const levelQualitySteps = {
+    low: 0,
+    medium: 0,
+    high: 0,
+    veryHigh: 0,
+    extreme: 0,
+  };
+
   return (
-    <main className="flex flex-col gap-4">
-      <RiverInfoCard
-        station={{
-          id: riverData.discharge[0].station_no,
-          name: murrumbidgee_yaouk_no2.name,
-          riverName: murrumbidgee_yaouk_no2.waterwayName,
-          owner: riverData.discharge[0].DATA_OWNER_NAME,
-          latitude: riverData.discharge[0].station_latitude,
-          longitude: riverData.discharge[0].station_longitude,
-          fromDate: riverData.fromDate,
-          toDate: riverData.toDate,
-          timeZone: riverData.timeZone,
-        }}
-        dischargeQualitySteps={{
-          low: 10,
-          medium: 15,
-          high: 20,
-          veryHigh: 30,
-          extreme: 40,
-        }}
-        levelQualitySteps={{
-          low: 1.4,
-          medium: 1.5,
-          high: 1.6,
-          veryHigh: 1.7,
-          extreme: 1.8,
-        }}
-        latest={riverData.latest}
-      />
-      <RiverTablesContainer riverData={riverData} />
-    </main>
+    <WaterStationContainer
+      station={waterData.station}
+      dischargeData={waterData.discharge}
+      levelData={waterData.level}
+      latest={waterData.latest}
+      dischargeQualitySteps={dischargeQualitySteps}
+      levelQualitySteps={levelQualitySteps}
+      dischargeChartYScale={{ defaultMin: 1, defaultMax: 10 }}
+      levelChartYScale={{ defaultMin: 1, defaultMax: 2 }}
+    />
   );
 };
 

@@ -19,7 +19,7 @@ interface Props {
   tickSteps?: number;
 }
 
-const LowHighLineChart = ({ data, min, max, fieldName, fieldUnit, tickSteps = 24 }: Props) => {
+const LineChart = ({ data, min, max, fieldName, fieldUnit, tickSteps = 24 }: Props) => {
   const tickValues = data[0].data.filter((_, i) => i % tickSteps === 0).map((d) => d.x);
 
   return (
@@ -74,4 +74,4 @@ const LowHighLineChart = ({ data, min, max, fieldName, fieldUnit, tickSteps = 24
   );
 };
 
-export default LowHighLineChart;
+export default LineChart;

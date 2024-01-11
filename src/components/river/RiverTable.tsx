@@ -7,7 +7,7 @@ import { formatInTimeZone } from 'date-fns-tz';
 import { useMemo } from 'react';
 
 import Table from '~/components/table/Table';
-import { type RiverData } from '~/types/types';
+import { type WaterData } from '~/lib/validators/WaterDataValidator';
 
 type RiverTableData = {
   timestamp: string;
@@ -16,15 +16,15 @@ type RiverTableData = {
 };
 
 type Props = {
-  riverData: RiverData[];
+  waterData: WaterData;
 };
 
-const RiverTable = ({ riverData }: Props) => {
+const RiverTable = ({ waterData }: Props) => {
   const data = useMemo((): RiverTableData[] => {
-    return riverData[0].data
+    return waterData.data
       .slice()
       .reverse()
-      .filter((data) => data[1] !== null)
+      .filter((data) => data[1] !== null && data[0] !== null)
       .map((data, index, self) => {
         let change = '0.000';
         if (index > 0) {
@@ -37,12 +37,12 @@ const RiverTable = ({ riverData }: Props) => {
         }
 
         return {
-          timestamp: formatInTimeZone(data[0], '+10', 'dd/MM/yy - HH:mm'),
-          value: data[1] ?? '',
+          timestamp: formatInTimeZone(data[0] as string | number, '+10', 'dd/MM/yy - HH:mm'),
+          value: data[1] as string | number,
           change: change,
         };
       });
-  }, [riverData]);
+  }, [waterData]);
 
   const columns = useMemo(() => {
     const helper = createColumnHelper<RiverTableData>();
@@ -68,7 +68,7 @@ const RiverTable = ({ riverData }: Props) => {
   }, []);
 
   return (
-    <Table<RiverTableData> title={riverData[0].parametertype_name} data={data} columns={columns} />
+    <Table<RiverTableData> title={waterData.parametertype_name} data={data} columns={columns} />
   );
 };
 

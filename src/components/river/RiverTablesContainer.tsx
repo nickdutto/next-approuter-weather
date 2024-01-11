@@ -8,16 +8,14 @@ import { useEffect, useState } from 'react';
 import { WiFlood, WiSandstorm } from 'react-icons/wi';
 
 import RiverTable from '~/components/river/RiverTable';
-import { type RiverData } from '~/types/types';
+import { type WaterData } from '~/lib/validators/WaterDataValidator';
 
 type Props = {
-  riverData: {
-    discharge: RiverData[];
-    level: RiverData[];
-  };
+  dischargeData: WaterData;
+  levelData: WaterData;
 };
 
-const RiverTablesContainer = ({ riverData }: Props) => {
+const RiverTablesContainer = ({ dischargeData, levelData }: Props) => {
   const [tab, setTab] = useState<string | null>(null);
 
   const isMobile = useMediaQuery('(max-width: 768px)');
@@ -73,10 +71,10 @@ const RiverTablesContainer = ({ riverData }: Props) => {
             </TabsTab>
           </TabsList>
           <TabsPanel value="level" className="pt-2">
-            <RiverTable riverData={riverData.level} />
+            <RiverTable waterData={levelData} />
           </TabsPanel>
           <TabsPanel value="discharge" className="pt-2">
-            <RiverTable riverData={riverData.discharge} />
+            <RiverTable waterData={dischargeData} />
           </TabsPanel>
         </Tabs>
       )}
@@ -110,14 +108,14 @@ const RiverTablesContainer = ({ riverData }: Props) => {
             </TabsTab>
           </TabsList>
           <TabsPanel value="level" className="pt-2">
-            <RiverTable riverData={riverData.level} />
+            <RiverTable waterData={levelData} />
           </TabsPanel>
           <TabsPanel value="both" className="flex gap-2 pt-2">
-            <RiverTable riverData={riverData.level} />
-            <RiverTable riverData={riverData.discharge} />
+            <RiverTable waterData={levelData} />
+            <RiverTable waterData={dischargeData} />
           </TabsPanel>
           <TabsPanel value="discharge" className="pt-2">
-            <RiverTable riverData={riverData.discharge} />
+            <RiverTable waterData={dischargeData} />
           </TabsPanel>
         </Tabs>
       )}

@@ -1,46 +1,40 @@
 import { formatInTimeZone } from 'date-fns-tz';
 import { WiFlood, WiSandstorm } from 'react-icons/wi';
 
-import { riverQualityCn, type RiverQualitySteps } from '~/lib/river';
 import { cn } from '~/lib/utils';
+import { waterQualityCn, type WaterQualitySteps } from '~/lib/water';
+import { type LatestWaterData } from '~/server/water';
+
+export type StationInfo = {
+  id?: number;
+  name: string;
+  waterwayName: string;
+  owner: string;
+  latitude?: number;
+  longitude?: number;
+  fromDate: string;
+  toDate: string;
+  timezone: string;
+};
 
 type Props = {
-  station: {
-    id: string;
-    name: string;
-    riverName: string;
-    owner: string;
-    latitude: string;
-    longitude: string;
-    fromDate: string;
-    toDate: string;
-    timeZone: string;
-  };
-  dischargeQualitySteps: RiverQualitySteps;
-  levelQualitySteps: RiverQualitySteps;
-  latest: {
-    discharge: {
-      timestamp: string | undefined;
-      value: number;
-    };
-    level: {
-      timestamp: string | undefined;
-      value: number;
-    };
-  };
+  station: StationInfo;
+  dischargeQualitySteps: WaterQualitySteps;
+  levelQualitySteps: WaterQualitySteps;
+  latest: LatestWaterData;
 };
 
 const RiverInfoCard = ({ station, dischargeQualitySteps, levelQualitySteps, latest }: Props) => {
-  const dischargeQuality = riverQualityCn(latest.discharge.value, dischargeQualitySteps);
-  const levelQuality = riverQualityCn(latest.level.value, levelQualitySteps);
+  const dischargeQuality = waterQualityCn(latest.discharge.value, dischargeQualitySteps);
+  const levelQuality = waterQualityCn(latest.level.value, levelQualitySteps);
 
   return (
-    <div className="pt-4">
+    <div>
       <div className="flex justify-between rounded-m-lg bg-m-night-7 p-4">
         <div className="flex w-full flex-col gap-1">
           <h2 className="flex flex-col text-center">
             <span className="text-base font-bold sm:text-start sm:text-2xl">
-              {station.riverName}
+              {station.waterwayName}
             </span>
             <span className="text-base font-semibold sm:text-start sm:text-xl">{station.name}</span>
           </h2>
@@ -98,8 +92,8 @@ const RiverInfoCard = ({ station, dischargeQualitySteps, levelQualitySteps, late
           </p>
           <p>
             <span className="font-semibold">Range:</span>{' '}
-            {formatInTimeZone(station.fromDate, station.timeZone, 'dd/MM/yy')} -{' '}
-            {formatInTimeZone(station.toDate, station.timeZone, 'dd/MM/yy')}
+            {formatInTimeZone(station.fromDate, station.timezone, 'dd/MM/yy')} -{' '}
+            {formatInTimeZone(station.toDate, station.timezone, 'dd/MM/yy')}
           </p>
         </div>
       </div>

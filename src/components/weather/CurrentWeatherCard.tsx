@@ -3,8 +3,8 @@ import { Divider, Paper, Text } from '@mantine/core';
 import { formatInTimeZone } from 'date-fns-tz';
 import { TbCalendarEvent, TbMapPin } from 'react-icons/tb';
 
+import { getWeatherIcon } from '~/lib/weather';
 import { type WeatherInterval } from '~/types/types';
-import { getWeatherIcon } from '~/utils/weather-utils';
 
 type Props = {
   data: WeatherInterval;

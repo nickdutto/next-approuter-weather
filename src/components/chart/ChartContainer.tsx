@@ -5,8 +5,8 @@ import { InputLabel, Select, Slider } from '@mantine/core';
 import { useEffect, useMemo, useState } from 'react';
 
 import LineChart from '~/components/chart/LineChart';
+import { createChartData, getMinMaxValues, type SerieWithColor } from '~/lib/weather';
 import { type Weather } from '~/types/types';
-import { createChartData, getMinMaxValues, type SerieWithColor } from '~/utils/weather-utils';
 
 interface Props {
   weather: Weather;
