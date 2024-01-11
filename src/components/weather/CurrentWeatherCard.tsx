@@ -22,7 +22,7 @@ const CurrentWeatherCard = ({ data, sunrise, sunset }: Props) => {
     >
       <div className="">
         <img
-          src={`./tio/large/${getWeatherIcon(
+          src={`/tio/large/${getWeatherIcon(
             data.startTime,
             sunrise,
             sunset,

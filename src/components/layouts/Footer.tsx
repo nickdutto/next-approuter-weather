@@ -12,7 +12,7 @@ const Footer = ({ className }: Props) => {
       className={cn('flex w-full items-center justify-end bg-black px-4 py-[12px]', className)}
     >
       <a href="https://www.tomorrow.io/weather-api" target="_blank">
-        <img src="./tio/logo/tomorrowio-logo.svg" alt="Tomorrow.io Logo" className="w-[200px]" />
+        <img src="/tio/logo/tomorrowio-logo.svg" alt="Tomorrow.io Logo" className="w-[200px]" />
       </a>
     </footer>
   );

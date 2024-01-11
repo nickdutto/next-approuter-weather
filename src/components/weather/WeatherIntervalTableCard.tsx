@@ -24,7 +24,7 @@ const WeatherIntervalTableCard = ({ data, sunrise, sunset }: Props) => {
           </Table.Td>
           <Table.Td>
             <img
-              src={`./tio/${getWeatherIcon(
+              src={`/tio/${getWeatherIcon(
                 interval.startTime,
                 sunrise,
                 sunset,
