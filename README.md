@@ -1,34 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NextWeather
 
-## Getting Started
+Welcome to the NextWeather repository! This Next.js application provides local weather & water information around Canberra, Australia.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- Weather information from [Tomorrow.io - Weather API](https://www.tomorrow.io/weather-api/)
+  - Current Weather Information
+  - Future Weather Forecast
+- Water information from the [Bureau of Meteorology (BOM) - Water Data Online](http://www.bom.gov.au/waterdata)
+  - Water Data Station Info
+  - Current & Historical data
+  - Charts - Watercourse Discharge & Level
+  - Tables - Watercourse Discharge & Level
+  - Interactive Map of Water Data stations.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [Next.js](https://nextjs.org)
+- [Mantine](https://mantine.dev/)
+- [Nivo](https://nivo.rocks/)
+- [React Map GL](https://visgl.github.io/react-map-gl/)
+- [TanStack Query (React Query)](https://tanstack.com/query/latest)
+- [TanStack Table](https://tanstack.com/table/v8)
+- [Tailwind CSS](https://tailwindcss.com)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Acknowledgements
 
-## Learn More
+### MapTiler
 
-To learn more about Next.js, take a look at the following resources:
+Map data is provided by [MapTiler](https://www.maptiler.com/).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Tomorrow.io
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [Tomorrow.io - Weather API](https://www.tomorrow.io/weather-api/)
+- [Tomorrow.io - Weather Code icons](https://github.com/Tomorrow-IO-API/tomorrow-weather-codes) - [CC BY 4.0 License](https://creativecommons.org/licenses/by/4.0/)
 
-## Deploy on Vercel
+### BOM Water Data Online - Data Owners
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+All data is licenced under [CC BY 4.0 License](https://creativecommons.org/licenses/by/4.0/). Please check the [Water Data Online - Copyright](http://www.bom.gov.au/waterdata/index.shtml?selected=Copyright) for detailed licensing information.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+| State/Territory | Data Owner Name                                                                                      | Data Owner Code | Attribution                             |
+| --------------- | ---------------------------------------------------------------------------------------------------- | --------------- | --------------------------------------- |
+| ACT             | [Icon Water Limited](https://www.iconwater.com.au/)                                                  | w00002          | No attribution required                 |
+| ACT             | [Environment, Planning and Sustainable Development Directorate](https://www.environment.act.gov.au/) | w00075          | © ACT Environment Protection Authority |
+| NSW             | [Department of Planning, Industry and Environment – Water](https://www.dpie.nsw.gov.au/)             | w00077          | © State of NSW (Lands and Water)       |
