@@ -10,19 +10,19 @@ const ResponsiveLine = dynamic(() => import('@nivo/line').then((m) => m.Responsi
   ssr: false,
 });
 
-interface Props {
+type Props = LineProps & {
   data: LineProps['data'];
   min: number | 'auto' | undefined;
   max: number | 'auto' | undefined;
   fieldName: string;
   fieldUnit: string;
-}
+};
 
-const LineChart = ({ data, min, max, fieldName, fieldUnit }: Props) => {
+const LineChart = ({ data, margin, min, max, fieldName, fieldUnit, ...props }: Props) => {
   return (
     <ResponsiveLine
       data={data}
-      margin={{ top: 20, right: 20, bottom: 60, left: 60 }}
+      margin={{ top: 20, right: 20, bottom: 60, left: 60, ...margin }}
       xScale={{ format: '%Y-%m-%dT%H:%M:%S.%L%Z', type: 'time', precision: 'minute' }}
       xFormat="time:%d/%m/%Y-%H:%M"
       yScale={{
@@ -59,6 +59,7 @@ const LineChart = ({ data, min, max, fieldName, fieldUnit }: Props) => {
       tooltip={({ point }) => (
         <ChartTooltip point={point} fieldUnit={fieldUnit} xElemCount={data[0].data.length} />
       )}
+      {...props}
     />
   );
 };
