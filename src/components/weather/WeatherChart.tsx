@@ -105,7 +105,7 @@ const WeatherChart = ({ weather }: Props) => {
   }, [weatherValue, timeRange, colorSteps, weather]);
 
   return (
-    <div className="relative h-[536px] w-full overflow-hidden rounded-m-lg bg-m-night-7 p-2">
+    <div className="relative h-[416px] w-full overflow-hidden rounded-m-lg bg-m-night-7 p-2 md:h-[536px]">
       <div className="flex h-[80px] items-center gap-2 px-4">
         <Select
           data={timeRangeData}
@@ -128,10 +128,13 @@ const WeatherChart = ({ weather }: Props) => {
           radius="md"
           classNames={{
             input: '!bg-m-night-4 !border-none',
+            dropdown: '!bg-m-night-5 !border-m-night-0',
+            option:
+              'hover:!bg-m-night-0 active:!bg-m-night-2 data-[checked=true]:!bg-m-night-0 !my-1 first:!mt-0 last:!mb-0',
           }}
         />
       </div>
-      <div className="grid h-[400px] auto-cols-fr bg-m-night-7">
+      <div className="grid h-[280px] auto-cols-fr bg-m-night-7 md:h-[400px]">
         {chartData && (
           <LineChart
             data={chartData}
