@@ -1,7 +1,8 @@
-import { Button, Title } from '@mantine/core';
+import { Title } from '@mantine/core';
 
 import Link from 'next/link';
 
+import NavbarMapMenu from '~/components/layouts/NavbarMapMenu';
 import NavbarRiverMenu from '~/components/layouts/NavbarRiverMenu';
 
 const Navbar = () => {
@@ -14,18 +15,7 @@ const Navbar = () => {
           </Title>
           <div className="flex">
             <NavbarRiverMenu />
-            <Button
-              component={Link}
-              href="/map"
-              fw={600}
-              variant="transparent"
-              color="gray.5"
-              classNames={{
-                root: 'text-m-xs sm:text-m-sm active:!bg-m-night-7',
-              }}
-            >
-              Map
-            </Button>
+            <NavbarMapMenu />
           </div>
         </div>
       </nav>
