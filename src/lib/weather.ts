@@ -85,7 +85,7 @@ export const createChartData = (
   return mappedValues.filter((value) => value !== null) as SerieWithColor[];
 };
 
-export const getMinMaxValues = (data: TomorrowIOTimelines, field: string) => {
+export const getFieldMinMaxValues = (data: TomorrowIOTimelines, field: string) => {
   const values = data.data.timelines[0].intervals
     .map((interval) => {
       return interval.values[field as keyof typeof interval.values];
@@ -93,7 +93,34 @@ export const getMinMaxValues = (data: TomorrowIOTimelines, field: string) => {
     .filter((value): value is number => value !== null && value !== undefined);
 
   return {
-    min: Math.min(...values),
-    max: Math.max(...values),
+    fieldMin: Math.min(...values),
+    fieldMax: Math.max(...values),
+  };
+};
+
+export const getMinMaxValues = (data: TomorrowIOTimelines, field: string, valuePadding: number) => {
+  let min = 0;
+  let max = 0;
+
+  if (field === 'humidity') {
+    max = 100;
+  } else if (field === 'precipitationIntensity') {
+    const { fieldMax } = getFieldMinMaxValues(data, field);
+
+    max = fieldMax + valuePadding;
+  } else if (field === 'windGust' || field === 'windSpeed') {
+    const { fieldMax } = getFieldMinMaxValues(data, field);
+
+    max = fieldMax + valuePadding;
+  } else {
+    const { fieldMin, fieldMax } = getFieldMinMaxValues(data, field);
+
+    min = fieldMin - valuePadding;
+    max = fieldMax + valuePadding;
+  }
+
+  return {
+    min: min,
+    max: max,
   };
 };

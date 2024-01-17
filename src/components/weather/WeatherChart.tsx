@@ -1,6 +1,6 @@
 'use client';
 
-import { Select, Slider } from '@mantine/core';
+import { InputLabel, Select, Slider, Switch } from '@mantine/core';
 
 import { useEffect, useMemo, useState } from 'react';
 
@@ -17,6 +17,7 @@ const WeatherChart = ({ weather }: Props) => {
   const [timeRange, setTimeRange] = useState<string | null>('120');
   const [weatherValue, setWeatherValue] = useState<string | null>('pressureSeaLevel');
   const [chartData, setChartData] = useState<SerieWithColor[] | null>(null);
+  const [enableChartArea, setEnableChartArea] = useState(false);
   const [minMaxY, setMinMaxY] = useState({ min: 0, max: 0 });
 
   const fieldUnit = useMemo(() => {
@@ -32,6 +33,8 @@ const WeatherChart = ({ weather }: Props) => {
       case 'windSpeed':
       case 'windGust':
         return 'km/h';
+      case 'precipitationIntensity':
+        return 'mm/hr';
       default:
         return '';
     }
@@ -44,6 +47,8 @@ const WeatherChart = ({ weather }: Props) => {
       { value: '72', label: '3 Days' },
       { value: '48', label: '2 Days' },
       { value: '24', label: '1 Days' },
+      { value: '12', label: '12 Hours' },
+      { value: '6', label: '6 Hours' },
     ];
   }, []);
 
@@ -73,6 +78,10 @@ const WeatherChart = ({ weather }: Props) => {
         value: 'windGust',
         label: 'Wind Gust',
       },
+      {
+        value: 'precipitationIntensity',
+        label: 'Precipitation Intensity',
+      },
     ];
   }, []);
 
@@ -94,9 +103,8 @@ const WeatherChart = ({ weather }: Props) => {
 
   useEffect(() => {
     if (!weatherValue) return;
-
-    setMinMaxY(getMinMaxValues(weather, weatherValue));
-  }, [weatherValue, weather]);
+    setMinMaxY(getMinMaxValues(weather, weatherValue, sliderValue));
+  }, [weather, weatherValue, sliderValue]);
 
   useEffect(() => {
     if (!timeRange || !weatherValue) return;
@@ -105,14 +113,16 @@ const WeatherChart = ({ weather }: Props) => {
   }, [weatherValue, timeRange, colorSteps, weather]);
 
   return (
-    <div className="relative h-[416px] w-full overflow-hidden rounded-m-lg bg-m-night-7 p-2 md:h-[536px]">
+    <div className="relative h-[436px] w-full overflow-hidden rounded-m-lg bg-m-night-7 p-2 md:h-[556px]">
       <div className="flex h-[80px] items-center gap-2 px-4">
         <Select
           data={timeRangeData}
           value={timeRange}
           onChange={setTimeRange}
           label="Time Range"
+          maxDropdownHeight={600}
           radius="md"
+          checkIconPosition="right"
           classNames={{
             input: '!bg-m-night-4 !border-none',
             dropdown: '!bg-m-night-5 !border-m-night-0',
@@ -125,7 +135,9 @@ const WeatherChart = ({ weather }: Props) => {
           defaultValue={weatherValue}
           onChange={setWeatherValue}
           label="Weather Field"
+          maxDropdownHeight={600}
           radius="md"
+          checkIconPosition="right"
           classNames={{
             input: '!bg-m-night-4 !border-none',
             dropdown: '!bg-m-night-5 !border-m-night-0',
@@ -139,28 +151,49 @@ const WeatherChart = ({ weather }: Props) => {
           <LineChart
             data={chartData}
             margin={{ bottom: 20 }}
-            min={minMaxY.min - sliderValue}
-            max={minMaxY.max + sliderValue}
+            enableArea={enableChartArea}
+            curve="monotoneX"
+            min={minMaxY.min}
+            max={minMaxY.max}
             fieldName={weatherValue ?? ''}
             fieldUnit={fieldUnit}
           />
         )}
       </div>
-      <div className="flex h-[40px] w-full items-center px-4">
-        <Slider
-          id="minmax"
-          label={`yScale: +${sliderValue}`}
-          min={0}
-          max={100}
-          step={2}
-          value={sliderValue}
-          onChange={setSliderValue}
+      <div className="flex h-[60px] w-full flex-col justify-center gap-2 px-4">
+        <Switch
+          checked={enableChartArea}
+          onChange={(e) => setEnableChartArea(e.currentTarget.checked)}
+          label="Show Area"
+          labelPosition="left"
           classNames={{
-            root: 'w-full',
-            track: 'before:!bg-m-night-4',
-            label: 'bg-m-night-2 text-m-dark-0',
+            label: 'w-[90px]',
+            track: `!border-m-night-0 ${enableChartArea ? '!bg-m-blue-8' : '!bg-m-night-4'}`,
           }}
         />
+        <div className="flex items-center">
+          <InputLabel
+            htmlFor="minmax"
+            fw={400}
+            classNames={{ label: '!w-[90px] flex-shrink-0 leading-5' }}
+          >
+            yScale: +{sliderValue}
+          </InputLabel>
+          <Slider
+            id="minmax"
+            label={`yScale: +${sliderValue}`}
+            min={0}
+            max={100}
+            step={2}
+            value={sliderValue}
+            onChange={setSliderValue}
+            classNames={{
+              root: 'w-full',
+              track: 'before:!bg-m-night-4',
+              label: 'bg-m-night-2 text-m-dark-0',
+            }}
+          />
+        </div>
       </div>
     </div>
   );

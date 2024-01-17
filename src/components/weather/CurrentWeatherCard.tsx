@@ -25,7 +25,7 @@ const CurrentWeatherCard = ({ data, sunrise, sunset }: Props) => {
     <Paper
       radius="lg"
       classNames={{
-        root: 'bg-m-night-7 p-4 flex flex-col gap-2 md:!h-[536px]',
+        root: 'bg-m-night-7 p-4 flex flex-col gap-2 md:!h-[556px]',
       }}
     >
       <div className="">
