@@ -2,7 +2,7 @@ import { Paper } from '@mantine/core';
 
 import CurrentWeatherCard from '~/components/weather/CurrentWeatherCard';
 import WeatherChart from '~/components/weather/WeatherChart';
-import WeatherIntervalTableCard from '~/components/weather/WeatherIntervalTableCard';
+import WeatherIntervalTable from '~/components/weather/WeatherIntervalTable';
 import { TomorrowIOTimelinesValidator } from '~/lib/validators/TomorrowIOValidator';
 import { type SunriseSunset } from '~/types/types';
 
@@ -86,8 +86,13 @@ const Page = async () => {
         </div>
         <WeatherChart weather={weather} />
       </div>
-      <Paper radius="lg" classNames={{ root: 'flex w-full h-[600px] gap-2 p-4 bg-m-night-7' }}>
-        <WeatherIntervalTableCard
+      <Paper
+        radius="lg"
+        classNames={{
+          root: 'flex w-full h-[600px] md:h-[calc(100svh-664px)] gap-2 bg-m-night-7 p-2 overflow-auto',
+        }}
+      >
+        <WeatherIntervalTable
           data={weather.data.timelines[0].intervals}
           sunrise={sunriseSunset.results.sunrise}
           sunset={sunriseSunset.results.sunset}

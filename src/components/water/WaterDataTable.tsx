@@ -68,7 +68,13 @@ const WaterDataTable = ({ waterData }: Props) => {
   }, []);
 
   return (
-    <Table<RiverTableData> title={waterData.parametertype_name} data={data} columns={columns} />
+    <Table<RiverTableData>
+      title={waterData.parametertype_name}
+      data={data}
+      columns={columns}
+      wrapperProps={{ className: 'h-[calc(100svh-304px)] sm:h-[calc(100svh-380px)]' }}
+      tableProps={{ className: 'w-full' }}
+    />
   );
 };
 

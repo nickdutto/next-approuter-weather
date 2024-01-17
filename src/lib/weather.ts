@@ -21,7 +21,7 @@ export const getWeatherIcon = (
   sunsetStr: string,
   code?: number,
 ) => {
-  if (!code) return null;
+  if (!code) return undefined;
 
   const today = utcToZonedTime(time, 'Australia/Canberra');
   const tomorrow = add(today, { days: 1 });
