@@ -5,11 +5,11 @@ import { Select, Slider } from '@mantine/core';
 import { useEffect, useMemo, useState } from 'react';
 
 import LineChart from '~/components/chart/LineChart';
+import { type TomorrowIOTimelines } from '~/lib/validators/TomorrowIOValidator';
 import { createChartData, getMinMaxValues, type SerieWithColor } from '~/lib/weather';
-import { type Weather } from '~/types/types';
 
 interface Props {
-  weather: Weather;
+  weather: TomorrowIOTimelines;
 }
 
 const WeatherChart = ({ weather }: Props) => {

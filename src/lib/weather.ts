@@ -3,7 +3,7 @@ import { type Serie } from '@nivo/line';
 import { add, getHours, isAfter, isBefore, isEqual, setHours } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 
-import { type Weather } from '~/types/types';
+import { type TomorrowIOTimelines } from '~/lib/validators/TomorrowIOValidator';
 
 export interface SerieWithColor extends Serie {
   color: string;
@@ -19,8 +19,10 @@ export const getWeatherIcon = (
   time: string,
   sunriseStr: string,
   sunsetStr: string,
-  code: number,
+  code?: number,
 ) => {
+  if (!code) return null;
+
   const today = utcToZonedTime(time, 'Australia/Canberra');
   const tomorrow = add(today, { days: 1 });
 
@@ -50,7 +52,7 @@ export const getWeatherIcon = (
 };
 
 export const createChartData = (
-  data: Weather,
+  data: TomorrowIOTimelines,
   field: string,
   range: number,
   colorSteps: ColorStep[],
@@ -60,7 +62,7 @@ export const createChartData = (
   const mappedValues = colorSteps.map((step) => {
     const mappedData = slicedData.map((interval) => {
       const value = interval.values[field as keyof typeof interval.values];
-      if (Math.round(value) >= step.low && Math.round(value) <= step.high) {
+      if (value && Math.round(value) >= step.low && Math.round(value) <= step.high) {
         return {
           x: new Date(interval.startTime),
           y: interval.values[field as keyof typeof interval.values],
@@ -83,10 +85,12 @@ export const createChartData = (
   return mappedValues.filter((value) => value !== null) as SerieWithColor[];
 };
 
-export const getMinMaxValues = (data: Weather, field: string) => {
-  const values = data.data.timelines[0].intervals.map((interval) => {
-    return interval.values[field as keyof typeof interval.values];
-  });
+export const getMinMaxValues = (data: TomorrowIOTimelines, field: string) => {
+  const values = data.data.timelines[0].intervals
+    .map((interval) => {
+      return interval.values[field as keyof typeof interval.values];
+    })
+    .filter((value): value is number => value !== null && value !== undefined);
 
   return {
     min: Math.min(...values),

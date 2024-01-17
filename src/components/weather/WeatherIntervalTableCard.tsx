@@ -4,12 +4,12 @@ import { Table } from '@mantine/core';
 
 import { formatInTimeZone } from 'date-fns-tz';
 import { useMemo } from 'react';
+import { type TomorrowIOTimeline } from '~/lib/validators/TomorrowIOValidator';
 
 import { getWeatherIcon } from '~/lib/weather';
-import { type WeatherInterval } from '~/types/types';
 
 type Props = {
-  data: WeatherInterval[];
+  data: TomorrowIOTimeline[];
   sunrise: string;
   sunset: string;
 };
@@ -28,19 +28,19 @@ const WeatherIntervalTableCard = ({ data, sunrise, sunset }: Props) => {
                 interval.startTime,
                 sunrise,
                 sunset,
-                interval.values.weatherCode,
+                interval.values.weatherCode ?? undefined,
               )}`}
               alt=""
               className="w-[32px] brightness-90"
             />
           </Table.Td>
-          <Table.Td>{interval.values.temperature.toFixed(1)}°C</Table.Td>
-          <Table.Td>{interval.values.humidity.toFixed(0)}%</Table.Td>
-          <Table.Td>{interval.values.pressureSeaLevel.toFixed(1)}hPa</Table.Td>
-          <Table.Td>{interval.values.dewPoint.toFixed(1)}°C</Table.Td>
-          <Table.Td>{interval.values.windSpeed.toFixed(0)}km/h</Table.Td>
-          <Table.Td>{interval.values.windGust.toFixed(0)}km/h</Table.Td>
-          <Table.Td>{interval.values.windDirection.toFixed(0)}°</Table.Td>
+          <Table.Td>{interval.values.temperature?.toFixed(1)}°C</Table.Td>
+          <Table.Td>{interval.values.humidity?.toFixed(0)}%</Table.Td>
+          <Table.Td>{interval.values.pressureSeaLevel?.toFixed(1)}hPa</Table.Td>
+          <Table.Td>{interval.values.dewPoint?.toFixed(1)}°C</Table.Td>
+          <Table.Td>{interval.values.windSpeed?.toFixed(0)}km/h</Table.Td>
+          <Table.Td>{interval.values.windGust?.toFixed(0)}km/h</Table.Td>
+          <Table.Td>{interval.values.windDirection?.toFixed(0)}°</Table.Td>
         </Table.Tr>
       );
     });

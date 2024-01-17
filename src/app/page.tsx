@@ -3,7 +3,8 @@ import { Paper } from '@mantine/core';
 import CurrentWeatherCard from '~/components/weather/CurrentWeatherCard';
 import WeatherChart from '~/components/weather/WeatherChart';
 import WeatherIntervalTableCard from '~/components/weather/WeatherIntervalTableCard';
-import { type SunriseSunset, type Weather } from '~/types/types';
+import { TomorrowIOTimelinesValidator } from '~/lib/validators/TomorrowIOValidator';
+import { type SunriseSunset } from '~/types/types';
 
 const getSunriseSunset = async () => {
   const params = new URLSearchParams({
@@ -25,22 +26,48 @@ const getSunriseSunset = async () => {
 const getWeather = async () => {
   const params = new URLSearchParams({
     location: '-35.2801846,149.1310324',
-    fields:
-      'temperature,temperatureApparent,humidity,pressureSeaLevel,dewPoint,windSpeed,windGust,windDirection,precipitationProbability,cloudCover,weatherCode',
+    fields: `cloudBase,
+    cloudCeiling,
+    cloudCover,
+    dewPoint,
+    freezingRainIntensity,
+    humidity,
+    iceAccumulation,
+    precipitationIntensity,
+    precipitationProbability,
+    precipitationType,
+    pressureSeaLevel,
+    pressureSurfaceLevel,
+    rainAccumulation,
+    rainIntensity,
+    sleetAccumulation,
+    sleetIntensity,
+    snowAccumulation,
+    snowIntensity,
+    temperature,
+    temperatureApparent,
+    uvHealthConcern,
+    uvIndex,
+    visibility,
+    weatherCode,
+    windDirection,
+    windGust,
+    windSpeed`.replace(/\s+/g, ''),
     timezone: 'Australia/Canberra',
     timesteps: '1h',
     units: 'metric',
     apikey: `${process.env.TOMORROW_IO_API_KEY}`,
   });
 
-  const url = `https://api.tomorrow.io/v4/timelines?${params.toString()}`;
-  const res = await fetch(url, {
+  const res = await fetch(`https://api.tomorrow.io/v4/timelines?${params.toString()}`, {
     next: {
       revalidate: 3600,
     },
-  });
+  }).then((res) => res.json());
 
-  return res.json() as unknown as Weather;
+  const validated = TomorrowIOTimelinesValidator.parse(res);
+
+  return validated;
 };
 
 const Page = async () => {

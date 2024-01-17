@@ -11,11 +11,11 @@ import {
   WiWindy,
 } from 'react-icons/wi';
 
+import { type TomorrowIOTimeline } from '~/lib/validators/TomorrowIOValidator';
 import { getWeatherIcon } from '~/lib/weather';
-import { type WeatherInterval } from '~/types/types';
 
 type Props = {
-  data: WeatherInterval;
+  data: TomorrowIOTimeline;
   sunrise: string;
   sunset: string;
 };
@@ -34,14 +34,14 @@ const CurrentWeatherCard = ({ data, sunrise, sunset }: Props) => {
             data.startTime,
             sunrise,
             sunset,
-            data.values.weatherCode,
+            data.values.weatherCode ?? undefined,
           )}`}
           className="h-20 w-20 p-2"
           alt=""
         />
         <span className="flex">
           <Text c="gray.3" className="text-5xl">
-            {data.values.temperature.toFixed(0)}
+            {data.values.temperature?.toFixed(0)}
           </Text>
           <Text c="gray.3" className="text-3xl">
             °C
@@ -68,7 +68,7 @@ const CurrentWeatherCard = ({ data, sunrise, sunset }: Props) => {
           </Text>
           <span className="flex items-baseline">
             <Text size="sm" c="gray.4">
-              {data.values.humidity.toFixed(0)}
+              {data.values.humidity?.toFixed(0)}
             </Text>
             <Text size="sm" c="gray.5">
               %
@@ -113,7 +113,7 @@ const CurrentWeatherCard = ({ data, sunrise, sunset }: Props) => {
           </Text>
           <span className="flex items-baseline">
             <Text size="sm" c="gray.4">
-              {data.values.windSpeed.toFixed(1)}
+              {data.values.windSpeed?.toFixed(1)}
             </Text>
             <Text size="xs" c="gray.5">
               km/h
@@ -127,7 +127,7 @@ const CurrentWeatherCard = ({ data, sunrise, sunset }: Props) => {
           </Text>
           <span className="flex items-baseline">
             <Text size="sm" c="gray.4">
-              {data.values.windGust.toFixed(1)}
+              {data.values.windGust?.toFixed(1)}
             </Text>
             <Text size="xs" c="gray.5">
               km/h
