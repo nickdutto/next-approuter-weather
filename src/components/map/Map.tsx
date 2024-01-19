@@ -22,10 +22,10 @@ const Map = () => {
       maxPitch={0}
       style={{ width: '100%', height: '100%' }}
       reuseMaps
-      mapStyle={`https://api.maptiler.com/maps/backdrop-dark/style.json?key=${process.env.NEXT_PUBLIC_MAP_TILER_API_KEY}`}
+      mapStyle={`https://api.maptiler.com/maps/14fa0bc7-431f-434e-be9c-f8ca8f6d0636/style.json?key=${process.env.NEXT_PUBLIC_MAP_TILER_API_KEY}`}
     >
-      <GeolocateControl />
-      <NavigationControl />
+      <GeolocateControl position="top-left" />
+      <NavigationControl position="top-left" />
       <ScaleControl />
       <WaterDataMarkers setPopupInfo={setPopupInfo} />
       <Popup popupInfo={popupInfo} setPopupInfo={setPopupInfo} />
