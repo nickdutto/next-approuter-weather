@@ -2,7 +2,7 @@
 
 import { Marker } from 'react-map-gl/maplibre';
 
-import GisPoiIcon from '~/components/icon/GisPoiIcon';
+import GisPoi from '~/components/icons/gis-icons/GisPoi';
 import { type PopupInfo } from '~/components/map/Popup';
 import { water_data_stations } from '~/data/waterdata-stations';
 
@@ -33,7 +33,7 @@ const WaterDataMarkers = ({ setPopupInfo }: Props) => {
             });
           }}
         >
-          <GisPoiIcon className="h-5 w-5 cursor-pointer" />
+          <GisPoi className="size-4 cursor-pointer text-m-red-7 md:size-5" />
         </Marker>
       ))}
     </>
