@@ -51,11 +51,11 @@ const CurrentWeatherCard = ({ data, sunrise, sunset }: Props) => {
       <Divider color="night.1" />
       <div className="flex flex-col gap-1">
         <Text size="sm" c="gray.5" className="flex items-center gap-1">
-          <TbMapPin size={16} />
+          <TbMapPin aria-hidden="true" size={16} />
           Canberra, Australia
         </Text>
         <Text size="sm" c="gray.5" className="flex items-center gap-1">
-          <TbCalendarEvent size={16} />
+          <TbCalendarEvent aria-hidden="true" size={16} />
           {formatInTimeZone(data.startTime, 'Australia/Canberra', 'dd LLLL yyyy, h:mm a')}
         </Text>
       </div>
@@ -63,7 +63,7 @@ const CurrentWeatherCard = ({ data, sunrise, sunset }: Props) => {
       <div className="flex flex-col">
         <div className="inline-flex items-center gap-1">
           <Text size="sm" c="gray.4" className="flex items-center gap-0.5">
-            <WiHumidity size={16} />
+            <WiHumidity aria-hidden="true" size={16} />
             Humidity:
           </Text>
           <span className="flex items-baseline">
@@ -77,7 +77,7 @@ const CurrentWeatherCard = ({ data, sunrise, sunset }: Props) => {
         </div>
         <div className="inline-flex items-center gap-1">
           <Text size="sm" c="gray.4" className="flex items-center gap-0.5">
-            <WiBarometer size={16} />
+            <WiBarometer aria-hidden="true" size={16} />
             Pressure:
           </Text>
           <span className="flex items-baseline">
@@ -91,7 +91,7 @@ const CurrentWeatherCard = ({ data, sunrise, sunset }: Props) => {
         </div>
         <div className="inline-flex items-center gap-1">
           <Text size="sm" c="gray.4" className="flex items-center gap-0.5">
-            <WiRaindrop size={16} />
+            <WiRaindrop aria-hidden="true" size={16} />
             Dew Point:
           </Text>
           <span className="flex items-start">
@@ -108,7 +108,7 @@ const CurrentWeatherCard = ({ data, sunrise, sunset }: Props) => {
       <div className="flex flex-col">
         <div className="inline-flex items-center gap-1">
           <Text size="sm" c="gray.4" className="flex items-center gap-0.5">
-            <WiWindy size={16} />
+            <WiWindy aria-hidden="true" size={16} />
             Wind Speed:
           </Text>
           <span className="flex items-baseline">
@@ -122,7 +122,7 @@ const CurrentWeatherCard = ({ data, sunrise, sunset }: Props) => {
         </div>
         <div className="inline-flex items-center gap-1">
           <Text size="sm" c="gray.4" className="flex items-center gap-0.5">
-            <WiStrongWind size={16} />
+            <WiStrongWind aria-hidden="true" size={16} />
             Wind Gust:
           </Text>
           <span className="flex items-baseline">
@@ -136,7 +136,11 @@ const CurrentWeatherCard = ({ data, sunrise, sunset }: Props) => {
         </div>
         <div className="inline-flex items-center gap-1">
           <Text size="sm" c="gray.4" className="flex items-center gap-0.5">
-            <WiWindDeg size={16} style={{ transform: `rotate(${data.values.windDirection}deg)` }} />
+            <WiWindDeg
+              aria-hidden="true"
+              size={16}
+              style={{ transform: `rotate(${data.values.windDirection}deg)` }}
+            />
             Wind Direction:
           </Text>
           <span className="flex items-start">

@@ -164,8 +164,7 @@ const WeatherChart = ({ weather }: Props) => {
         <Switch
           checked={enableChartArea}
           onChange={(e) => setEnableChartArea(e.currentTarget.checked)}
-          label="Show Area"
-          labelPosition="left"
+          aria-label="Toggle Area"
           classNames={{
             label: 'w-[90px]',
             track: `!border-m-night-0 ${enableChartArea ? '!bg-m-blue-8' : '!bg-m-night-4'}`,
@@ -181,12 +180,13 @@ const WeatherChart = ({ weather }: Props) => {
           </InputLabel>
           <Slider
             id="minmax"
-            label={`yScale: +${sliderValue}`}
+            label="Chart Y Scale"
             min={0}
             max={100}
             step={2}
             value={sliderValue}
             onChange={setSliderValue}
+            thumbLabel="Change chart Y Scale"
             classNames={{
               root: 'w-full',
               track: 'before:!bg-m-night-4',

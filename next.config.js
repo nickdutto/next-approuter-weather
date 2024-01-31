@@ -16,6 +16,11 @@ const nextConfig = {
       'maplibre-gl',
     ],
   },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
 };
 
 module.exports = withBundleAnalyzer(nextConfig);
