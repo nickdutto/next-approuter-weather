@@ -166,6 +166,33 @@ export const mergeRiverData = (discharge: WaterData, level: WaterData) => {
   return mergedArray;
 };
 
+export const formatWaterDataTableValues = (waterData: WaterData['data']) => {
+  const filteredData = waterData
+    .slice()
+    .reverse()
+    .filter((data) => data[1] !== null && data[0] !== null);
+
+  return filteredData.map((data, index, self) => {
+    let change = '0.000';
+
+    if (index >= 0) {
+      const diff = Number(data[1]) - Number(self[index + 1]?.[1]) ?? 0;
+
+      if (diff > 0) {
+        change = `+ ${diff.toFixed(3)}`;
+      } else if (diff < 0) {
+        change = `- ${Math.abs(diff).toFixed(3)}`;
+      }
+    }
+
+    return {
+      timestamp: formatInTimeZone(data[0] as string | number, '+10', 'dd/MM/yy - HH:mm'),
+      value: data[1] as string | number,
+      change: change,
+    };
+  });
+};
+
 export const waterQualityCn = (level: number, steps: WaterQualitySteps) => {
   return clsx([
     level <= steps.low && 'bg-m-blue-7',

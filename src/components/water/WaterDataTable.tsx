@@ -3,11 +3,11 @@
 import { createColumnHelper } from '@tanstack/react-table';
 
 import clsx from 'clsx';
-import { formatInTimeZone } from 'date-fns-tz';
 import { useMemo } from 'react';
 
 import Table from '~/components/table/Table';
 import { type WaterData } from '~/lib/validators/WaterDataValidator';
+import { formatWaterDataTableValues } from '~/lib/water';
 
 type RiverTableData = {
   timestamp: string;
@@ -21,27 +21,7 @@ type Props = {
 
 const WaterDataTable = ({ waterData }: Props) => {
   const data = useMemo((): RiverTableData[] => {
-    return waterData.data
-      .slice()
-      .reverse()
-      .filter((data) => data[1] !== null && data[0] !== null)
-      .map((data, index, self) => {
-        let change = '0.000';
-        if (index > 0) {
-          const diff = Number(data[1]) - Number(self[index - 1][1]);
-          if (diff > 0) {
-            change = `+ ${diff.toFixed(3)}`;
-          } else if (diff < 0) {
-            change = `- ${Math.abs(diff).toFixed(3)}`;
-          }
-        }
-
-        return {
-          timestamp: formatInTimeZone(data[0] as string | number, '+10', 'dd/MM/yy - HH:mm'),
-          value: data[1] as string | number,
-          change: change,
-        };
-      });
+    return formatWaterDataTableValues(waterData.data);
   }, [waterData]);
 
   const columns = useMemo(() => {
