@@ -1,8 +1,9 @@
 import { formatInTimeZone } from 'date-fns-tz';
 import { WiFlood, WiSandstorm } from 'react-icons/wi';
 
+import { type WaterQualitySteps } from '~/data/waterdata-stations';
 import { cn } from '~/lib/utils';
-import { waterQualityCn, type WaterQualitySteps } from '~/lib/water';
+import { waterQualityCn } from '~/lib/water';
 import { type LatestWaterData } from '~/server/water';
 
 export type StationInfo = {

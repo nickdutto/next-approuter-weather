@@ -13,29 +13,13 @@ const Page = async () => {
     subDateRange: { days: 7 },
   });
 
-  const dischargeQualitySteps = {
-    low: 0,
-    medium: 0,
-    high: 0,
-    veryHigh: 0,
-    extreme: 0,
-  };
-
-  const levelQualitySteps = {
-    low: 0,
-    medium: 0,
-    high: 0,
-    veryHigh: 0,
-    extreme: 0,
-  };
-
   return (
     <WaterStationContainer
       stationWaterData={waterData}
-      dischargeQualitySteps={dischargeQualitySteps}
-      levelQualitySteps={levelQualitySteps}
-      dischargeChartYScale={{ defaultMin: 1, defaultMax: 60 }}
-      levelChartYScale={{ defaultMin: 1, defaultMax: 4 }}
+      levelQualitySteps={murrumbidgee_billilingra.qualitySteps.level}
+      dischargeQualitySteps={murrumbidgee_billilingra.qualitySteps.discharge}
+      levelChartYScale={murrumbidgee_billilingra.chartYScale.level}
+      dischargeChartYScale={murrumbidgee_billilingra.chartYScale.discharge}
     />
   );
 };

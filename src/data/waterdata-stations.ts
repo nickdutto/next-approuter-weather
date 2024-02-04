@@ -1,3 +1,17 @@
+export type WaterQualitySteps = {
+  low: number;
+  medium: number;
+  high: number;
+  veryHigh: number;
+  extreme: number;
+};
+
+export type DefaultChartYScale = {
+  defaultMin: number;
+  defaultMax: number;
+  maxPadding: number;
+};
+
 type WaterDataStation = {
   id: number;
   dischargeId: number;
@@ -8,6 +22,14 @@ type WaterDataStation = {
   href: string;
   longitude: number;
   latitude: number;
+  qualitySteps: {
+    level: WaterQualitySteps;
+    discharge: WaterQualitySteps;
+  };
+  chartYScale: {
+    discharge: DefaultChartYScale;
+    level: DefaultChartYScale;
+  };
 };
 
 //? Murrumbidgee River Stations
@@ -35,6 +57,34 @@ export const murrumbidgee_yaouk_no2: WaterDataStation = {
   href: '/water/murrumbidgee-river/yaouk-no2',
   longitude: 148.79321619,
   latitude: -35.88474689,
+  qualitySteps: {
+    level: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+    discharge: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+  },
+  chartYScale: {
+    level: {
+      defaultMin: 0,
+      defaultMax: 1,
+      maxPadding: 1,
+    },
+    discharge: {
+      defaultMin: 0,
+      defaultMax: 5,
+      maxPadding: 5,
+    },
+  },
 };
 
 export const murrumbidgee_mittagang_crossing: WaterDataStation = {
@@ -47,6 +97,34 @@ export const murrumbidgee_mittagang_crossing: WaterDataStation = {
   href: '/water/murrumbidgee-river/mittagang-crossing',
   longitude: 149.0947,
   latitude: -36.1644,
+  qualitySteps: {
+    level: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+    discharge: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+  },
+  chartYScale: {
+    level: {
+      defaultMin: 0,
+      defaultMax: 1,
+      maxPadding: 1,
+    },
+    discharge: {
+      defaultMin: 0,
+      defaultMax: 5,
+      maxPadding: 5,
+    },
+  },
 };
 
 export const murrumbidgee_billilingra: WaterDataStation = {
@@ -59,6 +137,34 @@ export const murrumbidgee_billilingra: WaterDataStation = {
   href: '/water/murrumbidgee-river/billilingra',
   longitude: 149.1276,
   latitude: -35.9826,
+  qualitySteps: {
+    level: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+    discharge: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+  },
+  chartYScale: {
+    level: {
+      defaultMin: 0,
+      defaultMax: 1,
+      maxPadding: 1,
+    },
+    discharge: {
+      defaultMin: 0,
+      defaultMax: 20,
+      maxPadding: 10,
+    },
+  },
 };
 
 export const murrumbidgee_michelago_creek: WaterDataStation = {
@@ -71,6 +177,34 @@ export const murrumbidgee_michelago_creek: WaterDataStation = {
   href: '/water/murrumbidgee-river/michelago-creek',
   longitude: 149.137988,
   latitude: -35.702337,
+  qualitySteps: {
+    level: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+    discharge: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+  },
+  chartYScale: {
+    level: {
+      defaultMin: 0,
+      defaultMax: 2,
+      maxPadding: 2,
+    },
+    discharge: {
+      defaultMin: 0,
+      defaultMax: 20,
+      maxPadding: 10,
+    },
+  },
 };
 
 export const murrumbidgee_angle_crossing: WaterDataStation = {
@@ -83,6 +217,34 @@ export const murrumbidgee_angle_crossing: WaterDataStation = {
   href: '/water/murrumbidgee-river/angle-crossing',
   longitude: 149.114147,
   latitude: -35.585654,
+  qualitySteps: {
+    level: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+    discharge: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+  },
+  chartYScale: {
+    level: {
+      defaultMin: 0,
+      defaultMax: 2,
+      maxPadding: 1,
+    },
+    discharge: {
+      defaultMin: 0,
+      defaultMax: 20,
+      maxPadding: 10,
+    },
+  },
 };
 
 export const murrumbidgee_lobbs_hole_creek: WaterDataStation = {
@@ -95,6 +257,34 @@ export const murrumbidgee_lobbs_hole_creek: WaterDataStation = {
   href: '/water/murrumbidgee-river/lobbs-hole-creek',
   longitude: 149.10119444,
   latitude: -35.53813889,
+  qualitySteps: {
+    level: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+    discharge: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+  },
+  chartYScale: {
+    level: {
+      defaultMin: 0,
+      defaultMax: 3,
+      maxPadding: 1,
+    },
+    discharge: {
+      defaultMin: 0,
+      defaultMax: 20,
+      maxPadding: 10,
+    },
+  },
 };
 
 export const murrumbidgee_mt_macdonald: WaterDataStation = {
@@ -107,6 +297,34 @@ export const murrumbidgee_mt_macdonald: WaterDataStation = {
   href: '/water/murrumbidgee-river/mt-macdonald',
   longitude: 148.95527639,
   latitude: -35.29166431,
+  qualitySteps: {
+    level: {
+      low: 1.4,
+      medium: 1.5,
+      high: 1.6,
+      veryHigh: 1.7,
+      extreme: 1.8,
+    },
+    discharge: {
+      low: 10,
+      medium: 15,
+      high: 20,
+      veryHigh: 30,
+      extreme: 40,
+    },
+  },
+  chartYScale: {
+    level: {
+      defaultMin: 0,
+      defaultMax: 1,
+      maxPadding: 1,
+    },
+    discharge: {
+      defaultMin: 0,
+      defaultMax: 20,
+      maxPadding: 10,
+    },
+  },
 };
 
 export const murrumbidgee_halls_crossing: WaterDataStation = {
@@ -119,6 +337,34 @@ export const murrumbidgee_halls_crossing: WaterDataStation = {
   href: '/water/murrumbidgee-river/halls-crossing',
   longitude: 148.94475,
   latitude: -35.13136111,
+  qualitySteps: {
+    level: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+    discharge: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+  },
+  chartYScale: {
+    level: {
+      defaultMin: 0,
+      defaultMax: 2,
+      maxPadding: 1,
+    },
+    discharge: {
+      defaultMin: 0,
+      defaultMax: 20,
+      maxPadding: 10,
+    },
+  },
 };
 
 export const murrumbidgee_stations = [
@@ -144,6 +390,34 @@ export const molonglo_coppins_crossing: WaterDataStation = {
   href: '/water/molonglo-river/coppins-crossing',
   longitude: 149.00860983,
   latitude: -35.27360722,
+  qualitySteps: {
+    level: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+    discharge: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+  },
+  chartYScale: {
+    level: {
+      defaultMin: 0,
+      defaultMax: 1,
+      maxPadding: 1.5,
+    },
+    discharge: {
+      defaultMin: 0,
+      defaultMax: 10,
+      maxPadding: 10,
+    },
+  },
 };
 
 export const molonglo_sturt_island: WaterDataStation = {
@@ -156,6 +430,34 @@ export const molonglo_sturt_island: WaterDataStation = {
   href: '/water/molonglo-river/sturt-island',
   longitude: 148.961247,
   latitude: -35.24433,
+  qualitySteps: {
+    level: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+    discharge: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+  },
+  chartYScale: {
+    level: {
+      defaultMin: 0,
+      defaultMax: 1,
+      maxPadding: 1.5,
+    },
+    discharge: {
+      defaultMin: 0,
+      defaultMax: 10,
+      maxPadding: 10,
+    },
+  },
 };
 
 export const molonglo_stations = [molonglo_coppins_crossing, molonglo_sturt_island];
@@ -171,6 +473,34 @@ export const cotter_gingera: WaterDataStation = {
   href: '/water/cotter-river/gingera',
   longitude: 148.82191667,
   latitude: -35.58805556,
+  qualitySteps: {
+    level: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+    discharge: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+  },
+  chartYScale: {
+    level: {
+      defaultMin: 0,
+      defaultMax: 1,
+      maxPadding: 1,
+    },
+    discharge: {
+      defaultMin: 0,
+      defaultMax: 4,
+      maxPadding: 2,
+    },
+  },
 };
 
 export const cotter_corin_dam: WaterDataStation = {
@@ -183,6 +513,34 @@ export const cotter_corin_dam: WaterDataStation = {
   href: '/water/cotter-river/corin-dam',
   longitude: 148.83594444,
   latitude: -35.53172222,
+  qualitySteps: {
+    level: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+    discharge: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+  },
+  chartYScale: {
+    level: {
+      defaultMin: 0,
+      defaultMax: 1,
+      maxPadding: 1,
+    },
+    discharge: {
+      defaultMin: 0,
+      defaultMax: 4,
+      maxPadding: 2,
+    },
+  },
 };
 
 export const cotter_bendora_dam: WaterDataStation = {
@@ -195,6 +553,34 @@ export const cotter_bendora_dam: WaterDataStation = {
   href: '/water/cotter-river/bendora-dam',
   longitude: 148.82938889,
   latitude: -35.44527778,
+  qualitySteps: {
+    level: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+    discharge: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+  },
+  chartYScale: {
+    level: {
+      defaultMin: 0,
+      defaultMax: 1.5,
+      maxPadding: 1,
+    },
+    discharge: {
+      defaultMin: 0,
+      defaultMax: 2,
+      maxPadding: 2,
+    },
+  },
 };
 
 export const cotter_vanitys_crossing: WaterDataStation = {
@@ -207,6 +593,34 @@ export const cotter_vanitys_crossing: WaterDataStation = {
   href: '/water/cotter-river/vanitys-crossing',
   longitude: 148.89,
   latitude: -35.35,
+  qualitySteps: {
+    level: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+    discharge: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+  },
+  chartYScale: {
+    level: {
+      defaultMin: 0,
+      defaultMax: 1.5,
+      maxPadding: 1,
+    },
+    discharge: {
+      defaultMin: 0,
+      defaultMax: 4,
+      maxPadding: 2,
+    },
+  },
 };
 
 export const cotter_cotter_kiosk: WaterDataStation = {
@@ -219,6 +633,34 @@ export const cotter_cotter_kiosk: WaterDataStation = {
   href: '/water/cotter-river/cotter-kiosk',
   longitude: 148.94175,
   latitude: -35.32402778,
+  qualitySteps: {
+    level: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+    discharge: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+  },
+  chartYScale: {
+    level: {
+      defaultMin: 0,
+      defaultMax: 1,
+      maxPadding: 1,
+    },
+    discharge: {
+      defaultMin: 0,
+      defaultMax: 4,
+      maxPadding: 2,
+    },
+  },
 };
 
 export const cotter_stations = [
@@ -240,6 +682,34 @@ export const condor_creek_threeways: WaterDataStation = {
   href: '/water/condor-creek/threeways',
   longitude: 148.88834802,
   latitude: -35.33019071,
+  qualitySteps: {
+    level: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+    discharge: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+  },
+  chartYScale: {
+    level: {
+      defaultMin: 0,
+      defaultMax: 0.5,
+      maxPadding: 1,
+    },
+    discharge: {
+      defaultMin: 0,
+      defaultMax: 0.5,
+      maxPadding: 0.5,
+    },
+  },
 };
 
 export const condor_creek_stations = [condor_creek_threeways];
@@ -255,6 +725,34 @@ export const gudgenby_tennent: WaterDataStation = {
   href: '/water/gudgenby-river/tennent',
   longitude: 149.06811389,
   latitude: -35.57187222,
+  qualitySteps: {
+    level: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+    discharge: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+  },
+  chartYScale: {
+    level: {
+      defaultMin: 0,
+      defaultMax: 1,
+      maxPadding: 1.5,
+    },
+    discharge: {
+      defaultMin: 0,
+      defaultMax: 2,
+      maxPadding: 2,
+    },
+  },
 };
 
 export const gudgenby_stations = [gudgenby_tennent];
@@ -270,6 +768,34 @@ export const orroral_orroral_rd_crossing: WaterDataStation = {
   href: '/water/orroral-river/orroral-rd-crossing',
   longitude: 148.98936111,
   latitude: -35.66505556,
+  qualitySteps: {
+    level: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+    discharge: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      veryHigh: 0,
+      extreme: 0,
+    },
+  },
+  chartYScale: {
+    level: {
+      defaultMin: 0,
+      defaultMax: 1,
+      maxPadding: 2,
+    },
+    discharge: {
+      defaultMin: 0,
+      defaultMax: 1,
+      maxPadding: 2,
+    },
+  },
 };
 
 export const orroral_stations = [orroral_orroral_rd_crossing];

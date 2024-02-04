@@ -8,13 +8,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { WiFlood, WiSandstorm } from 'react-icons/wi';
 
 import LineChart from '~/components/chart/LineChart';
+import { type DefaultChartYScale } from '~/data/waterdata-stations';
 import { type WaterData } from '~/lib/validators/WaterDataValidator';
 import { createWaterChartData, getWaterMinMaxValues } from '~/lib/water';
-
-type ChartYScale = {
-  defaultMin: number;
-  defaultMax: number;
-};
 
 type Props = {
   discharge: WaterData;
@@ -29,8 +25,8 @@ type Props = {
     high: number;
     color: string;
   };
-  dischargeChartYScale: ChartYScale;
-  levelChartYScale: ChartYScale;
+  dischargeChartYScale: DefaultChartYScale;
+  levelChartYScale: DefaultChartYScale;
 };
 
 const WaterDataChartsContainer = ({
@@ -45,29 +41,29 @@ const WaterDataChartsContainer = ({
 
   const isMobile = useMediaQuery('(max-width: 768px)');
 
-  const dischargeChartData = useMemo(() => {
-    const chartData = createWaterChartData(discharge, 'WatercourseDischarge', 7, [
-      dischargeChartOptions,
-    ]);
-
-    const yScale = getWaterMinMaxValues(discharge, 'discharge', dischargeChartYScale);
-
-    return {
-      data: chartData,
-      yScale: yScale,
-    };
-  }, [discharge, dischargeChartOptions, dischargeChartYScale]);
-
   const levelChartData = useMemo(() => {
     const chartData = createWaterChartData(level, 'WatercourseLevel', 7, [levelChartOptions]);
 
-    const yScale = getWaterMinMaxValues(level, 'level', levelChartYScale);
+    const yScale = getWaterMinMaxValues(level.data, 'level', levelChartYScale);
 
     return {
       data: chartData,
       yScale: yScale,
     };
   }, [level, levelChartOptions, levelChartYScale]);
+
+  const dischargeChartData = useMemo(() => {
+    const chartData = createWaterChartData(discharge, 'WatercourseDischarge', 7, [
+      dischargeChartOptions,
+    ]);
+
+    const yScale = getWaterMinMaxValues(discharge.data, 'discharge', dischargeChartYScale);
+
+    return {
+      data: chartData,
+      yScale: yScale,
+    };
+  }, [discharge, dischargeChartOptions, dischargeChartYScale]);
 
   useEffect(() => {
     if (isMobile) {
@@ -89,6 +85,8 @@ const WaterDataChartsContainer = ({
       value !== tab && 'bg-m-night-5 text-m-dark-2',
     ]);
   };
+
+  console.log(dischargeChartData.yScale);
 
   return (
     <>

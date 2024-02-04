@@ -13,30 +13,14 @@ const Page = async () => {
     subDateRange: { days: 7 },
   });
 
-  const dischargeQualitySteps = {
-    low: 0,
-    medium: 0,
-    high: 0,
-    veryHigh: 0,
-    extreme: 0,
-  };
-
-  const levelQualitySteps = {
-    low: 0,
-    medium: 0,
-    high: 0,
-    veryHigh: 0,
-    extreme: 0,
-  };
-
   return (
     <>
       <WaterStationContainer
         stationWaterData={waterData}
-        dischargeQualitySteps={dischargeQualitySteps}
-        levelQualitySteps={levelQualitySteps}
-        dischargeChartYScale={{ defaultMin: 1, defaultMax: 2 }}
-        levelChartYScale={{ defaultMin: 1, defaultMax: 2 }}
+        levelQualitySteps={condor_creek_threeways.qualitySteps.level}
+        dischargeQualitySteps={condor_creek_threeways.qualitySteps.discharge}
+        levelChartYScale={condor_creek_threeways.chartYScale.level}
+        dischargeChartYScale={condor_creek_threeways.chartYScale.discharge}
       />
     </>
   );

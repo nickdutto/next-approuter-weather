@@ -2,16 +2,9 @@ import clsx from 'clsx';
 import { sub } from 'date-fns';
 import { formatInTimeZone, toDate } from 'date-fns-tz';
 
+import { type DefaultChartYScale, type WaterQualitySteps } from '~/data/waterdata-stations';
 import { type WaterData } from '~/lib/validators/WaterDataValidator';
 import { type ColorStep, type SerieWithColor } from '~/lib/weather';
-
-export type WaterQualitySteps = {
-  low: number;
-  medium: number;
-  high: number;
-  veryHigh: number;
-  extreme: number;
-};
 
 export const baseWaterDataParams = {
   service: 'kisters',
@@ -104,11 +97,11 @@ export const createWaterChartData = (
 };
 
 export const getWaterMinMaxValues = (
-  riverData: WaterData,
+  waterData: WaterData['data'],
   type: 'discharge' | 'level',
-  { defaultMin = 0, defaultMax = 40 } = {},
+  chartYScale: DefaultChartYScale,
 ) => {
-  const mappedData = riverData.data
+  const mappedData = waterData
     .filter((data) => typeof data[1] === 'number')
     .map((data) => {
       return Number(data[1]);
@@ -117,23 +110,25 @@ export const getWaterMinMaxValues = (
   const min = Math.min(...mappedData);
   const max = Math.max(...mappedData);
 
-  const finalMin = min < defaultMin ? min : defaultMin;
-  const finalMax = max > defaultMax ? max : defaultMax;
+  console.log(max);
+  const finalMin = min < chartYScale.defaultMin ? min : chartYScale.defaultMin;
+  const finalMax = max > chartYScale.defaultMax ? max : chartYScale.defaultMax;
+  console.log(finalMax);
 
   if (type === 'discharge') {
     return {
       min: finalMin,
-      max: finalMax + 20,
+      max: finalMax + chartYScale.maxPadding,
     };
   } else if (type === 'level') {
     return {
       min: finalMin,
-      max: finalMax + 2,
+      max: finalMax + chartYScale.maxPadding,
     };
   } else {
     return {
       min: finalMin,
-      max: finalMax + 2,
+      max: finalMax + chartYScale.maxPadding,
     };
   }
 };

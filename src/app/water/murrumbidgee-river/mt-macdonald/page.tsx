@@ -13,28 +13,13 @@ const Page = async () => {
     subDateRange: { days: 7 },
   });
 
-  const dischargeQualitySteps = {
-    low: 10,
-    medium: 15,
-    high: 20,
-    veryHigh: 30,
-    extreme: 40,
-  };
-
-  const levelQualitySteps = {
-    low: 1.4,
-    medium: 1.5,
-    high: 1.6,
-    veryHigh: 1.7,
-    extreme: 1.8,
-  };
   return (
     <WaterStationContainer
       stationWaterData={waterData}
-      dischargeQualitySteps={dischargeQualitySteps}
-      levelQualitySteps={levelQualitySteps}
-      dischargeChartYScale={{ defaultMin: 1, defaultMax: 40 }}
-      levelChartYScale={{ defaultMin: 1, defaultMax: 2 }}
+      levelQualitySteps={murrumbidgee_mt_macdonald.qualitySteps.level}
+      dischargeQualitySteps={murrumbidgee_mt_macdonald.qualitySteps.discharge}
+      levelChartYScale={murrumbidgee_mt_macdonald.chartYScale.level}
+      dischargeChartYScale={murrumbidgee_mt_macdonald.chartYScale.discharge}
     />
   );
 };

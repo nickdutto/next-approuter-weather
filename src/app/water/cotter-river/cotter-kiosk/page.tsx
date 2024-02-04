@@ -13,29 +13,13 @@ const Page = async () => {
     subDateRange: { days: 7 },
   });
 
-  const dischargeQualitySteps = {
-    low: 0,
-    medium: 0,
-    high: 0,
-    veryHigh: 0,
-    extreme: 0,
-  };
-
-  const levelQualitySteps = {
-    low: 0,
-    medium: 0,
-    high: 0,
-    veryHigh: 0,
-    extreme: 0,
-  };
-
   return (
     <WaterStationContainer
       stationWaterData={waterData}
-      dischargeQualitySteps={dischargeQualitySteps}
-      levelQualitySteps={levelQualitySteps}
-      dischargeChartYScale={{ defaultMin: 1, defaultMax: 30 }}
-      levelChartYScale={{ defaultMin: 1, defaultMax: 3 }}
+      levelQualitySteps={cotter_cotter_kiosk.qualitySteps.level}
+      dischargeQualitySteps={cotter_cotter_kiosk.qualitySteps.discharge}
+      levelChartYScale={cotter_cotter_kiosk.chartYScale.level}
+      dischargeChartYScale={cotter_cotter_kiosk.chartYScale.discharge}
     />
   );
 };

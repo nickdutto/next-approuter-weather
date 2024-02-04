@@ -13,29 +13,13 @@ const Page = async () => {
     subDateRange: { days: 7 },
   });
 
-  const dischargeQualitySteps = {
-    low: 0,
-    medium: 0,
-    high: 0,
-    veryHigh: 0,
-    extreme: 0,
-  };
-
-  const levelQualitySteps = {
-    low: 0,
-    medium: 0,
-    high: 0,
-    veryHigh: 0,
-    extreme: 0,
-  };
-
   return (
     <WaterStationContainer
       stationWaterData={waterData}
-      dischargeQualitySteps={dischargeQualitySteps}
-      levelQualitySteps={levelQualitySteps}
-      dischargeChartYScale={{ defaultMin: 1, defaultMax: 80 }}
-      levelChartYScale={{ defaultMin: 1, defaultMax: 6 }}
+      levelQualitySteps={murrumbidgee_michelago_creek.qualitySteps.level}
+      dischargeQualitySteps={murrumbidgee_michelago_creek.qualitySteps.discharge}
+      levelChartYScale={murrumbidgee_michelago_creek.chartYScale.level}
+      dischargeChartYScale={murrumbidgee_michelago_creek.chartYScale.discharge}
     />
   );
 };

@@ -5,20 +5,15 @@ import { TbAlertCircle } from 'react-icons/tb';
 import WaterDataChartsContainer from '~/components/water/WaterDataChartsContainer';
 import WaterDataTablesContainer from '~/components/water/WaterDataTablesContainer';
 import WaterStationInfoCard from '~/components/water/WaterStationInfoCard';
-import { type WaterQualitySteps } from '~/lib/water';
+import { type DefaultChartYScale, type WaterQualitySteps } from '~/data/waterdata-stations';
 import { type StationWaterData } from '~/server/water';
-
-type ChartYScale = {
-  defaultMin: number;
-  defaultMax: number;
-};
 
 type Props = {
   stationWaterData: StationWaterData;
   dischargeQualitySteps: WaterQualitySteps;
   levelQualitySteps: WaterQualitySteps;
-  dischargeChartYScale: ChartYScale;
-  levelChartYScale: ChartYScale;
+  dischargeChartYScale: DefaultChartYScale;
+  levelChartYScale: DefaultChartYScale;
 };
 
 const WaterStationContainer = ({
