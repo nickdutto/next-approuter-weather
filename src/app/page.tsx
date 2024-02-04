@@ -89,7 +89,7 @@ const Page = async () => {
       <Paper
         radius="lg"
         classNames={{
-          root: 'flex w-full h-[600px] md:h-[calc(100svh-664px)] gap-2 bg-m-night-7 p-2 overflow-auto',
+          root: 'flex w-full h-[600px] sm:h-[800px] gap-2 bg-m-night-7 p-2 overflow-auto',
         }}
       >
         <WeatherIntervalTable

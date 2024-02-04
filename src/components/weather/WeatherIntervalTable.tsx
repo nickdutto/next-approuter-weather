@@ -19,7 +19,7 @@ type WeatherFields = Pick<
   | 'windGust'
   | 'windDirection'
 >;
-type WeatherIntervalTableData = Record<keyof WeatherFields, string | undefined> & {
+type TableData = Record<keyof WeatherFields, string | undefined> & {
   time: string;
   condition?: string;
 };
@@ -31,7 +31,7 @@ type Props = {
 };
 
 const WeatherIntervalTable = ({ data, sunrise, sunset }: Props) => {
-  const tableData = useMemo((): WeatherIntervalTableData[] => {
+  const tableData = useMemo((): TableData[] => {
     return data.map((interval) => {
       return {
         time: formatInTimeZone(interval.startTime, 'Australia/Canberra', 'h:mm a'),
@@ -53,7 +53,7 @@ const WeatherIntervalTable = ({ data, sunrise, sunset }: Props) => {
   }, [data, sunrise, sunset]);
 
   const columns = useMemo(() => {
-    const helper = createColumnHelper<WeatherIntervalTableData>();
+    const helper = createColumnHelper<TableData>();
     return [
       helper.accessor('time', {
         header: 'Time',
@@ -104,14 +104,12 @@ const WeatherIntervalTable = ({ data, sunrise, sunset }: Props) => {
   }, []);
 
   return (
-    <Table<WeatherIntervalTableData>
+    <Table<TableData>
       data={tableData}
       columns={columns}
-      tableProps={{ className: 'min-w-[780px] w-full' }}
-      theadProps={{ className: 'shadow shadow-black' }}
-      tbodyProps={{ className: '[&>*:nth-child(even)]:bg-m-night-5' }}
-      thProps={{ className: 'text-m-xs font-bold' }}
-      tdProps={{ className: 'text-m-xs border-0' }}
+      tableProps={{ className: 'min-w-[780px] sm:w-full' }}
+      thProps={{ className: 'text-m-xs' }}
+      tdProps={{ className: 'text-m-xs' }}
     />
   );
 };

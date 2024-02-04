@@ -9,7 +9,7 @@ import Table from '~/components/table/Table';
 import { type WaterData } from '~/lib/validators/WaterDataValidator';
 import { formatWaterDataTableValues } from '~/lib/water';
 
-type RiverTableData = {
+type TableData = {
   timestamp: string;
   value: string | number;
   change: string;
@@ -20,12 +20,12 @@ type Props = {
 };
 
 const WaterDataTable = ({ waterData }: Props) => {
-  const data = useMemo((): RiverTableData[] => {
+  const data = useMemo((): TableData[] => {
     return formatWaterDataTableValues(waterData.data);
   }, [waterData]);
 
   const columns = useMemo(() => {
-    const helper = createColumnHelper<RiverTableData>();
+    const helper = createColumnHelper<TableData>();
     return [
       helper.accessor('timestamp', {
         cell: (row) => row.getValue(),
@@ -48,11 +48,13 @@ const WaterDataTable = ({ waterData }: Props) => {
   }, []);
 
   return (
-    <Table<RiverTableData>
+    <Table<TableData>
       title={waterData.parametertype_name}
       data={data}
       columns={columns}
-      wrapperProps={{ className: 'h-[calc(100svh-304px)] sm:h-[calc(100svh-380px)]' }}
+      wrapperProps={{
+        className: 'h-[600px] sm:h-[800px]',
+      }}
       tableProps={{ className: 'w-full' }}
     />
   );
