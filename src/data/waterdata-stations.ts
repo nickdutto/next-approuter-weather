@@ -33,20 +33,6 @@ type WaterDataStation = {
 };
 
 //? Murrumbidgee River Stations
-//! Removed Tantangara Reservoir until licence conditions are obtained from NSW - Snowy Hydro Limited
-//! http://www.snowyhydro.com.au
-// export const murrumbidgee_tantangara_reservoir: WaterDataStation = {
-//   id: 410535,
-//   dischargeId: 325639010,
-//   levelId: 325665010,
-//   timezone: 'Australia/Canberra',
-//   name: 'Tantangara Reservoir - U/S',
-//   waterwayName: 'Murrumbidgee River',
-//   href: '/water/murrumbidgee-river/tantangara-reservoir',
-//   longitude: 148.57027778,
-//   latitude: -35.77055556,
-// };
-
 export const murrumbidgee_yaouk_no2: WaterDataStation = {
   id: 41000260,
   dischargeId: 148601010,
