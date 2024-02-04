@@ -1,9 +1,9 @@
 import WaterStationContainer from '~/components/water/WaterStationContainer';
 import { condor_creek_threeways } from '~/data/waterdata-stations';
-import { getWaterData } from '~/server/water';
+import { getStationWaterData } from '~/server/water';
 
 const Page = async () => {
-  const waterData = await getWaterData({
+  const waterData = await getStationWaterData({
     id: condor_creek_threeways.id,
     name: condor_creek_threeways.name,
     waterwayName: condor_creek_threeways.waterwayName,
@@ -30,16 +30,15 @@ const Page = async () => {
   };
 
   return (
-    <WaterStationContainer
-      station={waterData.station}
-      dischargeData={waterData.discharge}
-      levelData={waterData.level}
-      latest={waterData.latest}
-      dischargeQualitySteps={dischargeQualitySteps}
-      levelQualitySteps={levelQualitySteps}
-      dischargeChartYScale={{ defaultMin: 1, defaultMax: 2 }}
-      levelChartYScale={{ defaultMin: 1, defaultMax: 2 }}
-    />
+    <>
+      <WaterStationContainer
+        stationWaterData={waterData}
+        dischargeQualitySteps={dischargeQualitySteps}
+        levelQualitySteps={levelQualitySteps}
+        dischargeChartYScale={{ defaultMin: 1, defaultMax: 2 }}
+        levelChartYScale={{ defaultMin: 1, defaultMax: 2 }}
+      />
+    </>
   );
 };
 

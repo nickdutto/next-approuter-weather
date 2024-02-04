@@ -1,9 +1,9 @@
 import WaterStationContainer from '~/components/water/WaterStationContainer';
 import { gudgenby_tennent } from '~/data/waterdata-stations';
-import { getWaterData } from '~/server/water';
+import { getStationWaterData } from '~/server/water';
 
 const Page = async () => {
-  const waterData = await getWaterData({
+  const waterData = await getStationWaterData({
     id: gudgenby_tennent.id,
     name: gudgenby_tennent.name,
     waterwayName: gudgenby_tennent.waterwayName,
@@ -31,10 +31,7 @@ const Page = async () => {
 
   return (
     <WaterStationContainer
-      station={waterData.station}
-      dischargeData={waterData.discharge}
-      levelData={waterData.level}
-      latest={waterData.latest}
+      stationWaterData={waterData}
       dischargeQualitySteps={dischargeQualitySteps}
       levelQualitySteps={levelQualitySteps}
       dischargeChartYScale={{ defaultMin: 1, defaultMax: 20 }}

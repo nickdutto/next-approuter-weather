@@ -1,9 +1,9 @@
 import WaterStationContainer from '~/components/water/WaterStationContainer';
 import { cotter_vanitys_crossing } from '~/data/waterdata-stations';
-import { getWaterData } from '~/server/water';
+import { getStationWaterData } from '~/server/water';
 
 const Page = async () => {
-  const waterData = await getWaterData({
+  const waterData = await getStationWaterData({
     id: cotter_vanitys_crossing.id,
     name: cotter_vanitys_crossing.name,
     waterwayName: cotter_vanitys_crossing.waterwayName,
@@ -31,10 +31,7 @@ const Page = async () => {
 
   return (
     <WaterStationContainer
-      station={waterData.station}
-      dischargeData={waterData.discharge}
-      levelData={waterData.level}
-      latest={waterData.latest}
+      stationWaterData={waterData}
       dischargeQualitySteps={dischargeQualitySteps}
       levelQualitySteps={levelQualitySteps}
       dischargeChartYScale={{ defaultMin: 1, defaultMax: 30 }}

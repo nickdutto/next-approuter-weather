@@ -1,9 +1,9 @@
 import WaterStationContainer from '~/components/water/WaterStationContainer';
 import { murrumbidgee_mt_macdonald } from '~/data/waterdata-stations';
-import { getWaterData } from '~/server/water';
+import { getStationWaterData } from '~/server/water';
 
 const Page = async () => {
-  const waterData = await getWaterData({
+  const waterData = await getStationWaterData({
     id: murrumbidgee_mt_macdonald.id,
     name: murrumbidgee_mt_macdonald.name,
     waterwayName: murrumbidgee_mt_macdonald.waterwayName,
@@ -30,10 +30,7 @@ const Page = async () => {
   };
   return (
     <WaterStationContainer
-      station={waterData.station}
-      dischargeData={waterData.discharge}
-      levelData={waterData.level}
-      latest={waterData.latest}
+      stationWaterData={waterData}
       dischargeQualitySteps={dischargeQualitySteps}
       levelQualitySteps={levelQualitySteps}
       dischargeChartYScale={{ defaultMin: 1, defaultMax: 40 }}

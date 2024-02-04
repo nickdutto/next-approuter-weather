@@ -4,33 +4,70 @@ import { Tabs } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { WiFlood, WiSandstorm } from 'react-icons/wi';
 
 import LineChart from '~/components/chart/LineChart';
-import { type SerieWithColor } from '~/lib/weather';
+import { type WaterData } from '~/lib/validators/WaterDataValidator';
+import { createWaterChartData, getWaterMinMaxValues } from '~/lib/water';
 
-type YScaleMinMax = {
-  min: number;
-  max: number;
+type ChartYScale = {
+  defaultMin: number;
+  defaultMax: number;
 };
 
 type Props = {
-  dischargeChartData: SerieWithColor[];
-  levelChartData: SerieWithColor[];
-  dischargeChartYScale: YScaleMinMax;
-  levelChartYScale: YScaleMinMax;
+  discharge: WaterData;
+  level: WaterData;
+  dischargeChartOptions: {
+    low: number;
+    high: number;
+    color: string;
+  };
+  levelChartOptions: {
+    low: number;
+    high: number;
+    color: string;
+  };
+  dischargeChartYScale: ChartYScale;
+  levelChartYScale: ChartYScale;
 };
 
 const WaterDataChartsContainer = ({
-  dischargeChartData,
-  levelChartData,
+  discharge,
+  level,
+  dischargeChartOptions,
+  levelChartOptions,
   dischargeChartYScale,
   levelChartYScale,
 }: Props) => {
   const [tab, setTab] = useState<string | null>(null);
 
   const isMobile = useMediaQuery('(max-width: 768px)');
+
+  const dischargeChartData = useMemo(() => {
+    const chartData = createWaterChartData(discharge, 'WatercourseDischarge', 7, [
+      dischargeChartOptions,
+    ]);
+
+    const yScale = getWaterMinMaxValues(discharge, 'discharge', dischargeChartYScale);
+
+    return {
+      data: chartData,
+      yScale: yScale,
+    };
+  }, [discharge, dischargeChartOptions, dischargeChartYScale]);
+
+  const levelChartData = useMemo(() => {
+    const chartData = createWaterChartData(level, 'WatercourseLevel', 7, [levelChartOptions]);
+
+    const yScale = getWaterMinMaxValues(level, 'level', levelChartYScale);
+
+    return {
+      data: chartData,
+      yScale: yScale,
+    };
+  }, [level, levelChartOptions, levelChartYScale]);
 
   useEffect(() => {
     if (isMobile) {
@@ -85,11 +122,11 @@ const WaterDataChartsContainer = ({
             <div className="w-full">
               <div className="h-[400px] w-full rounded-m-lg bg-m-night-7">
                 <LineChart
-                  data={levelChartData}
+                  data={levelChartData.data}
                   fieldName="Watercourse Level"
                   fieldUnit="m"
                   min={0}
-                  max={levelChartYScale.max}
+                  max={levelChartData.yScale.max}
                 />
               </div>
             </div>
@@ -98,11 +135,11 @@ const WaterDataChartsContainer = ({
             <div className="w-full">
               <div className="h-[400px] w-full rounded-m-lg bg-m-night-7">
                 <LineChart
-                  data={dischargeChartData}
+                  data={dischargeChartData.data}
                   fieldName="Watercourse Discharge"
                   fieldUnit="cumec"
                   min={0}
-                  max={dischargeChartYScale.max}
+                  max={dischargeChartData.yScale.max}
                 />
               </div>
             </div>
@@ -142,11 +179,11 @@ const WaterDataChartsContainer = ({
             <div className="w-full">
               <div className="h-[400px] w-full rounded-m-lg bg-m-night-7">
                 <LineChart
-                  data={levelChartData}
+                  data={levelChartData.data}
                   fieldName="Watercourse Level"
                   fieldUnit="m"
                   min={0}
-                  max={levelChartYScale.max}
+                  max={levelChartData.yScale.max}
                 />
               </div>
             </div>
@@ -156,22 +193,22 @@ const WaterDataChartsContainer = ({
               <div className="h-[400px] w-full rounded-m-lg bg-m-night-7">
                 {levelChartData && (
                   <LineChart
-                    data={levelChartData}
+                    data={levelChartData.data}
                     fieldName="Watercourse Level"
                     fieldUnit="m"
                     min={0}
-                    max={levelChartYScale.max}
+                    max={levelChartData.yScale.max}
                   />
                 )}
               </div>
               <div className="h-[400px] w-full rounded-m-lg bg-m-night-7">
                 {dischargeChartData && (
                   <LineChart
-                    data={dischargeChartData}
+                    data={dischargeChartData.data}
                     fieldName="Watercourse Discharge"
                     fieldUnit="cumec"
                     min={0}
-                    max={dischargeChartYScale.max}
+                    max={dischargeChartData.yScale.max}
                   />
                 )}
               </div>
@@ -181,11 +218,11 @@ const WaterDataChartsContainer = ({
             <div className="w-full">
               <div className="h-[400px] w-full rounded-m-lg bg-m-night-7">
                 <LineChart
-                  data={dischargeChartData}
+                  data={dischargeChartData.data}
                   fieldName="Watercourse Discharge"
                   fieldUnit="cumec"
                   min={0}
-                  max={dischargeChartYScale.max}
+                  max={dischargeChartData.yScale.max}
                 />
               </div>
             </div>
